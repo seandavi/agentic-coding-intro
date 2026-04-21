@@ -431,6 +431,98 @@ If you want a compact reading list, start with these:
 - [SWE-bench paper](https://openreview.net/forum?id=VTF8yNQM66)
 - [SWE-bench leaderboards](https://www.swebench.com/)
 
+## Three projects to try
+
+If you want to move beyond toy examples, the best next step is to give the agent a task that depends on real files, real conventions, and real decisions. The three projects below are meant to exercise different parts of agentic coding.
+
+### 1. Explore a Bioconductor repository
+
+**Why this is useful:** Bioconductor packages are a good test of repository understanding because they mix code, documentation, vignettes, metadata, and domain-specific conventions. This is a realistic example of the kind of codebase that is difficult to understand through snippets alone.
+
+Pick a Bioconductor repository that looks interesting to you. Good candidates are packages with active documentation and a non-trivial codebase, such as `DESeq2`, `GenomicRanges`, `BiocFileCache`, or `SingleCellExperiment`.
+
+Start by cloning one repository and opening it in your coding environment. Then ask the agent to do tasks like these:
+
+```text
+Explain the purpose of this package in plain language, then identify the most important source files and describe how they fit together.
+```
+
+```text
+Find one exported function that seems central to the package. Trace where it is implemented, how it is documented, and which tests exercise it.
+```
+
+```text
+Read the vignette and summarize the main user workflow, then compare that workflow to the internal code structure.
+```
+
+This project exercises codebase search, file inspection, documentation reading, and cross-referencing between source, tests, and user-facing materials.
+
+### 2. Extract structure from a messy text file
+
+**Why this is useful:** Many real tasks are not "write a new function" tasks. They are "take this messy text artifact and turn it into structured data" tasks. This is a good way to see whether the agent can combine file creation, parsing logic, validation, and command-line execution.
+
+Create a file called `field_notes.txt` with content like this:
+
+```text
+2026-04-10 | Site A | observer: Kim | species: heron | count: 12 | notes: 3 near marsh edge
+2026-04-10 | Site B | observer: Rao | species: egret | count: 7 | notes: one tag unreadable
+2026-04-11 | Site A | observer: Kim | species: heron | count: twelve | notes: transcription uncertain
+2026-04-11 | Site C | observer: Patel | species: ibis | count: 4 | notes: weather windy
+2026-04-11 | Site B | observer: Rao | species: egret | notes: count missing
+```
+
+Then give the agent a task such as:
+
+```text
+Create a Python script that parses field_notes.txt into a CSV file, flags rows with invalid or missing counts, and prints a short summary by species. Add one or two tests for the parser.
+```
+
+You can extend the exercise by asking the agent to produce both a "clean" table and a separate "problems" report.
+
+This project exercises local file creation, parsing, validation, error handling, tests, and iterative refinement after inspecting bad input.
+
+### 3. Audit a small command-line workflow
+
+**Why this is useful:** Agentic tools are especially helpful when you need to understand not just one file, but how files and commands interact. A small workflow audit is a compact way to practice that skill.
+
+Create a tiny project with three files:
+
+- `download_data.sh`
+- `analyze.py`
+- `README.md`
+
+Put a few deliberate rough edges into it. For example, let the shell script write to a hard-coded path, let the Python script assume a column name that is not documented, and let the README omit one setup step.
+
+Then ask the agent to do this:
+
+```text
+Review this mini-project and identify the assumptions that would cause it to break on another machine. Then fix the problems, update the README, and explain the changes.
+```
+
+You can make the exercise richer by asking for a Makefile, a simple test, or a more portable way to pass paths and parameters.
+
+This project exercises repository inspection, shell understanding, documentation repair, and the ability to connect user instructions to actual executable code.
+
+## A note on tokens and model costs
+
+As you start using agentic coding tools on real projects, it helps to track token usage and model cost. Most tools expose some combination of usage metrics, rate limits, or billing dashboards.
+
+A simple mental model is:
+
+- more input context (large files, long chats, many tool outputs) usually means more tokens
+- more turns in a session usually means more tokens
+- larger or premium models usually cost more per token than smaller models
+
+Practical ways to manage cost without losing quality:
+
+- start with focused prompts and only include the files that matter
+- summarize or trim very long outputs before the next step
+- use a smaller model for exploration, then switch to a stronger model for critical edits or review
+- reset or branch a conversation when context becomes noisy
+- check usage reports periodically so cost does not become a surprise
+
+You do not need exact pricing memorized. The important habit is to treat tokens as a real resource, just like compute time or API calls.
+
 ## Closing idea
 
 If you remember only one thing from this document, let it be this:
