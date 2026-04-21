@@ -510,6 +510,8 @@ Create a tiny project with three files:
 
 Put a few deliberate rough edges into it. For example, let the shell script write to a hard-coded path, let the Python script assume a column name that is not documented, and let the README omit one setup step.
 
+Note that you can also JUST ASK THE AGENT TO CREATE THIS MINI-PROJECT. That is a good way to see how it handles multiple files and cross-file consistency.
+
 Then ask the agent to do this:
 
 ```text
