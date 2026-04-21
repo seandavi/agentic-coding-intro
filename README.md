@@ -521,6 +521,19 @@ Practical ways to manage cost without losing quality:
 - reset or branch a conversation when context becomes noisy
 - check usage reports periodically so cost does not become a surprise
 
+Worked example (illustrative only):
+
+- Session A (focused): 6 turns, about 2,000 tokens per turn on average -> about 12,000 total tokens
+- Session B (broad and noisy): 14 turns, about 8,000 tokens per turn on average -> about 112,000 total tokens
+
+Even before model pricing differences, Session B uses about 9 times more tokens than Session A. If Session B also uses a higher-cost model tier, total spend can rise much faster than expected.
+
+One practical budgeting pattern is:
+
+- do discovery and file triage with a lower-cost model
+- switch to a stronger model only for the final implementation pass and review
+- keep each conversation scoped to one objective
+
 You do not need exact pricing memorized. The important habit is to treat tokens as a real resource, just like compute time or API calls.
 
 ## Closing idea
