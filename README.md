@@ -63,6 +63,21 @@ Gemini CLI is explicitly built around that model. Its docs describe it as a way 
 - [Gemini CLI tools](https://geminicli.com/docs/tools)
 - [Gemini CLI cheatsheet](https://geminicli.com/docs/cli/cli-reference/)
 
+## The right mental model: colleague, not oracle
+
+A common mistake when starting with agentic coding tools is to treat them as infallible oracles. They are not. A more useful mental model is a **capable but junior colleague**: someone who can read quickly, write reasonable first drafts, run commands, search for things, and follow instructions, but who needs clear direction, makes mistakes, and benefits from review.
+
+The developer's job does not disappear. It shifts:
+
+- from writing every line to **directing what to write and why**
+- from remembering all context to **providing context clearly**
+- from fixing bugs alone to **reviewing agent output the way you would review a pull request**
+- from one-shot commands to **iterating with feedback**
+
+Think of it less like consulting an expert and more like working with a new team member who happens to read code very fast and never gets tired. You would not hand a new team member an ambiguous task and walk away. You would give them a clear goal, check in on their progress, catch errors early, and push back when the approach is wrong.
+
+That framing also helps calibrate frustration. When an agent makes a wrong assumption, the right response is usually a clearer prompt or more explicit context, not a different tool. The bottleneck is almost always the quality of the instructions.
+
 ## Agentic frameworks: model versus agent
 
 One source of confusion is that people often talk about the model and the agent as if they were the same thing. They are not.
@@ -431,7 +446,7 @@ If you want a compact reading list, start with these:
 - [SWE-bench paper](https://openreview.net/forum?id=VTF8yNQM66)
 - [SWE-bench leaderboards](https://www.swebench.com/)
 
-## Three projects to try
+## Four projects to try
 
 If you want to move beyond toy examples, the best next step is to give the agent a task that depends on real files, real conventions, and real decisions. The three projects below are meant to exercise different parts of agentic coding.
 
@@ -503,6 +518,42 @@ You can make the exercise richer by asking for a Makefile, a simple test, or a m
 
 This project exercises repository inspection, shell understanding, documentation repair, and the ability to connect user instructions to actual executable code.
 
+### 4. Survey foundation models for transcriptomics and spatial transcriptomics
+
+**Why this is useful:** The landscape of foundation models for single-cell and spatial transcriptomics moves fast and is genuinely hard to navigate. Published papers often describe models that have prototype code but are not practically installable. At the same time, a smaller number of projects are actively maintained, well-documented, and used by real lab workflows. Agentic tools with web access are well-suited to doing this kind of structured literature and code survey, because the task involves reading many sources, comparing them against consistent criteria, and producing a summary you can actually act on.
+
+The prompt below is designed to yield a comparative table rather than a flat list, and to explicitly probe usability signals that papers and abstracts tend to omit.
+
+```text
+Search the web and GitHub for foundation models designed for single-cell transcriptomics or
+spatial transcriptomics. Identify at least ten distinct models. For each one, collect the
+following information and produce a Markdown table:
+
+- Model name and primary citation or preprint
+- Modalities supported (scRNA-seq, spatial, multiome, ATAC, etc.)
+- GitHub repository URL, if one exists
+- Number of GitHub stars and date of most recent commit
+- Whether a pip- or conda-installable package exists (yes / no / partial)
+- Whether tutorial notebooks or vignettes are present in the repository (yes / no)
+- Whether the documentation covers installation for a user who is not the author (yes / no)
+- A one-sentence description of the primary task the model was designed for
+
+After the table, write a short paragraph distinguishing the models that appear to be
+actively maintained and accessible to a working bioinformatician from those that appear to
+be research prototypes unlikely to be usable without significant effort. Use the GitHub
+activity and packaging signals as your primary evidence, not the citation count.
+```
+
+If the agent returns a table faster than you expected, a good follow-up is:
+
+```text
+For the two or three models you rated as most accessible, check whether their GitHub issues
+show evidence of community use: recent issues opened by external users, pull requests from
+non-authors, or explicit questions about installation and data formats. Report what you find.
+```
+
+This project exercises web search, GitHub repository inspection, structured comparison across many sources, and evidence-based judgment rather than recitation of abstracts.
+
 ## A note on tokens and model costs
 
 As you start using agentic coding tools on real projects, it helps to track token usage and model cost. Most tools expose some combination of usage metrics, rate limits, or billing dashboards.
@@ -543,3 +594,7 @@ If you remember only one thing from this document, let it be this:
 **Agentic coding tools are most useful when the work depends on the state of real files, real commands, and real project context.**
 
 That is what separates them from ordinary chatbots and from the copy/paste workflow. They are not just text generators. They are becoming practical collaborators inside the working environment where software and analysis are actually built.
+
+## AI assistance
+
+This document was structured, edited, and written with the help of AI tools, including Gemini CLI, OpenAI Codex, and GitHub Copilot. That is intentional: using agentic and AI-assisted tools to produce a document about agentic and AI-assisted tools is itself a reasonable demonstration of the workflow described here.
