@@ -496,6 +496,8 @@ You can extend the exercise by asking the agent to produce both a "clean" table 
 
 This project exercises local file creation, parsing, validation, error handling, tests, and iterative refinement after inspecting bad input.
 
+More generally, agents can usually read PDFs, HTML files, and other text-based formats. At this point, many can also parse word documents, excel files, powerpoint presentations, etc. That makes them useful for extracting structured data from a wide variety of messy sources.
+
 ### 3. Audit a small command-line workflow
 
 **Why this is useful:** Agentic tools are especially helpful when you need to understand not just one file, but how files and commands interact. A small workflow audit is a compact way to practice that skill.
