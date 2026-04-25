@@ -1,4 +1,4 @@
-# Agentic Coding with Gemini CLI
+# An Introduction to Agentic Coding
 
 This short handout is for developers who are already comfortable writing code in R and/or Python, but who are new to AI coding tools. The goal is not to turn programming into button-pushing. The goal is to understand a new kind of interface: one where you can ask for reasoning, editing, search, shell commands, file inspection, and workflow execution from inside the same working session.
 
