@@ -6,6 +6,37 @@ The tool used here is [Gemini CLI](https://github.com/google-gemini/gemini-cli),
 
 Although the examples here use Gemini CLI, the core workflow generalizes well to other coding agents such as Claude Code and Codex-style tools. The vocabulary and config file names vary, but the underlying pattern is similar: work inside a real repository, let the tool inspect actual files, and keep important project instructions in versioned text files.
 
+## Table of Contents
+
+- [Why this is different from a chatbot](#why-this-is-different-from-a-chatbot)
+- [What agentic coding tools are good at](#what-agentic-coding-tools-are-good-at)
+- [Core idea: from "answering" to "acting"](#core-idea-from-answering-to-acting)
+- [The right mental model: colleague, not oracle](#the-right-mental-model-colleague-not-oracle)
+- [Agentic frameworks: model versus agent](#agentic-frameworks-model-versus-agent)
+- [Security and permissions](#security-and-permissions)
+- [Tools, skills, and MCP](#tools-skills-and-mcp)
+  - [Tools](#tools)
+  - [Skills](#skills)
+  - [MCP](#mcp)
+- [Markdown as memory, process, and decision record](#markdown-as-memory-process-and-decision-record)
+- [Installing Gemini CLI on macOS and Linux](#installing-gemini-cli-on-macos-and-linux)
+  - [macOS](#macos)
+  - [Linux](#linux)
+  - [A practical setup note](#a-practical-setup-note)
+- [A very small hello-world example](#a-very-small-hello-world-example)
+- [A note on leaderboards and benchmarks](#a-note-on-leaderboards-and-benchmarks)
+  - [1. Aider polyglot leaderboard](#1-aider-polyglot-leaderboard)
+  - [2. SWE-bench](#2-swe-bench)
+- [Suggested references for a short session](#suggested-references-for-a-short-session)
+- [Four projects to try](#four-projects-to-try)
+  - [1. Explore a Bioconductor repository](#1-explore-a-bioconductor-repository)
+  - [2. Extract structure from a messy text file](#2-extract-structure-from-a-messy-text-file)
+  - [3. Audit a small command-line workflow](#3-audit-a-small-command-line-workflow)
+  - [4. Survey foundation models for transcriptomics and spatial transcriptomics](#4-survey-foundation-models-for-transcriptomics-and-spatial-transcriptomics)
+- [A note on tokens and model costs](#a-note-on-tokens-and-model-costs)
+- [Closing idea](#closing-idea)
+- [AI assistance](#ai-assistance)
+
 ## Why this is different from a chatbot
 
 Many developers first meet AI through a web chat window. That is a useful starting point, but it encourages a weak workflow:
