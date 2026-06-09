@@ -2,9 +2,9 @@
 
 This short handout is for developers who are already comfortable writing code in R and/or Python, but who are new to AI coding tools. The goal is not to turn programming into button-pushing. The goal is to understand a new kind of interface: one where you can ask for reasoning, editing, search, shell commands, file inspection, and workflow execution from inside the same working session.
 
-The tool used here is [Gemini CLI](https://github.com/google-gemini/gemini-cli), Google’s terminal-based coding agent. The official documentation is at [geminicli.com/docs](https://geminicli.com/docs/).
+The tool used here is [Antigravity CLI](https://github.com/google-antigravity/antigravity-cli), Google’s terminal-based coding agent. The official documentation is at [antigravity.google/docs](https://antigravity.google/docs/cli-overview).
 
-Although the examples here use Gemini CLI, the core workflow generalizes well to other coding agents such as Claude Code and Codex-style tools. The vocabulary and config file names vary, but the underlying pattern is similar: work inside a real repository, let the tool inspect actual files, and keep important project instructions in versioned text files.
+Although the examples here use Antigravity CLI, the core workflow generalizes well to other coding agents such as Claude Code and Codex-style tools. The vocabulary and config file names vary, but the underlying pattern is similar: work inside a real repository, let the tool inspect actual files, and keep important project instructions in versioned text files.
 
 ## Table of Contents
 
@@ -19,7 +19,7 @@ Although the examples here use Gemini CLI, the core workflow generalizes well to
   - [Skills](#skills)
   - [MCP](#mcp)
 - [Markdown as memory, process, and decision record](#markdown-as-memory-process-and-decision-record)
-- [Installing Gemini CLI on macOS and Linux](#installing-gemini-cli-on-macos-and-linux)
+- [Installing Antigravity CLI on macOS and Linux](#installing-antigravity-cli-on-macos-and-linux)
   - [macOS](#macos)
   - [Linux](#linux)
   - [A practical setup note](#a-practical-setup-note)
@@ -88,11 +88,11 @@ The simplest way to explain agentic coding is this:
 
 That does not mean it should be allowed to do everything automatically. Good tools expose actions with approvals, scope, logs, and context. But the important shift is that the tool is no longer disconnected from the codebase.
 
-Gemini CLI is explicitly built around that model. Its docs describe it as a way to "understand code, automate tasks, and build workflows with your local project context" and document built-in support for file operations, shell commands, web fetching, and MCP integrations:
+Antigravity CLI is explicitly built around that model. Its documentation describes it as a terminal coding agent that brings multi-step reasoning, multi-file editing, tool calling, and conversation history to your terminal, with built-in support for file operations, shell commands, web fetching, and MCP integrations:
 
-- [Gemini CLI overview](https://geminicli.com/docs/)
-- [Gemini CLI tools](https://geminicli.com/docs/tools)
-- [Gemini CLI cheatsheet](https://geminicli.com/docs/cli/cli-reference/)
+- [Antigravity CLI overview](https://antigravity.google/docs/cli-overview)
+- [Antigravity CLI features](https://antigravity.google/docs/cli-features)
+- [Antigravity CLI reference](https://antigravity.google/docs/cli-reference)
 
 ## The right mental model: colleague, not oracle
 
@@ -161,7 +161,7 @@ This is why it helps to separate questions like these:
 
 Examples of agentic frameworks and scaffolds include projects such as LangGraph, AutoGen, OpenAI Agents SDK, PydanticAI, and smolagents. They differ in ergonomics and abstractions, but they are all trying to solve a similar problem: how to let a model operate as part of a controlled multi-step system instead of a one-shot text generator.
 
-For day-to-day coding, you may interact with a finished tool such as Gemini CLI, Claude Code, Aider, or another editor-integrated agent rather than building directly on a framework. Even so, the same architectural split still applies: one layer is the model, and another layer is the agent system that turns the model into something that can work on a repository.
+For day-to-day coding, you may interact with a finished tool such as Antigravity CLI, Claude Code, Aider, or another editor-integrated agent rather than building directly on a framework. Even so, the same architectural split still applies: one layer is the model, and another layer is the agent system that turns the model into something that can work on a repository.
 
 ## Security and permissions
 
@@ -175,9 +175,9 @@ These three ideas are worth separating clearly.
 
 ### Tools
 
-In an agentic coding environment, a **tool** is a capability the model can call to do something concrete. Gemini CLI documents built-in tools for file access and shell execution, and its tools page describes them as the mechanism that lets the model go beyond plain text generation:
+In an agentic coding environment, a **tool** is a capability the model can call to do something concrete. Antigravity CLI documents built-in tools for file access and shell execution, and its features page describes them as the mechanism that lets the model go beyond plain text generation:
 
-- [Gemini CLI tools](https://geminicli.com/docs/tools)
+- [Antigravity CLI features](https://antigravity.google/docs/cli-features)
 
 Examples of tool-like actions include:
 
@@ -191,11 +191,10 @@ This is why agentic systems are so useful for real coding work. The model does n
 
 ### Skills
 
-A **skill** is a reusable bundle of instructions and assets for a specific kind of task. In Gemini CLI, skills are a first-class concept. The official docs describe them as a way to package "specialized expertise, procedural workflows, and task-specific resources":
+A **skill** is a reusable bundle of instructions and assets for a specific kind of task. In Antigravity CLI, skills are a first-class concept: localized Markdown blueprints that package specialized expertise, procedural workflows, and task-specific resources. Skills live alongside the broader plugin system, and are stored per project (in `.agents/skills/`) or globally:
 
-- [Agent Skills](https://geminicli.com/docs/cli/skills/)
-- [Get started with Agent Skills](https://geminicli.com/docs/cli/tutorials/skills-getting-started/)
-- [Creating Agent Skills](https://geminicli.com/docs/cli/creating-skills/)
+- [Agent Skills](https://antigravity.google/docs/skills)
+- [Plugins & Skills](https://antigravity.google/docs/cli-plugins)
 
 It helps to think of a skill as a small, sharable playbook:
 
@@ -221,11 +220,10 @@ Other tools use different names for roughly the same idea. Claude Code tends to 
 
 The official MCP introduction describes it as a kind of "USB-C port for AI applications." That analogy is useful: the point is standardization. Instead of every tool inventing a different one-off integration, MCP provides a common way to expose tools, resources, and prompts.
 
-Gemini CLI has dedicated support for MCP servers:
+Antigravity CLI has dedicated support for MCP servers, configured either globally or per project in an `mcp_config.json` file:
 
-- [MCP servers with Gemini CLI](https://geminicli.com/docs/tools/mcp-server/)
-- [Set up an MCP server](https://geminicli.com/docs/cli/tutorials/mcp-setup/)
-- [MCP resource tools](https://geminicli.com/docs/tools/mcp-resources/)
+- [MCP with Antigravity](https://antigravity.google/docs/mcp)
+- [Antigravity CLI features](https://antigravity.google/docs/cli-features)
 
 In practice, MCP is what lets an agentic tool extend beyond the local filesystem. For example, you might connect a coding agent to:
 
@@ -241,18 +239,16 @@ One of the most important habits in agentic coding is using Markdown files to ca
 
 This matters for two reasons. First, the AI needs stable context. Second, human teams need stable context. A good Markdown file serves both.
 
-Gemini CLI uses `GEMINI.md` as its default context file name and supports a hierarchical loading model:
+Antigravity CLI uses `AGENTS.md` as its default context file name. Anything you write in an `AGENTS.md` at the root of a project is prepended to prompts processed inside that directory:
 
-- [Manage context and memory](https://geminicli.com/docs/cli/tutorials/memory-management/)
-- [Provide context with GEMINI.md files](https://geminicli.com/docs/cli/gemini-md/)
-- [Gemini CLI configuration: context files](https://geminicli.com/docs/reference/configuration/)
-- [Memory tool (`save_memory`)](https://geminicli.com/docs/tools/memory/)
+- [Antigravity CLI features](https://antigravity.google/docs/cli-features)
+- [Antigravity CLI overview](https://antigravity.google/docs/cli-overview)
 
 This is more than configuration trivia. It suggests a very practical point:
 
 > Markdown files are a low-friction way to encode how a codebase works, what decisions were made, and how the agent should behave.
 
-This is also a good place to point out cross-tool differences. Claude Code commonly uses `CLAUDE.md` for repository guidance. Codex-oriented workflows often use a repository instruction file such as `AGENTS.md` or another tool-specific prompt/config file, depending on the editor or wrapper in use. The exact filename matters less than the habit: keep durable instructions in the repository, in plain text, where both humans and agents can find them.
+This is also a good place to point out cross-tool conventions. The `AGENTS.md` filename Antigravity CLI uses is a shared convention: Codex-oriented workflows read the same file, so a single `AGENTS.md` can guide more than one agent. Claude Code commonly uses `CLAUDE.md` for repository guidance instead. The exact filename matters less than the habit: keep durable instructions in the repository, in plain text, where both humans and agents can find them.
 
 Examples of useful Markdown memory:
 
@@ -269,99 +265,66 @@ For R and Python teams, this can be especially effective because so many project
 
 The larger lesson is that agentic coding rewards explicitness. If a decision matters repeatedly, put it in a Markdown file instead of repeating it in chat forever.
 
-If you work with more than one tool, it is worth keeping this explicit: `GEMINI.md` and `CLAUDE.md` are not just random dotfiles. They are examples of a broader pattern of repository-scoped AI instructions.
+If you work with more than one tool, it is worth keeping this explicit: `AGENTS.md` and `CLAUDE.md` are not just random dotfiles. They are examples of a broader pattern of repository-scoped AI instructions.
 
-## Installing Gemini CLI on macOS and Linux
+## Installing Antigravity CLI on macOS and Linux
 
 The current official installation guide is here:
 
-- [Gemini CLI installation, execution, and releases](https://geminicli.com/docs/get-started/installation/)
-- [Gemini CLI authentication setup](https://geminicli.com/docs/get-started/authentication/)
+- [Installation & auth](https://antigravity.google/docs/cli-install)
+- [Getting started with Antigravity CLI](https://antigravity.google/docs/cli-getting-started)
 
-As of April 2026, the Gemini CLI docs list these baseline requirements:
+If you are coming from Gemini CLI, Google also publishes a dedicated migration guide:
 
-- macOS 15+ or Ubuntu 20.04+
-- Node.js 20.0.0+
-- Bash or Zsh
+- [Migrating from Gemini CLI](https://antigravity.google/docs/gcli-migration)
+
+As of June 2026, the baseline requirements are modest:
+
+- macOS or a supported Linux distribution
+- `curl` (used by the install script)
+- A Google account for authentication
+
+Antigravity CLI ships as a single self-contained binary, so there is no separate Node.js, Homebrew, or package-manager step.
 
 ### macOS
 
-For most macOS users, the cleanest path is:
-
-1. Install [Homebrew](https://brew.sh/) if you do not already have it.
-2. Install a current Node.js release from [nodejs.org](https://nodejs.org/en/download) or via Homebrew.
-3. Install Gemini CLI.
-
-Typical commands:
+The official install script downloads the binary and places the `agy` executable in `~/.local/bin`:
 
 ```bash
-# Optional: install Node with Homebrew if Node is not already available
-brew install node
-
-# Install Gemini CLI
-brew install gemini-cli
+curl -fsSL https://antigravity.google/cli/install.sh | bash
 ```
 
-You can also install with `npm`:
+Make sure `~/.local/bin` is on your `PATH` (the installer will tell you if it is not). Then start the tool:
 
 ```bash
-npm install -g @google/gemini-cli
+agy
 ```
 
-If you use MacPorts, Gemini CLI also documents:
-
-```bash
-sudo port install gemini-cli
-```
-
-Then start the tool:
-
-```bash
-gemini
-```
-
-For most individual users, the recommended authentication path is to launch `gemini` and choose **Sign in with Google** in the interactive prompt.
+For most individual users, the recommended authentication path is to launch `agy` and choose **Sign in with Google** in the interactive browser prompt.
 
 ### Linux
 
-On Linux, I would usually recommend:
-
-1. Make sure Node.js 20+ is installed.
-2. Install Gemini CLI with either `npm` or Homebrew on Linux.
-3. Run `gemini` and authenticate.
-
-Typical commands:
+On a supported Linux distribution, the install command is the same single line:
 
 ```bash
-# Check Node
-node --version
-npm --version
-
-# Install Gemini CLI
-npm install -g @google/gemini-cli
-```
-
-If you use Linuxbrew/Homebrew on Linux:
-
-```bash
-brew install gemini-cli
+curl -fsSL https://antigravity.google/cli/install.sh | bash
 ```
 
 Then start:
 
 ```bash
-gemini
+agy
 ```
 
-If you prefer not to authenticate with a browser-based Google login, Gemini CLI also supports using a Gemini API key from [Google AI Studio](https://aistudio.google.com/) or Vertex AI credentials:
+If you are working over SSH on a remote machine, Antigravity CLI prints an authorization URL you can open in a local browser to complete sign-in. Browser-based Google sign-in is the simplest path; enterprise and API-key options are covered in the installation and authentication docs:
 
-- [Authentication guide](https://geminicli.com/docs/get-started/authentication/)
+- [Installation & auth](https://antigravity.google/docs/cli-install)
 
 ### A practical setup note
 
-If you are trying Gemini CLI for the first time, browser-based login with a Google account is usually the least confusing path. It minimizes setup overhead and gets you to the main point quickly: the agent can work with the repository in front of you.
+If you are trying Antigravity CLI for the first time, browser-based login with a Google account is usually the least confusing path. It minimizes setup overhead and gets you to the main point quickly: the agent can work with the repository in front of you.
 
-Also relevant if you work in these languages: Google documents both **Python** and **R** among the verified coding languages for Gemini Code Assist:
+Also relevant if you work in these languages: Google documents both **Python** and **R** among its verified coding languages:
 
 - [Supported languages, IDEs, and interfaces](https://developers.google.com/gemini-code-assist/docs/supported-languages)
 
@@ -372,8 +335,8 @@ If you are just getting started, avoid beginning with "build a web app." Start w
 Create a directory and a tiny Python file:
 
 ```bash
-mkdir hello-gemini
-cd hello-gemini
+mkdir hello-antigravity
+cd hello-antigravity
 
 cat > hello.py <<'EOF'
 name = "world"
@@ -381,10 +344,10 @@ print(f"Hello, {name}!")
 EOF
 ```
 
-Now start Gemini CLI:
+Now start Antigravity CLI:
 
 ```bash
-gemini
+agy
 ```
 
 Then try prompts like these:
@@ -435,7 +398,7 @@ Run the tests for the R package you just created and report the results.
 
 A leaderboard can be helpful, but it is important to explain what is being measured.
 
-Most public leaderboards do **not** rank a CLI wrapper such as Gemini CLI by itself. They usually rank:
+Most public leaderboards do **not** rank a CLI wrapper such as Antigravity CLI by itself. They usually rank:
 
 - language models
 - full agent systems
@@ -466,13 +429,13 @@ The key message is not "which model is number one this week." The key message is
 
 If you want a compact reading list, start with these:
 
-- [Gemini CLI GitHub repository](https://github.com/google-gemini/gemini-cli)
-- [Gemini CLI docs home](https://geminicli.com/docs/)
-- [Gemini CLI installation guide](https://geminicli.com/docs/get-started/installation/)
-- [Gemini CLI authentication guide](https://geminicli.com/docs/get-started/authentication/)
-- [Gemini CLI cheatsheet](https://geminicli.com/docs/cli/cli-reference/)
-- [Agent Skills](https://geminicli.com/docs/cli/skills/)
-- [MCP servers with Gemini CLI](https://geminicli.com/docs/tools/mcp-server/)
+- [Antigravity CLI GitHub repository](https://github.com/google-antigravity/antigravity-cli)
+- [Antigravity CLI overview](https://antigravity.google/docs/cli-overview)
+- [Installation & auth](https://antigravity.google/docs/cli-install)
+- [Getting started with Antigravity CLI](https://antigravity.google/docs/cli-getting-started)
+- [Antigravity CLI reference](https://antigravity.google/docs/cli-reference)
+- [Agent Skills](https://antigravity.google/docs/skills)
+- [MCP with Antigravity](https://antigravity.google/docs/mcp)
 - [Model Context Protocol introduction](https://modelcontextprotocol.io/docs/getting-started/intro)
 - [SWE-bench paper](https://openreview.net/forum?id=VTF8yNQM66)
 - [SWE-bench leaderboards](https://www.swebench.com/)
@@ -632,4 +595,4 @@ That is what separates them from ordinary chatbots and from the copy/paste workf
 
 ## AI assistance
 
-This document was structured, edited, and written with the help of AI tools, including Gemini CLI, OpenAI Codex, and GitHub Copilot. That is intentional: using agentic and AI-assisted tools to produce a document about agentic and AI-assisted tools is itself a reasonable demonstration of the workflow described here.
+This document was structured, edited, and written with the help of AI tools, including Antigravity CLI, OpenAI Codex, and GitHub Copilot. That is intentional: using agentic and AI-assisted tools to produce a document about agentic and AI-assisted tools is itself a reasonable demonstration of the workflow described here.
