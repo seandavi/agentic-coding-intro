@@ -49,6 +49,10 @@ Many developers first meet AI through a web chat window. That is a useful starti
 
 That is the "cut-and-paste" approach. It can help with isolated questions, but it breaks down once the task depends on the actual state of your project.
 
+<p align="center">
+  <img src="assets/chatbot-vs-agentic.svg" alt="Side-by-side comparison. Left: a chatbot drives an Ask, Copy, Paste, 'doesn't fit' loop that repeats and never connects to your repository. Right: an agentic coding tool runs a Plan, Act, Observe, Revise loop that stays in sync with your repository through files, shell, git, and MCP." width="820">
+</p>
+
 An **agentic coding tool** works differently. It is not just producing text. It can usually:
 
 - inspect files on disk
