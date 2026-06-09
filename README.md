@@ -2,9 +2,9 @@
 
 This short handout is for developers who are already comfortable writing code in R and/or Python, but who are new to AI coding tools. The goal is not to turn programming into button-pushing. The goal is to understand a new kind of interface: one where you can ask for reasoning, editing, search, shell commands, file inspection, and workflow execution from inside the same working session.
 
-The tool used here is [Antigravity CLI](https://github.com/google-antigravity/antigravity-cli), Google’s terminal-based coding agent. The official documentation is at [antigravity.google/docs](https://antigravity.google/docs/cli-overview).
+The tool used here is [GitHub Copilot CLI](https://github.com/github/copilot-cli), GitHub’s terminal-based coding agent. The official documentation is at [docs.github.com/copilot](https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli).
 
-Although the examples here use Antigravity CLI, the core workflow generalizes well to other coding agents such as Claude Code and Codex-style tools. The vocabulary and config file names vary, but the underlying pattern is similar: work inside a real repository, let the tool inspect actual files, and keep important project instructions in versioned text files.
+Although the examples here use GitHub Copilot CLI, the core workflow generalizes well to other coding agents such as Claude Code and Codex-style tools. The vocabulary and config file names vary, but the underlying pattern is similar: work inside a real repository, let the tool inspect actual files, and keep important project instructions in versioned text files.
 
 ## Table of Contents
 
@@ -19,7 +19,7 @@ Although the examples here use Antigravity CLI, the core workflow generalizes we
   - [Skills](#skills)
   - [MCP](#mcp)
 - [Markdown as memory, process, and decision record](#markdown-as-memory-process-and-decision-record)
-- [Installing Antigravity CLI on macOS and Linux](#installing-antigravity-cli-on-macos-and-linux)
+- [Installing GitHub Copilot CLI on macOS and Linux](#installing-github-copilot-cli-on-macos-and-linux)
   - [macOS](#macos)
   - [Linux](#linux)
   - [A practical setup note](#a-practical-setup-note)
@@ -92,11 +92,11 @@ The simplest way to explain agentic coding is this:
 
 That does not mean it should be allowed to do everything automatically. Good tools expose actions with approvals, scope, logs, and context. But the important shift is that the tool is no longer disconnected from the codebase.
 
-Antigravity CLI is explicitly built around that model. Its documentation describes it as a terminal coding agent that brings multi-step reasoning, multi-file editing, tool calling, and conversation history to your terminal, with built-in support for file operations, shell commands, web fetching, and MCP integrations:
+GitHub Copilot CLI is explicitly built around that model. Its documentation describes it as a terminal-native coding agent — powered by the same agentic harness as GitHub's Copilot coding agent — that plans, edits files, runs commands, and reviews changes without leaving the terminal, with built-in support for file operations, shell commands, and MCP integrations:
 
-- [Antigravity CLI overview](https://antigravity.google/docs/cli-overview)
-- [Antigravity CLI features](https://antigravity.google/docs/cli-features)
-- [Antigravity CLI reference](https://antigravity.google/docs/cli-reference)
+- [About GitHub Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli)
+- [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/overview)
+- [GitHub Copilot CLI on GitHub](https://github.com/github/copilot-cli)
 
 ## The right mental model: colleague, not oracle
 
@@ -165,7 +165,7 @@ This is why it helps to separate questions like these:
 
 Examples of agentic frameworks and scaffolds include projects such as LangGraph, AutoGen, OpenAI Agents SDK, PydanticAI, and smolagents. They differ in ergonomics and abstractions, but they are all trying to solve a similar problem: how to let a model operate as part of a controlled multi-step system instead of a one-shot text generator.
 
-For day-to-day coding, you may interact with a finished tool such as Antigravity CLI, Claude Code, Aider, or another editor-integrated agent rather than building directly on a framework. Even so, the same architectural split still applies: one layer is the model, and another layer is the agent system that turns the model into something that can work on a repository.
+For day-to-day coding, you may interact with a finished tool such as GitHub Copilot CLI, Claude Code, Aider, or another editor-integrated agent rather than building directly on a framework. Even so, the same architectural split still applies: one layer is the model, and another layer is the agent system that turns the model into something that can work on a repository.
 
 ## Security and permissions
 
@@ -179,9 +179,9 @@ These three ideas are worth separating clearly.
 
 ### Tools
 
-In an agentic coding environment, a **tool** is a capability the model can call to do something concrete. Antigravity CLI documents built-in tools for file access and shell execution, and its features page describes them as the mechanism that lets the model go beyond plain text generation:
+In an agentic coding environment, a **tool** is a capability the model can call to do something concrete. GitHub Copilot CLI documents built-in tools for file access and shell execution, and its overview describes them as the mechanism that lets the model go beyond plain text generation:
 
-- [Antigravity CLI features](https://antigravity.google/docs/cli-features)
+- [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/overview)
 
 Examples of tool-like actions include:
 
@@ -195,10 +195,10 @@ This is why agentic systems are so useful for real coding work. The model does n
 
 ### Skills
 
-A **skill** is a reusable bundle of instructions and assets for a specific kind of task. In Antigravity CLI, skills are a first-class concept: localized Markdown blueprints that package specialized expertise, procedural workflows, and task-specific resources. Skills live alongside the broader plugin system, and are stored per project (in `.agents/skills/`) or globally:
+A **skill** is a reusable bundle of instructions and assets for a specific kind of task. GitHub Copilot CLI supports skills as a first-class concept: bundles that package specialized expertise, procedural workflows, and task-specific resources so the agent can load them when relevant:
 
-- [Agent Skills](https://antigravity.google/docs/skills)
-- [Plugins & Skills](https://antigravity.google/docs/cli-plugins)
+- [Add skills to GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills)
+- [Add custom instructions](https://docs.github.com/en/copilot/how-tos/copilot-cli/add-custom-instructions)
 
 It helps to think of a skill as a small, sharable playbook:
 
@@ -224,10 +224,10 @@ Other tools use different names for roughly the same idea. Claude Code tends to 
 
 The official MCP introduction describes it as a kind of "USB-C port for AI applications." That analogy is useful: the point is standardization. Instead of every tool inventing a different one-off integration, MCP provides a common way to expose tools, resources, and prompts.
 
-Antigravity CLI has dedicated support for MCP servers, configured either globally or per project in an `mcp_config.json` file:
+GitHub Copilot CLI has dedicated support for MCP servers. It even ships with the GitHub MCP server pre-configured, and you can add more with the `/mcp add` command:
 
-- [MCP with Antigravity](https://antigravity.google/docs/mcp)
-- [Antigravity CLI features](https://antigravity.google/docs/cli-features)
+- [Add MCP servers for GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-mcp-servers)
+- [About Model Context Protocol (MCP)](https://docs.github.com/en/copilot/concepts/context/mcp)
 
 In practice, MCP is what lets an agentic tool extend beyond the local filesystem. For example, you might connect a coding agent to:
 
@@ -243,16 +243,16 @@ One of the most important habits in agentic coding is using Markdown files to ca
 
 This matters for two reasons. First, the AI needs stable context. Second, human teams need stable context. A good Markdown file serves both.
 
-Antigravity CLI uses `AGENTS.md` as its default context file name. Anything you write in an `AGENTS.md` at the root of a project is prepended to prompts processed inside that directory:
+GitHub Copilot CLI reads `AGENTS.md` files for repository context, and also supports a repository-wide `.github/copilot-instructions.md` file. Instructions you put in these files are fed to the agent automatically when it works in that project:
 
-- [Antigravity CLI features](https://antigravity.google/docs/cli-features)
-- [Antigravity CLI overview](https://antigravity.google/docs/cli-overview)
+- [Add custom instructions](https://docs.github.com/en/copilot/how-tos/copilot-cli/add-custom-instructions)
+- [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/overview)
 
 This is more than configuration trivia. It suggests a very practical point:
 
 > Markdown files are a low-friction way to encode how a codebase works, what decisions were made, and how the agent should behave.
 
-This is also a good place to point out cross-tool conventions. The `AGENTS.md` filename Antigravity CLI uses is a shared convention: Codex-oriented workflows read the same file, so a single `AGENTS.md` can guide more than one agent. Claude Code commonly uses `CLAUDE.md` for repository guidance instead. The exact filename matters less than the habit: keep durable instructions in the repository, in plain text, where both humans and agents can find them.
+This is also a good place to point out cross-tool conventions. The `AGENTS.md` filename GitHub Copilot CLI reads is a shared convention: Codex-oriented workflows read the same file, so a single `AGENTS.md` can guide more than one agent. Claude Code commonly uses `CLAUDE.md` for repository guidance instead. The exact filename matters less than the habit: keep durable instructions in the repository, in plain text, where both humans and agents can find them.
 
 Examples of useful Markdown memory:
 
@@ -271,66 +271,80 @@ The larger lesson is that agentic coding rewards explicitness. If a decision mat
 
 If you work with more than one tool, it is worth keeping this explicit: `AGENTS.md` and `CLAUDE.md` are not just random dotfiles. They are examples of a broader pattern of repository-scoped AI instructions.
 
-## Installing Antigravity CLI on macOS and Linux
+## Installing GitHub Copilot CLI on macOS and Linux
 
 The current official installation guide is here:
 
-- [Installation & auth](https://antigravity.google/docs/cli-install)
-- [Getting started with Antigravity CLI](https://antigravity.google/docs/cli-getting-started)
+- [Installing GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli)
+- [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/overview)
 
-If you are coming from Gemini CLI, Google also publishes a dedicated migration guide:
-
-- [Migrating from Gemini CLI](https://antigravity.google/docs/gcli-migration)
-
-As of June 2026, the baseline requirements are modest:
+As of June 2026, the baseline requirements are:
 
 - macOS or a supported Linux distribution
-- `curl` (used by the install script)
-- A Google account for authentication
-
-Antigravity CLI ships as a single self-contained binary, so there is no separate Node.js, Homebrew, or package-manager step.
+- Node.js 22 or later (for the `npm` install path)
+- An active GitHub Copilot subscription for authentication
 
 ### macOS
 
-The official install script downloads the binary and places the `agy` executable in `~/.local/bin`:
+The simplest path is to install the `@github/copilot` package globally with `npm`:
 
 ```bash
-curl -fsSL https://antigravity.google/cli/install.sh | bash
+npm install -g @github/copilot
 ```
 
-Make sure `~/.local/bin` is on your `PATH` (the installer will tell you if it is not). Then start the tool:
+If you prefer Homebrew, the CLI is also packaged there:
 
 ```bash
-agy
+brew install copilot-cli
 ```
 
-For most individual users, the recommended authentication path is to launch `agy` and choose **Sign in with Google** in the interactive browser prompt.
+There is also a one-line install script:
+
+```bash
+curl -fsSL https://gh.io/copilot-install | bash
+```
+
+Then start the tool:
+
+```bash
+copilot
+```
+
+If you are not already signed in, run the `/login` slash command at the prompt and authenticate with your GitHub account.
 
 ### Linux
 
-On a supported Linux distribution, the install command is the same single line:
+On a supported Linux distribution, the `npm` command is the same:
 
 ```bash
-curl -fsSL https://antigravity.google/cli/install.sh | bash
+npm install -g @github/copilot
+```
+
+Homebrew on Linux and the install script both work as well:
+
+```bash
+brew install copilot-cli
+# or
+curl -fsSL https://gh.io/copilot-install | bash
 ```
 
 Then start:
 
 ```bash
-agy
+copilot
 ```
 
-If you are working over SSH on a remote machine, Antigravity CLI prints an authorization URL you can open in a local browser to complete sign-in. Browser-based Google sign-in is the simplest path; enterprise and API-key options are covered in the installation and authentication docs:
+If you are working over SSH on a remote machine, run `/login` and complete the device-authorization flow in a local browser:
 
-- [Installation & auth](https://antigravity.google/docs/cli-install)
+- [Installing GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli)
 
 ### A practical setup note
 
-If you are trying Antigravity CLI for the first time, browser-based login with a Google account is usually the least confusing path. It minimizes setup overhead and gets you to the main point quickly: the agent can work with the repository in front of you.
+If you are trying GitHub Copilot CLI for the first time, the `npm` install plus `/login` is usually the least confusing path. It gets you to the main point quickly: the agent can work with the repository in front of you. The CLI requires an active Copilot subscription, so make sure that is in place before you start.
 
-Also relevant if you work in these languages: Google documents both **Python** and **R** among its verified coding languages:
+Also relevant if you work in these languages: GitHub Copilot supports a broad range of languages, **Python** and **R** among them. See the overview for what the CLI can do:
 
-- [Supported languages, IDEs, and interfaces](https://developers.google.com/gemini-code-assist/docs/supported-languages)
+- [About GitHub Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli)
 
 ## A very small hello-world example
 
@@ -339,8 +353,8 @@ If you are just getting started, avoid beginning with "build a web app." Start w
 Create a directory and a tiny Python file:
 
 ```bash
-mkdir hello-antigravity
-cd hello-antigravity
+mkdir hello-copilot
+cd hello-copilot
 
 cat > hello.py <<'EOF'
 name = "world"
@@ -348,10 +362,10 @@ print(f"Hello, {name}!")
 EOF
 ```
 
-Now start Antigravity CLI:
+Now start GitHub Copilot CLI:
 
 ```bash
-agy
+copilot
 ```
 
 Then try prompts like these:
@@ -402,7 +416,7 @@ Run the tests for the R package you just created and report the results.
 
 A leaderboard can be helpful, but it is important to explain what is being measured.
 
-Most public leaderboards do **not** rank a CLI wrapper such as Antigravity CLI by itself. They usually rank:
+Most public leaderboards do **not** rank a CLI wrapper such as GitHub Copilot CLI by itself. They usually rank:
 
 - language models
 - full agent systems
@@ -433,13 +447,13 @@ The key message is not "which model is number one this week." The key message is
 
 If you want a compact reading list, start with these:
 
-- [Antigravity CLI GitHub repository](https://github.com/google-antigravity/antigravity-cli)
-- [Antigravity CLI overview](https://antigravity.google/docs/cli-overview)
-- [Installation & auth](https://antigravity.google/docs/cli-install)
-- [Getting started with Antigravity CLI](https://antigravity.google/docs/cli-getting-started)
-- [Antigravity CLI reference](https://antigravity.google/docs/cli-reference)
-- [Agent Skills](https://antigravity.google/docs/skills)
-- [MCP with Antigravity](https://antigravity.google/docs/mcp)
+- [GitHub Copilot CLI repository](https://github.com/github/copilot-cli)
+- [About GitHub Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli)
+- [Installing GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli)
+- [Using GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/overview)
+- [Add custom instructions](https://docs.github.com/en/copilot/how-tos/copilot-cli/add-custom-instructions)
+- [Add skills](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills)
+- [Add MCP servers for GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-mcp-servers)
 - [Model Context Protocol introduction](https://modelcontextprotocol.io/docs/getting-started/intro)
 - [SWE-bench paper](https://openreview.net/forum?id=VTF8yNQM66)
 - [SWE-bench leaderboards](https://www.swebench.com/)
@@ -599,4 +613,4 @@ That is what separates them from ordinary chatbots and from the copy/paste workf
 
 ## AI assistance
 
-This document was structured, edited, and written with the help of AI tools, including Antigravity CLI, OpenAI Codex, and GitHub Copilot. That is intentional: using agentic and AI-assisted tools to produce a document about agentic and AI-assisted tools is itself a reasonable demonstration of the workflow described here.
+This document was structured, edited, and written with the help of AI tools, including GitHub Copilot CLI and OpenAI Codex. That is intentional: using agentic and AI-assisted tools to produce a document about agentic and AI-assisted tools is itself a reasonable demonstration of the workflow described here.
