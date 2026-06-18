@@ -78,6 +78,44 @@ Think of it less like consulting an expert and more like working with a new team
 
 That framing also helps calibrate frustration. When an agent makes a wrong assumption, the right response is usually a clearer prompt or more explicit context, not a different tool. The bottleneck is almost always the quality of the instructions.
 
+## Understanding context: tokens and the context window
+
+Before going further, it helps to understand what the model is actually reading. Almost everything about quality, cost, and the habits in the rest of this document follows from two ideas: **tokens** and the **context window**.
+
+### Tokens
+
+A model does not read characters or words the way you do. It reads **tokens**: short chunks of text, usually a few characters each. A useful rule of thumb for English is:
+
+> 1 token ≈ 4 characters ≈ about ¾ of a word. So roughly **100 tokens ≈ 75 words**.
+
+Code, file paths, identifiers, and non-English text tend to break into *more* tokens per word, so a screen full of R or Python usually costs more tokens than a screen full of prose. Every model uses its own tokenizer, so these numbers are approximate — but the rule of thumb is good enough for planning.
+
+Tokens come in two flavors, and the distinction matters more than people expect:
+
+- **Input tokens** are everything the model *reads*: your prompt, the files it opens, earlier turns in the conversation, and the output of any tools it runs.
+- **Output tokens** are everything the model *writes*: explanations, code, edits, and tool calls.
+
+The reason to care is cost. **Output tokens are typically several times more expensive than input tokens — often 4x to 8x.** As of mid-2026, for example, one widely used model charges about \$3 per million input tokens and \$15 per million output tokens (a 5x gap); another charges roughly \$1.25 in and \$10 out (an 8x gap). Exact prices change constantly, so treat the figures as illustrative — but the *shape* is stable: reading is cheap, writing is expensive. That is why asking for a focused, well-scoped edit usually costs far less than asking for a sprawling rewrite, even when the model reads the same files in both cases.
+
+### The context window
+
+The **context window** is the maximum number of tokens the model can consider at once: the prompt, the files, the conversation history, and the answer it is generating all have to fit inside it. It is a finite budget, and *everything competes for the same space*.
+
+```text
+        ┌──────────────  CONTEXT WINDOW (a fixed token budget)  ──────────────┐
+        │  system + instructions │ files opened │ conversation so far │ output │
+        └─────────────────────────────────────────────────────────────────────┘
+                                          ↑
+                  as the session grows, the earlier parts crowd the budget
+```
+
+Modern windows are large — as of mid-2026, frontier models advertise context windows from a few hundred thousand tokens up to about a million. That sounds like effectively unlimited room, but two things complicate the picture:
+
+1. **Bigger is not free.** Every token in the window is an input token you pay for on each turn. A long, cluttered session re-reads its entire history every time the model responds, so cost grows with the conversation, not just with the task.
+2. **Bigger is not always better.** Research on long context — notably the *"Lost in the Middle"* finding (Liu et al., 2023) — shows that models attend best to information at the *start* and *end* of the window and can miss material buried in the middle. More recent work on *"context rot"* (2025) found that answer quality can degrade as the input grows long, sometimes well below the advertised limit. A million-token window does not guarantee a million tokens of reliable attention.
+
+Most tools soften the first problem with **prompt caching**: a stable chunk of context, such as a repository instruction file, can be cached so that re-reading it on later turns costs a small fraction of the normal input price (often around a tenth). This is one reason durable instructions belong in a file rather than being re-typed each session — caching is part of why that habit is also cheap. It does not solve the second problem, though: a cached-but-bloated context is still a bloated context. Both problems point to the same habit, covered later under [Managing context well](#managing-context-well): keep the working context lean and relevant.
+
 ## Agentic frameworks: model versus agent
 
 One source of confusion is that people often talk about the model and the agent as if they were the same thing. They are not.
@@ -239,6 +277,50 @@ For R and Python teams, this can be especially effective because so many project
 The larger lesson is that agentic coding rewards explicitness. If a decision matters repeatedly, put it in a Markdown file instead of repeating it in chat forever.
 
 If you work with more than one tool, it is worth keeping this explicit: `GEMINI.md` and `CLAUDE.md` are not just random dotfiles. They are examples of a broader pattern of repository-scoped AI instructions.
+
+## Managing context well
+
+If [tokens and the context window](#understanding-context-tokens-and-the-context-window) explain *what* the model reads, this section is about the single most useful operational habit: deciding what *should* be in the window at any moment. Good context management improves both quality and cost at the same time, which is rare enough to be worth taking seriously.
+
+The guiding principle is simple:
+
+> Keep the working context **lean and relevant**. Add what the task needs; remove what it does not.
+
+### Clear the context between unrelated tasks
+
+A long-running session accumulates history: files you opened three tasks ago, output from commands that no longer matter, a tangent you abandoned. All of it is still in the window, still being re-read on every turn, and — per the *lost-in-the-middle* and *context-rot* findings above — still competing for the model's attention. The symptoms are familiar: the agent starts referring to stale details, mixes up two problems, or gets slower and more expensive without getting better.
+
+The fix is to start fresh when you switch problems. Most tools provide a way to do this:
+
+- a command to **clear** the conversation and begin a new one (for example, `/clear` in Claude Code, or simply starting a new session);
+- a command to **compact** or summarize the session so far — replacing a long history with a short summary and continuing from there (for example, `/compact`);
+- starting a clean session and pointing the tool back at the repository, where the durable context lives in the instruction file anyway.
+
+A practical rhythm is **one objective per conversation**. Finish a task, capture anything durable in a Markdown file, then clear before the next unrelated task. This is the everyday version of the cost advice later in this document: a focused session is both cheaper and sharper.
+
+### Skills versus one large instruction file
+
+As teams encode more knowledge for the agent, a tension appears between two ways of storing it:
+
+- **One large instruction file** (`GEMINI.md`, `CLAUDE.md`, `AGENTS.md`). Everything the agent should know lives in a single document that is loaded into context every session.
+- **Skills** (and similar modular conventions). Knowledge is split into small, named, task-specific bundles — see [Skills](#skills) above — that are loaded *only when relevant*.
+
+The trade-off is about context budget. A single file is easy to find and reason about, but everything in it occupies the window on every turn, whether or not the current task needs it. A monolithic file that has grown to cover release steps, data-cleaning conventions, review checklists, and deployment notes spends tokens — and attention — on all of them even when you are just renaming a variable.
+
+A reasonable rule of thumb:
+
+- Keep **broadly applicable, always-true** facts in the main instruction file: project layout, core conventions, "do not touch this generated directory." These earn their permanent place in the window, and because the file is stable, [prompt caching](#the-context-window) makes re-reading it cheap.
+- Move **task-specific procedures** into skills or separate documents that load on demand: "how we cut a release," "how we run a reproducible R analysis," "how we audit an API endpoint."
+
+The result is the same lean-context principle applied to your own configuration: the agent carries a small, stable core at all times and pulls in specialized playbooks only when the task calls for them.
+
+### A short checklist
+
+- One objective per conversation; clear or compact before switching tasks.
+- Open only the files the task needs; close the loop on long tool output.
+- Put durable facts in a stable instruction file (cheap to cache, easy to share).
+- Put task-specific procedures in skills or separate docs that load on demand.
+- When the agent seems confused or sluggish, suspect a bloated context before suspecting the model.
 
 ## Installing Gemini CLI on macOS and Linux
 
@@ -560,12 +642,13 @@ This project exercises web search, GitHub repository inspection, structured comp
 
 ## A note on tokens and model costs
 
-As you start using agentic coding tools on real projects, it helps to track token usage and model cost. Most tools expose some combination of usage metrics, rate limits, or billing dashboards.
+This section builds directly on [Understanding context: tokens and the context window](#understanding-context-tokens-and-the-context-window) and [Managing context well](#managing-context-well). Those sections explain what tokens are and why a lean context helps; this one is the practical cost angle. As you start using agentic coding tools on real projects, it helps to track token usage and model cost. Most tools expose some combination of usage metrics, rate limits, or billing dashboards.
 
 A simple mental model is:
 
 - more input context (large files, long chats, many tool outputs) usually means more tokens
 - more turns in a session usually means more tokens
+- output tokens usually cost several times more than input tokens (often 4x–8x), so the size of the *answer* matters, not just the size of the *prompt*
 - larger or premium models usually cost more per token than smaller models
 
 Practical ways to manage cost without losing quality:
