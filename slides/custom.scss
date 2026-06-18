@@ -1,0 +1,62 @@
+/*-- scss:defaults --*/
+// Dark deck. Accents are lightened versions of the figure palette so they
+// stay legible on a dark surface. Figures themselves stay light and are
+// presented as cards (see rules below).
+
+$blue:  #6aa9e0; // input / context
+$amber: #f0913e; // output / cost
+$green: #5cc08c; // good / lean
+
+$body-bg:    #1a1f26;
+$body-color: #e6eaef;
+$link-color: $blue;
+
+$presentation-heading-color:  #f7fafc;
+$presentation-heading-font:   "Helvetica Neue", -apple-system, Arial, sans-serif;
+$presentation-font-size-root: 30px;
+
+// code blocks on dark
+$code-block-bg:    #11151a;
+$code-color:       #e6eaef;
+
+/*-- scss:rules --*/
+.reveal .slides section { text-align: left; }
+
+.reveal h1, .reveal h2 { font-weight: 700; letter-spacing: -0.01em; }
+
+.reveal section.title-slide .subtitle,
+#title-slide .subtitle { color: #9aa5b1; }
+
+// Section-divider slides (level-1 headings)
+.reveal .slides section.level1 { text-align: center; }
+
+.reveal .subtle { color: #9aa5b1; }
+.reveal .blue   { color: $blue;  font-weight: 700; }
+.reveal .amber  { color: $amber; font-weight: 700; }
+.reveal .green  { color: $green; font-weight: 700; }
+
+.reveal blockquote {
+  border-left: 4px solid $blue;
+  background: rgba(255, 255, 255, 0.06);
+  color: #eef2f6;
+  padding: 0.4em 0.8em;
+  font-style: normal;
+  box-shadow: none;
+}
+
+.reveal ul { line-height: 1.35; }
+
+// Figures as light cards on the dark deck — keeps the (light) SVGs and
+// ggplot charts readable and visually consistent.
+.reveal section img {
+  background: #ffffff;
+  border: none;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+}
+
+.reveal .footnote { font-size: 0.6em; color: #9aa5b1; }
+
+// Brighter, larger slide numbers on dark
+.reveal .slide-number { color: #9aa5b1; background: transparent; }
