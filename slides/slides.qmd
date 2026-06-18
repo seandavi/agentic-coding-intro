@@ -275,6 +275,30 @@ cross-file reasoning, and web+GitHub research with evidence-based judgment. Poin
 them to the handout rather than reading the prompts aloud.
 :::
 
+## Free today — \$20 to keep going
+
+- **Start free.** Everything today works on a free tier (we'll use Antigravity).
+- **Free tiers are demo-grade** — great for learning, but they hit a wall on
+  sustained work, and Antigravity's free quota is the tightest.
+- The on-ramp: [**Claude Pro — \$20/mo**]{.amber} (\$17 annual), **Claude Code included**, cancel anytime.
+- A *one-month rental* of a pro tool — cheaper than any textbook, and often
+  **expensable** (PI / training-grant funds).
+- A **fork, not a hurdle**: today needs nothing; *continuing* is worth \$20.
+
+::: notes
+Be honest and non-coercive. The equity risk is not the \$20 tool — it's the free
+path quietly failing, so "optional" becomes "you had to pay to keep up." So:
+scope today to fit inside the free budget, and frame the subscription as "to keep
+doing real work after this week," not "to survive today."
+
+Caveats to say out loud: there is no individual student discount (only
+institutional Claude for Education at partner universities); annual billing is the
+only price break; Max subscribers can share 7-day guest passes that include Claude
+Code. And the recommendation was tested — free terminal tools came up short for
+cowork-heavy tasks; Claude Code is what actually did the job. Full version is in
+the handout under "Paying for tools: an honest recommendation."
+:::
+
 ## Takeaways
 
 > Agentic coding tools are most useful when the work depends on the state of
@@ -294,7 +318,7 @@ service of this one sentence.
 ## Resources
 
 - Handout (this repo's `README.md`) — full notes + the four projects
-- Gemini CLI: <https://geminicli.com/docs/>
+- Antigravity: <https://antigravity.google> · Claude Code: <https://claude.com/product/claude-code>
 - Model Context Protocol: <https://modelcontextprotocol.io/>
 - "Lost in the Middle" (Liu et al., 2023) · "Context Rot" (2025)
 - SWE-bench: <https://www.swebench.com/> · Aider leaderboards
