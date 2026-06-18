@@ -1,0 +1,4 @@
+# local render previews (regenerate with rsvg-convert / qlmanage)
+_preview-*.png
+*.svg.png
+ctx-check.png

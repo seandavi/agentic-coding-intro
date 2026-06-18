@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 320" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <!-- the model reads tokens, not words -->
+  <text x="40" y="50" font-size="16" fill="#52606d">A model reads <tspan font-weight="700" fill="#1f2933">tokens</tspan> — short chunks of text, not whole words:</text>
+
+  <!-- token chips for: "Normalize the TSV columns, then write out." -->
+  <!-- chip helper: rounded rect + centered text -->
+  <g font-size="17" text-anchor="middle">
+    <rect x="40"  y="80" width="78" height="46" rx="8" fill="#e3effb" stroke="#2b6cb0"/><text x="79"  y="109" fill="#1f2933">Normal</text>
+    <rect x="126" y="80" width="46" height="46" rx="8" fill="#fdebd9" stroke="#dd6b20"/><text x="149" y="109" fill="#1f2933">ize</text>
+    <rect x="180" y="80" width="50" height="46" rx="8" fill="#e3effb" stroke="#2b6cb0"/><text x="205" y="109" fill="#1f2933"> the</text>
+    <rect x="238" y="80" width="34" height="46" rx="8" fill="#fdebd9" stroke="#dd6b20"/><text x="255" y="109" fill="#1f2933"> T</text>
+    <rect x="280" y="80" width="42" height="46" rx="8" fill="#e3effb" stroke="#2b6cb0"/><text x="301" y="109" fill="#1f2933">SV</text>
+    <rect x="330" y="80" width="98" height="46" rx="8" fill="#fdebd9" stroke="#dd6b20"/><text x="379" y="109" fill="#1f2933"> columns</text>
+    <rect x="436" y="80" width="28" height="46" rx="8" fill="#e3effb" stroke="#2b6cb0"/><text x="450" y="109" fill="#1f2933">,</text>
+    <rect x="472" y="80" width="60" height="46" rx="8" fill="#fdebd9" stroke="#dd6b20"/><text x="502" y="109" fill="#1f2933"> then</text>
+    <rect x="540" y="80" width="66" height="46" rx="8" fill="#e3effb" stroke="#2b6cb0"/><text x="573" y="109" fill="#1f2933"> write</text>
+    <rect x="614" y="80" width="52" height="46" rx="8" fill="#fdebd9" stroke="#dd6b20"/><text x="640" y="109" fill="#1f2933"> out</text>
+    <rect x="674" y="80" width="26" height="46" rx="8" fill="#e3effb" stroke="#2b6cb0"/><text x="687" y="109" fill="#1f2933">.</text>
+  </g>
+  <text x="708" y="109" font-size="16" fill="#52606d">= 11 tokens</text>
+
+  <!-- rule of thumb -->
+  <rect x="40" y="160" width="900" height="58" rx="10" fill="#f7fafc" stroke="#cbd5e0"/>
+  <text x="60" y="195" font-size="19" fill="#1f2933">
+    <tspan font-weight="700">1 token ≈ 4 characters ≈ ¾ of a word</tspan>
+    <tspan fill="#52606d">     →     100 tokens ≈ 75 words</tspan>
+  </text>
+
+  <text x="40" y="262" font-size="15" fill="#52606d">Code, file paths, and identifiers split into <tspan font-weight="700" fill="#dd6b20">more</tspan> tokens per word than plain prose —</text>
+  <text x="40" y="286" font-size="15" fill="#52606d">a screen of R or Python usually costs more tokens than a screen of text.</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 480" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#52606d"/>
+    </marker>
+  </defs>
+
+  <!-- panels -->
+  <rect x="30" y="55" width="440" height="400" rx="16" fill="#f7fafc" stroke="#cbd5e0"/>
+  <rect x="510" y="55" width="440" height="400" rx="16" fill="#f7fafc" stroke="#cbd5e0"/>
+
+  <text x="250" y="95" text-anchor="middle" font-size="23" font-weight="700" fill="#1f2933">Chatbot</text>
+  <text x="250" y="120" text-anchor="middle" font-size="13" fill="#52606d">answers from a prompt window</text>
+  <text x="730" y="95" text-anchor="middle" font-size="23" font-weight="700" fill="#1f2933">Coding agent</text>
+  <text x="730" y="120" text-anchor="middle" font-size="13" fill="#52606d">acts in your environment</text>
+
+  <!-- left: linear flow -->
+  <rect x="175" y="150" width="150" height="42" rx="10" fill="#e3effb" stroke="#2b6cb0"/>
+  <text x="250" y="176" text-anchor="middle" font-size="14" fill="#1f2933">You: a question</text>
+  <line x1="250" y1="192" x2="250" y2="226" stroke="#52606d" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="165" y="228" width="170" height="46" rx="10" fill="#ffffff" stroke="#2b6cb0"/>
+  <text x="250" y="256" text-anchor="middle" font-size="14" fill="#1f2933">Chat model (LLM)</text>
+  <line x1="250" y1="274" x2="250" y2="308" stroke="#52606d" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="175" y="310" width="150" height="42" rx="10" fill="#e3effb" stroke="#2b6cb0"/>
+  <text x="250" y="336" text-anchor="middle" font-size="14" fill="#1f2933">Text reply</text>
+  <text x="250" y="398" text-anchor="middle" font-size="14" fill="#c53030">✗ no access to your files</text>
+  <text x="250" y="422" text-anchor="middle" font-size="13" fill="#52606d">copy · paste · adjust · repeat</text>
+
+  <!-- right: agent loop -->
+  <rect x="655" y="150" width="150" height="42" rx="10" fill="#e3f3ea" stroke="#2f855a"/>
+  <text x="730" y="176" text-anchor="middle" font-size="14" fill="#1f2933">You: a goal</text>
+  <line x1="730" y1="192" x2="730" y2="210" stroke="#52606d" stroke-width="2" marker-end="url(#ar)"/>
+
+  <rect x="615" y="212" width="230" height="150" rx="12" fill="#ffffff" stroke="#2f855a"/>
+  <text x="730" y="234" text-anchor="middle" font-size="12" fill="#52606d" font-style="italic">agentic loop</text>
+  <rect x="635" y="248" width="82" height="34" rx="8" fill="#e3effb" stroke="#2b6cb0"/>
+  <text x="676" y="270" text-anchor="middle" font-size="13" fill="#1f2933">Plan</text>
+  <rect x="743" y="248" width="82" height="34" rx="8" fill="#e3effb" stroke="#2b6cb0"/>
+  <text x="784" y="270" text-anchor="middle" font-size="13" fill="#1f2933">Act</text>
+  <rect x="689" y="316" width="82" height="34" rx="8" fill="#e3effb" stroke="#2b6cb0"/>
+  <text x="730" y="338" text-anchor="middle" font-size="13" fill="#1f2933">Observe</text>
+  <line x1="717" y1="265" x2="741" y2="265" stroke="#52606d" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="790" y1="282" x2="752" y2="314" stroke="#52606d" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="700" y1="314" x2="676" y2="284" stroke="#52606d" stroke-width="2" marker-end="url(#ar)"/>
+
+  <line x1="730" y1="362" x2="730" y2="384" stroke="#52606d" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="598" y="386" width="264" height="34" rx="8" fill="#eef2f7" stroke="#cbd5e0"/>
+  <text x="730" y="408" text-anchor="middle" font-size="14" fill="#1f2933">Files · Shell · Git · MCP</text>
+  <text x="730" y="442" text-anchor="middle" font-size="14" fill="#2f855a">✓ reads &amp; changes your real repo</text>
+</svg>

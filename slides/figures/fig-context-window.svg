@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 360" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <text x="40" y="48" font-size="18" font-weight="700" fill="#1f2933">The context window: a fixed token budget</text>
+  <text x="40" y="74" font-size="14" fill="#52606d">Prompt, files, history, and the answer all compete for the same space.</text>
+
+  <!-- outer budget frame -->
+  <rect x="40" y="96" width="900" height="132" rx="12" fill="#ffffff" stroke="#1f2933" stroke-width="2.5"/>
+
+  <!-- segments -->
+  <rect x="56" y="116" width="150" height="92" rx="8" fill="#2b6cb0"/>
+  <text x="131" y="158" text-anchor="middle" font-size="13" fill="#ffffff">System +</text>
+  <text x="131" y="176" text-anchor="middle" font-size="13" fill="#ffffff">instructions</text>
+
+  <rect x="214" y="116" width="250" height="92" rx="8" fill="#5b8fc7"/>
+  <text x="339" y="167" text-anchor="middle" font-size="14" fill="#ffffff">Files opened</text>
+
+  <rect x="472" y="116" width="284" height="92" rx="8" fill="#52606d"/>
+  <text x="614" y="158" text-anchor="middle" font-size="14" fill="#ffffff">Conversation</text>
+  <text x="614" y="176" text-anchor="middle" font-size="14" fill="#ffffff">so far</text>
+
+  <rect x="764" y="116" width="160" height="92" rx="8" fill="#dd6b20"/>
+  <text x="844" y="158" text-anchor="middle" font-size="13" fill="#ffffff">Output being</text>
+  <text x="844" y="176" text-anchor="middle" font-size="13" fill="#ffffff">written</text>
+
+  <!-- total bracket -->
+  <text x="490" y="262" text-anchor="middle" font-size="14" fill="#52606d">total ≤ the window limit (a few hundred K up to ~1M tokens, mid-2026)</text>
+
+  <text x="40" y="312" font-size="15" fill="#1f2933">Two consequences: <tspan font-weight="700" fill="#dd6b20">bigger is not free</tspan> (every token is re-read and re-paid each turn)</text>
+  <text x="40" y="336" font-size="15" fill="#1f2933">and <tspan font-weight="700" fill="#c53030">bigger is not always better</tspan> (quality can drop as the window fills).</text>
+</svg>
