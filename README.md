@@ -48,6 +48,57 @@ Agentic coding tools are especially strong whenever the task depends on **files 
 
 For Python and R users, this matters because so much day-to-day work is file-shaped: scripts, notebooks, CSV/TSV files, environment files, package metadata, Quarto or R Markdown, Snakemake or Nextflow pipelines, and test fixtures. If the tool can read the actual repository state, it can reason with fewer guesses.
 
+## Beyond code: agents for knowledge work
+
+Everything so far has been framed around code, but the same capabilities — reading files on disk, following instructions, calling tools, and holding context — apply just as well to the document-heavy work that fills a research week. Modern agents can read and write PDFs, Word documents, Excel spreadsheets, PowerPoint decks, and Markdown, so the real boundary is not "code vs. not code." It is *"does the task depend on real files and real context?"* — and most knowledge work does.
+
+A few examples that map onto common graduate-research tasks. (These slides were built this way; see the [`slides/`](slides/) directory.)
+
+**Deep research and literature synthesis.** Instead of reading twenty tabs by hand, point the agent at the question and let it gather, read, and compare sources, then write something you can act on.
+
+```text
+Search the web and PubMed for recent reviews of spatial transcriptomics
+normalization methods. Read the most-cited and most-recent sources, then write a
+one-page synthesis with citations. Note explicitly where sources disagree, and
+end with the three open questions that come up most often.
+```
+
+**Extracting structure from PDFs.** Stacks of PDFs — applications, CVs, papers, supplementary files — are a classic "messy input" that agents are good at turning into a table.
+
+```text
+This folder has ~40 applicant CVs as PDFs. For each one, extract: name, degree,
+years since PhD, methods used (e.g., scRNA-seq, imaging, ML), and number of
+first-author papers. Score each against the rubric in rubric.md, output a ranked
+CSV with a one-line justification per applicant, and flag anyone missing a
+required item.
+```
+
+**Building and editing slide decks.** Agents can draft a deck from notes, restructure an existing one, and even generate figures — the workflow used to produce this talk.
+
+```text
+Turn outline.md into a 12-slide deck: one idea per slide, speaker notes on each,
+and a simple diagram for the methods section. Keep it readable from the back of
+a room.
+```
+
+**Editing and tightening documents.** Grants, manuscripts, and theses are long, structured, and full of internal consistency you have to maintain by hand.
+
+```text
+Read aims.md (a grant Specific Aims page). Tighten it to one page while keeping
+my voice, flag every claim that needs a citation, and list any place where the
+aims and the one-paragraph summary contradict each other.
+```
+
+**Brainstorming with real context.** The agent is a better thinking partner when it can see your actual material — the papers, the data, the current draft — rather than a paraphrase.
+
+```text
+Here are three papers (PDFs) and my current slide deck. Given what these papers
+show, suggest three follow-up experiments and the figure each one would produce.
+Then push back on the weakest part of my current framing.
+```
+
+The thread is identical to the coding case: the agent is most useful when you hand it the *real material* — the PDFs, the spreadsheet, the draft, the slides — instead of describing it. And the same habits carry over: keep the context focused, put durable instructions in a file, and review the output the way you would review a colleague's draft.
+
 ## Core idea: from "answering" to "acting"
 
 The simplest way to explain agentic coding is this:

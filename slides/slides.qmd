@@ -70,6 +70,31 @@ ground it in their world: exploring an unfamiliar Bioconductor package, cleaning
 a messy field-notes file, auditing a small pipeline.
 :::
 
+## Not just code — knowledge work too
+
+![](figures/fig-knowledge-work.svg){width="90%"}
+
+::: notes
+This is the slide that makes the talk relevant to everyone in the room, not just
+the people who write pipelines. The same capabilities — read files, follow
+instructions, call tools, hold context — power document work too. Concrete
+prompts to mention or demo:
+
+- Deep research: "Search the web and PubMed for recent reviews of X; read the top
+  sources and write a one-page synthesis with citations, noting disagreements."
+- PDF extraction: "These 40 applicant CVs are PDFs — extract degree, methods, and
+  first-author papers, score against rubric.md, and give me a ranked CSV." Works
+  the same for course applications or pulling data out of papers.
+- Slides: "Turn outline.md into a 12-slide deck with speaker notes" — exactly how
+  this deck was built.
+- Document editing: "Tighten this grant Aims page, flag claims needing citations,
+  and list inconsistencies with the summary."
+- Brainstorming: "Given these three papers and my deck, propose three follow-up
+  experiments and push back on my weakest framing."
+
+The thread is the same: give it the real material, not a description of it.
+:::
+
 ## The right mental model
 
 A **capable but junior colleague** — not an oracle.
@@ -241,6 +266,7 @@ Start small and concrete — not "build a web app."
 - **Structure a messy text file** into clean CSV + a problems report
 - **Audit a small CLI workflow** for assumptions that break on another machine
 - **Survey foundation models** for single-cell / spatial transcriptomics
+- **Knowledge work**: extract a folder of PDFs into a table, or draft a deck from notes
 
 ::: notes
 These four projects are in the handout (README) with copy-paste prompts. They're
@@ -255,6 +281,7 @@ them to the handout rather than reading the prompts aloud.
 > **real files, real commands, and real project context.**
 
 - They **act**, they don't just answer
+- Just as useful for **knowledge work** — research, PDFs, slides, editing
 - **Tokens and the context window** explain cost *and* quality
 - Keep context **lean**; keep durable knowledge in **Markdown**
 - Treat the agent as a **junior colleague** you direct and review
