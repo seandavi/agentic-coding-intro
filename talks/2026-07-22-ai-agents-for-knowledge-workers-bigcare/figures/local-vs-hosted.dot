@@ -66,7 +66,7 @@ digraph local_vs_hosted {
       h_doc [label="your document", fillcolor="#e8eef7", color="#2b6cb0", fontcolor="#1f2933"];
     }
 
-    h_srv [label="someone else's server", fillcolor="#fdebd9", color="#dd6b20", fontcolor="#7b341e"];
+    h_srv [label="someone else's server", width=2.70, fillcolor="#fdebd9", color="#dd6b20", fontcolor="#7b341e"];
 
     h_doc -> h_srv [color="#c05621", fontcolor="#c05621", penwidth=2,
                     label="your text"];
