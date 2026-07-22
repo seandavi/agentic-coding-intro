@@ -5,3 +5,7 @@ slides.html
 
 # headless-browser / preview scratch
 .playwright-mcp/
+
+# demo PDFs: fetched from demo/papers.csv, ~114 MB, never committed
+demo/papers/
+

@@ -3,8 +3,10 @@
 A 50–60 minute talk for a broad audience of clinicians and researchers.
 Adapted from the CSHL deck (`../2026-06-18-chatbots-to-coding-agents-cshl/`),
 recentered on knowledge work rather than coding: documents, folders of PDFs,
-grants, and manuscripts. Tool-agnostic, with a ~10-minute live demo
-(folder of open-access PDFs → extraction table + cited synthesis) and a
+grants, and manuscripts. The audience is mostly basic-science cancer
+researchers (genomics and molecular biology) with some clinicians, so examples
+lean single-cell and immunotherapy. Tool-agnostic, with a ~10-minute live demo
+(DOI list → downloaded PDFs → extraction table + cited synthesis) and a
 privacy/PHI slide.
 
 ## Build
@@ -20,11 +22,13 @@ Present with `quarto preview slides.qmd`, or open `slides.html` directly.
 Speaker notes are in the deck — press **`s`** in the browser to open the
 speaker view. The rendered `slides.html` is git-ignored (regenerate it locally).
 
-## Demo materials (prepare before the talk)
+## Demo materials
 
-- `papers/` — ~10 open-access PDFs on one topic (nothing sensitive or paywalled)
-- `backup/` — the finished CSV + synthesis from a rehearsal run
-- a pre-recorded screen capture of the run, as the wifi fallback
+See [`demo/README.md`](demo/README.md). In short: `demo/papers.csv` is a list of
+10 open-access single-cell / immunotherapy papers (DOIs only, 3 KB). The agent
+downloads them live as Act 1, then extracts and synthesizes as Act 2. The PDFs
+(~114 MB) are git-ignored and re-fetched on demand; `demo/fetch_papers.py` is
+the offline fallback.
 
 ## Figures
 

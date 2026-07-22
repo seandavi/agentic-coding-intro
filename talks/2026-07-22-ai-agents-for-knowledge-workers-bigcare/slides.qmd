@@ -50,20 +50,21 @@ this with your actual documents, with permissions and your approval.
 
 ## Your work is file-shaped
 
-So much of research and clinical-academic life lives in files:
+So much of research life lives in files:
 
-- manuscripts, grant applications, protocols, consent documents
-- folders of PDFs — papers, applications, reports
-- spreadsheets, data dictionaries, survey exports
-- slide decks, meeting notes, literature libraries
+- manuscripts, grant applications, protocols, reviews
+- folders of PDFs — papers, applicant CVs, reports
+- sample sheets, metadata tables, marker-gene lists, data dictionaries
+- analysis scripts and notebooks; slide decks and meeting notes
 
 . . .
 
 A chatbot reasons about a *snippet you paste*.
 An agent reasons about the *documents as they actually are*.
 
-> "Read the 12 PDFs in this folder, extract the study design and sample size
-> from each, and flag the two whose methods sections disagree with their abstracts."
+> "Take this list of 40 DOIs, fetch the open-access PDFs, extract the platform
+> and cell counts from each, and flag the two whose methods disagree with
+> their abstracts."
 
 ::: notes
 This is the key distinction worth repeating. The unit of work changes from
@@ -79,16 +80,18 @@ a folder of PDFs they wish were a table. That's the hook.
 This is the center of the talk. Walk each card slowly — each one is a real
 prompt pattern:
 
-- Deep research: "Search the web and PubMed for recent reviews of X; read the
-  top sources and write a one-page synthesis with citations, noting disagreements."
-- PDF extraction: "These 40 applicant CVs are PDFs — extract degree, methods,
-  and first-author papers, score against rubric.md, and give me a ranked CSV."
+- Deep research: "Search PubMed for recent work on CAF subtypes in pancreatic
+  cancer; read the top sources and write a one-page synthesis with citations,
+  noting where they disagree."
+- PDF extraction: "These 40 postdoc applicant CVs are PDFs — extract degree,
+  methods experience, and first-author papers, score against rubric.md, and
+  give me a ranked CSV." (Same loop as the paper demo, different folder.)
 - Slides: "Turn outline.md into a 12-slide deck with speaker notes" — exactly
   how this deck was built.
 - Document editing: "Tighten this Aims page, flag claims needing citations,
   and list inconsistencies with the project summary."
 - Brainstorming: "Given these three papers and my draft, propose follow-up
-  analyses and push back on my weakest framing."
+  experiments and push back on my weakest framing."
 
 The thread: give it the real material, not a description of the material.
 :::
@@ -135,41 +138,112 @@ product" are separate questions, and this talk teaches the durable layer.
 
 # Live demo — let's watch one work {background-color="#222c38"}
 
-## The task
+## What we start with: a reference list
 
-A folder of **10 open-access papers** (PDFs). One instruction:
+`papers.csv` — 10 open-access single-cell papers on the tumor
+microenvironment and immunotherapy response.
 
-> "Read the PDFs in `papers/`. Build a table — study, year, design, sample
-> size, key finding, main limitation — as a CSV. Then write a one-page
-> synthesis: where do these papers agree, and where do they disagree?
-> Cite by filename."
+| doi | year | journal | short_name |
+|---|---|---|---|
+| 10.1186/s13073-023-01164-9 | 2023 | Genome Medicine | nsclc-neoadjuvant-ici |
+| 10.1038/s41590-022-01215-0 | 2022 | Nature Immunology | gbm-immune-evolution |
+| 10.7150/thno.60540 | 2022 | Theranostics | gastric-proinvasive-caf |
+| … | | | *(7 more)* |
+
+**No PDFs yet.** Just DOIs — the way a reference list actually arrives.
+
+::: notes
+Start here deliberately: this is what people really have — a citation list, a
+saved search, a collaborator's email. The PDFs are 114 MB; the list is 3 KB.
+Say that out loud, it lands.
+
+The papers are all CC-BY / CC-BY-NC open access, deliberately: nothing
+paywalled, nothing sensitive. Same reason the privacy slide comes later.
+:::
+
+## Act 1 — "go get them"
+
+> "Read `papers.csv`. Download each open-access PDF into `papers/`,
+> named by `short_name`. Then tell me which ones failed and why."
 
 . . .
 
-Watch for the **loop**: plan → open a file → extract → next file → synthesize.
+Watch the loop: read the list → fetch → **check it's actually a PDF** →
+report what broke.
 
 ::: notes
-Demo plan (~10 min):
+This act is short (~2 min) but it earns the whole talk. Points to narrate:
 
-- Materials prepared in advance: papers/ with 10 open-access PDFs on one topic;
-  nothing sensitive, nothing paywalled.
-- Narrate the loop as it runs — the audience should see it *reading files they
-  can see in the folder*, not answering from training data.
-- While it works, take one or two audience questions.
-- Punchline when it finishes: open the CSV, spot-check one row against the
-  actual PDF. Model the verification habit in front of them.
+- It handles a *list*, one row at a time — the same loop as any repetitive task.
+- Publishers differ: two candidate papers were dropped from this list because
+  their sites block scripted download (AACR, BMJ). Real friction, real
+  workaround — that is what "verify" means in practice.
+- It reports failures instead of silently producing a short table. Contrast
+  with a chatbot, which would just hand you plausible-looking text.
 
-Fallbacks, in order: (1) hotspot if venue wifi fails; (2) pre-recorded screen
-capture of the same run; (3) screenshots of the finished CSV + synthesis.
-Keep the finished outputs in a backup/ folder either way.
+If wifi is slow, the PDFs are already in papers/ from rehearsal — the agent
+will say "already present" and move on, which is itself a nice touch.
+:::
+
+## Act 2 — "now read them"
+
+> "Read the PDFs in `papers/`. Build `extraction.csv` — cancer type, platform,
+> number of cells, key finding, main limitation. Then write a one-page
+> synthesis: where do these papers agree, and where do they disagree?
+> Cite by DOI."
+
+. . .
+
+Same loop, bigger job: plan → open a paper → extract → next → synthesize.
+
+::: notes
+The main act (~6-7 min). Narrate that it is reading files the audience can see
+in the folder, not recalling training data.
+
+Watch for on-screen: it opens each PDF in turn; the row count grows; the
+review paper (scrnaseq-cancer-review) has no sample size, so a good agent
+flags it rather than inventing one. That's the tell worth pointing at.
+
+The real disagreement in this set — what predicts response to checkpoint
+blockade: a stemness signature, a T-cell exhaustion signature, CAF
+subpopulations, or myeloid composition? Four papers, four answers, all
+defensible. If the synthesis surfaces that tension, say so. If it papers over
+it, say that too — a smooth summary that hides a real disagreement is exactly
+the failure mode to watch for.
+
+While it works, take audience questions.
+:::
+
+## The punchline: check a row
+
+Open `extraction.csv`. Pick one row. Open that PDF. **Verify.**
+
+. . .
+
+- number of cells → is that the number in the paper, or the number in the abstract?
+- "main limitation" → the authors', or the agent's opinion?
+
+. . .
+
+You would do this to a trainee's first draft. Do it here.
+
+::: notes
+Do this live, on one row, in front of them — this is the single most important
+90 seconds of the talk. Whether the row is right or wrong, the habit is the
+lesson. If it's wrong, even better: that's the talk's thesis made concrete.
+
+Fallbacks, in order: (1) phone hotspot if venue wifi fails; (2) the pre-recorded
+screen capture of the same run; (3) screenshots of the finished CSV +
+synthesis. Keep rehearsal outputs in demo/backup/ either way.
 :::
 
 ## What you just saw
 
-- It **planned**, then worked file-by-file — not one giant answer
+- It went from a **reference list to a synthesis** without you touching a PDF
+- It **planned**, then worked one paper at a time — not one giant answer
 - Every step was **visible and interruptible**
 - The output landed **in files you keep** — a CSV and a document, not a chat bubble
-- And one row was wrong until we checked it — **that's the job now**
+- And we checked a row before believing it — **that's the job now**
 
 ::: notes
 Bridge slide: convert the demo into the concepts. The visible loop is Part 1;
@@ -298,13 +372,18 @@ file, verify before it counts."
 
 Start small and concrete — with material you already have:
 
-- **A folder of PDFs → a table**: extract the same five fields from each,
+- **A DOI list → a table**: your last review's references, five fields each,
   then spot-check two rows
-- **Literature synthesis**: recent reviews on your topic → one page,
+- **Literature synthesis**: recent papers on your target or pathway → one page,
   cited, with disagreements flagged
-- **Draft from your outline**: turn notes into a deck or a first-draft section
+- **Methods triage**: which of these 20 papers used 10x v3 vs. Smart-seq2,
+  and at what depth?
 - **Edit with pushback**: "tighten this Aims page and flag weak claims"
-- **Meeting notes → action items**, assigned and dated
+- **Draft from your outline**: turn notes into a deck or a first-draft section
+
+::: {.footnote}
+Today's `papers.csv` and prompts are in the handout repo — start from them.
+:::
 
 ::: notes
 All research-leaning, all PHI-free by construction, all in the handout with
