@@ -8,6 +8,44 @@ The tool used here is [Google Antigravity](https://antigravity.google), Google's
 
 Although the examples here use Antigravity, the core workflow generalizes well to other coding agents such as Claude Code and Codex-style tools. The vocabulary and config file names vary, but the underlying pattern is similar: work inside a real repository, let the tool inspect actual files, and keep important project instructions in versioned text files.
 
+## Table of Contents
+
+- [Why this is different from a chatbot](#why-this-is-different-from-a-chatbot)
+- [What agentic coding tools are good at](#what-agentic-coding-tools-are-good-at)
+- [Beyond code: agents for knowledge work](#beyond-code-agents-for-knowledge-work)
+- [Core idea: from "answering" to "acting"](#core-idea-from-answering-to-acting)
+- [The right mental model: colleague, not oracle](#the-right-mental-model-colleague-not-oracle)
+- [Understanding context: tokens and the context window](#understanding-context-tokens-and-the-context-window)
+  - [Tokens](#tokens)
+  - [The context window](#the-context-window)
+- [Agentic frameworks: model versus agent](#agentic-frameworks-model-versus-agent)
+- [Security and permissions](#security-and-permissions)
+- [Tools, skills, and MCP](#tools-skills-and-mcp)
+  - [Tools](#tools)
+  - [Skills](#skills)
+  - [MCP](#mcp)
+- [Markdown as memory, process, and decision record](#markdown-as-memory-process-and-decision-record)
+- [Managing context well](#managing-context-well)
+  - [Clear the context between unrelated tasks](#clear-the-context-between-unrelated-tasks)
+  - [Skills versus one large instruction file](#skills-versus-one-large-instruction-file)
+  - [A short checklist](#a-short-checklist)
+- [Installing Antigravity](#installing-antigravity)
+  - [A note on the free tier](#a-note-on-the-free-tier)
+- [A very small hello-world example](#a-very-small-hello-world-example)
+- [A note on leaderboards and benchmarks](#a-note-on-leaderboards-and-benchmarks)
+  - [1. Aider polyglot leaderboard](#1-aider-polyglot-leaderboard)
+  - [2. SWE-bench](#2-swe-bench)
+- [Suggested references for a short session](#suggested-references-for-a-short-session)
+- [Four projects to try](#four-projects-to-try)
+  - [1. Explore a Bioconductor repository](#1-explore-a-bioconductor-repository)
+  - [2. Extract structure from a messy text file](#2-extract-structure-from-a-messy-text-file)
+  - [3. Audit a small command-line workflow](#3-audit-a-small-command-line-workflow)
+  - [4. Survey foundation models for transcriptomics and spatial transcriptomics](#4-survey-foundation-models-for-transcriptomics-and-spatial-transcriptomics)
+- [A note on tokens and model costs](#a-note-on-tokens-and-model-costs)
+- [Paying for tools: an honest recommendation](#paying-for-tools-an-honest-recommendation)
+- [Closing idea](#closing-idea)
+- [AI assistance](#ai-assistance)
+
 ## Why this is different from a chatbot
 
 Many developers first meet AI through a web chat window. That is a useful starting point, but it encourages a weak workflow:
@@ -19,6 +57,10 @@ Many developers first meet AI through a web chat window. That is a useful starti
 5. Go back and repeat.
 
 That is the "cut-and-paste" approach. It can help with isolated questions, but it breaks down once the task depends on the actual state of your project.
+
+<p align="center">
+  <img src="assets/chatbot-vs-agentic.svg" alt="Side-by-side comparison. Left: a chatbot drives an Ask, Copy, Paste, 'doesn't fit' loop that repeats and never connects to your repository. Right: an agentic coding tool runs a Plan, Act, Observe, Revise loop that stays in sync with your repository through files, shell, git, and MCP." width="820">
+</p>
 
 An **agentic coding tool** works differently. It is not just producing text. It can usually:
 
