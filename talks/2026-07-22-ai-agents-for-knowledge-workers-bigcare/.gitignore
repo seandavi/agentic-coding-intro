@@ -9,3 +9,12 @@ slides.html
 # demo PDFs: fetched from demo/papers.csv, ~114 MB, never committed
 demo/papers/
 
+# quartobot
+_book/
+_freeze/
+.quarto/
+references.resolved.bib
+references.json
+*.bak-*
+*_files/
+**/*.quarto_ipynb

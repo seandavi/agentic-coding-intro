@@ -77,3 +77,134 @@ $code-color:       #e6eaef;
 
 // Brighter, larger slide numbers on dark
 .reveal .slide-number { color: #9aa5b1; background: transparent; }
+
+// ---------------------------------------------------------------------------
+// Polish
+// ---------------------------------------------------------------------------
+
+// A very slight warm-cool vignette so the flat dark field has some depth.
+// Deliberately low-contrast: it must never compete with a figure card.
+.reveal-viewport {
+  background:
+    radial-gradient(115% 85% at 80% 6%, #222c38 0%, rgba(34, 44, 56, 0) 58%),
+    radial-gradient(80% 70% at 5% 100%, #1d2630 0%, rgba(29, 38, 48, 0) 60%),
+    $body-bg;
+}
+
+// The accent rule used under the title and section headings.
+@mixin accent-rule($width: 200px, $thickness: 5px) {
+  content: "";
+  display: block;
+  width: $width;
+  height: $thickness;
+  border-radius: $thickness;
+  background: linear-gradient(90deg, $blue 0%, $green 58%, $amber 100%);
+}
+
+// ---- Title slide ----------------------------------------------------------
+#title-slide.quarto-title-block {
+  text-align: left;
+  padding: 0 9% 0 8%;
+}
+
+#title-slide .title {
+  font-size: 2.3em;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  margin: 0;
+  color: #f7fafc;
+}
+
+#title-slide .title::after {
+  @include accent-rule(210px, 5px);
+  margin: 0.42em 0 0.5em;
+}
+
+#title-slide .subtitle {
+  color: #9fabb8;
+  font-size: 0.88em;
+  font-style: normal;
+  line-height: 1.4;
+  max-width: 32em;
+  margin: 0 0 2.1em;
+}
+
+// Author, affiliation, and date read as one small line of metadata rather
+// than three stacked blocks: SEAN DAVIS · BIGCARE · 22 JULY 2026
+#title-slide .quarto-title-authors { display: inline-flex; margin: 0; }
+#title-slide .quarto-title-author {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+#title-slide .quarto-title-author-name,
+#title-slide .quarto-title-affiliation,
+#title-slide .date {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-size: 0.56em;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8b96a3;
+}
+#title-slide .quarto-title-author-name { color: #ccd6e1; }
+
+#title-slide .quarto-title-author-name::after,
+#title-slide .quarto-title-affiliation::after {
+  content: "·";
+  padding: 0 0.62em;
+  color: #55626f;
+}
+
+// ---- Section dividers -----------------------------------------------------
+.reveal .slides section.level1 h1 {
+  font-size: 1.7em;
+  letter-spacing: -0.015em;
+}
+.reveal .slides section.level1 h1::after {
+  @include accent-rule(150px, 4px);
+  margin: 0.55em auto 0;
+}
+
+// ---- Content headings -----------------------------------------------------
+// A hairline under each heading separates it from the body without a box.
+.reveal .slides section.level2 > h2 {
+  font-size: 1.32em;
+  padding-bottom: 0.3em;
+  margin-bottom: 0.65em;
+  border-bottom: 2px solid rgba(106, 169, 224, 0.26);
+}
+
+// ---- Body detail ----------------------------------------------------------
+.reveal ul li::marker { color: $blue; }
+.reveal ol li::marker { color: $blue; }
+.reveal ul li, .reveal ol li { margin-bottom: 0.28em; }
+
+.reveal code:not(.sourceCode) {
+  color: #d5e4f5;
+  background: rgba(106, 169, 224, 0.13);
+  padding: 0.06em 0.32em;
+  border-radius: 4px;
+  font-size: 0.92em;
+}
+
+.reveal table {
+  font-size: 0.78em;
+  border-collapse: collapse;
+}
+.reveal table th {
+  text-align: left;
+  color: #cfd8e3;
+  font-weight: 700;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+.reveal table td { border-bottom: 1px solid rgba(255, 255, 255, 0.07); }
+
+// ---- Citations and references --------------------------------------------
+.reveal .citation a { color: $blue; text-decoration: none; }
+
+.reveal .tiny { font-size: 0.52em; line-height: 1.35; color: #b3bdc9; }
+.reveal .tiny .csl-entry { margin-bottom: 0.6em; }
+.reveal .tiny a { color: $blue; }

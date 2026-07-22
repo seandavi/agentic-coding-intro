@@ -1,0 +1,19 @@
+project:
+  type: default
+  # Resolves @doi:, @pmid:, @arxiv:, @isbn:, @url:, @wikidata:, @pmcid:,
+  # and bare DOIs before pandoc runs. The resolved entries land in
+  # references.resolved.bib (gitignored — regenerated each render) and
+  # pandoc reads it alongside hand-curated entries in references.bib.
+  pre-render: quartobot resolve --from-scan . --id-mode citation-key
+  render:
+    - slides.qmd
+
+bibliography:
+  - references.bib
+  - references.resolved.bib
+
+# Numeric superscripts keep citations out of the way on a slide; AMA is the
+# convention this audience reads in.
+csl: ama.csl
+
+# The deck's own format block (revealjs) lives in slides.qmd.

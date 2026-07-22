@@ -1,8 +1,11 @@
 ---
 title: "AI Agents for Knowledge Workers"
 subtitle: "What changes when AI can work in your files — and how to work well with it"
-author: "Sean Davis"
+author:
+  - name: "Sean Davis"
+    affiliation: "BigCare"
 date: "2026-07-22"
+date-format: "D MMMM YYYY"
 format:
   revealjs:
     theme: [dark, custom.scss]
@@ -12,6 +15,10 @@ format:
     fig-align: center
     embed-resources: true
     history: true
+    # Every figure here sets its own width. Reveal's auto-stretch fights that:
+    # on slides where an image shares space with a caption it computes a
+    # remaining height of 0 and the image silently disappears.
+    auto-stretch: false
 ---
 
 ## You already know the hard part
@@ -298,6 +305,11 @@ every turn (so bloat costs money and attention), and bigger is not free.
 
 ![](figures/chart-context-rot.svg){width="88%"}
 
+::: {.small}
+"Lost in the middle" [@doi:10.1162/tacl_a_00638]; degradation with input
+length is reported across frontier models.
+:::
+
 ::: notes
 Two robust findings, in plain terms. "Lost in the middle": models attend best
 to the start and end of the window and can miss material buried in the middle —
@@ -518,10 +530,10 @@ mostly orchestrations of specialized agents, not one giant prompt.
 
 ## Agents built for biomedical research
 
-![](figures/papers/biomni.png){.paper-banner width="88%"}
+![](figures/papers/biomni.png){.paper-banner .nostretch width="88%"}
 
 ::: {.small}
-Stanford · bioRxiv 2025 · now published in *Science* (2026)
+Stanford · *Science* 2026 [@doi:10.1126/science.adz4351]
 :::
 
 - ~150 tools, ~60 databases, mined from the literature across 25 subdomains
@@ -550,7 +562,7 @@ is still early.
 ![](figures/papers/ai-co-scientist.png){.paper-banner}
 
 ::: {.small}
-Google · accepted at *Nature* (2026)
+Google · *Nature* 2026 [@doi:10.1038/s41586-026-10644-y]
 
 Agents **debate and rank** hypotheses. It proposed KIRA6 for **AML** —
 a compound no human had pointed it at — and it killed leukemia cells
@@ -562,7 +574,7 @@ in vitro at far lower doses than healthy cells.
 ![](figures/papers/virtual-lab.png){.paper-banner}
 
 ::: {.small}
-Stanford + CZ Biohub · *Nature* (2025)
+Stanford + CZ Biohub · *Nature* 2025 [@doi:10.1038/s41586-025-09442-9]
 
 An LLM "PI" runs meetings with LLM scientists; 92 nanobodies designed,
 **two validated at the bench**.
@@ -588,10 +600,11 @@ of* — and the reviewing is still yours.
 
 ## Closer to home: agents in cancer research
 
-![](figures/papers/crispr-gpt.png){.paper-banner width="80%"}
+![](figures/papers/crispr-gpt.png){.paper-banner .nostretch width="80%"}
 
 ::: {.small}
-Stanford/Princeton · *Nature Biomedical Engineering* (2025) — plans and
+Stanford/Princeton · *Nature Biomedical Engineering* 2025
+[@doi:10.1038/s41551-025-01463-z] — plans and
 executes gene-editing experiments end to end. **Wet-lab validated**: four
 genes knocked out in a lung adenocarcinoma line, two activated in melanoma.
 :::
@@ -612,11 +625,11 @@ tested in cancer lines.
 
 ## And the honest evaluation
 
-![](figures/papers/agentic-eval-cancer.png){.paper-banner width="86%"}
+![](figures/papers/agentic-eval-cancer.png){.paper-banner .nostretch width="86%"}
 
 ::: {.small}
-Dana-Farber (Van Allen lab) · bioRxiv 2026 — agents tested on single-cell
-multi-omics across **11 cancer types**.
+Dana-Farber (Van Allen lab) · bioRxiv 2026 [@doi:10.64898/2026.06.04.729919]
+— agents tested on single-cell multi-omics across **11 cancer types**.
 :::
 
 > Good at broad exploration. **Domain experts remained essential** for
@@ -762,4 +775,18 @@ you give it again — that is the whole point of the tools-change-fast lesson.
 
 ::: {.footnote}
 Token and context-window figures are mid-2026 and illustrative; exact numbers move fast.
+:::
+
+## References {.scrollable}
+
+::: {.tiny}
+::: {#refs}
+:::
+:::
+
+::: notes
+Auto-generated from the `@doi:` keys in this deck — quartobot resolves them
+against Crossref at render, so the metadata is the publisher's, not mine.
+Leave it up during Q&A alongside the resources slide, or skip past it; the
+handout has the same list with links.
 :::

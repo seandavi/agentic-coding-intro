@@ -23,6 +23,24 @@ quarto render slides.qmd --to revealjs
 # produces a self-contained slides.html (open it in any browser)
 ```
 
+### Citations
+
+Papers are cited by persistent identifier directly in the slide source —
+`[@doi:10.1126/science.adz4351]` — and resolved by
+[quartobot](https://seandavi.github.io/quartobot/), which `_quarto.yml` runs
+as a pre-render hook. It fetches metadata from Crossref/PubMed and writes
+`references.resolved.bib` (gitignored, regenerated each render); pandoc formats
+the References slide from it using `ama.csl`.
+
+**Rendering therefore requires `quartobot` on PATH**
+(`uv tool install git+https://github.com/seandavi/quartobot`). Nothing is
+hand-transcribed, so a citation is either correct or fails loudly at render.
+To add one, write the `@doi:` key in the slide and re-render.
+
+Note `auto-stretch: false` in the deck's YAML — it is load-bearing. Reveal's
+auto-stretch computes a remaining height of 0 for an image that shares a slide
+with a caption, which silently makes the image vanish.
+
 Present with `quarto preview slides.qmd`, or open `slides.html` directly.
 Speaker notes are in the deck — press **`s`** in the browser to open the
 speaker view. The rendered `slides.html` is git-ignored (regenerate it locally).
