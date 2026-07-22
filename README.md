@@ -1,10 +1,12 @@
-# Agentic Coding with Gemini CLI
+# Agentic Coding with ~~Gemini CLI~~ Antigravity
 
 This short handout is for developers who are already comfortable writing code in R and/or Python, but who are new to AI coding tools. The goal is not to turn programming into button-pushing. The goal is to understand a new kind of interface: one where you can ask for reasoning, editing, search, shell commands, file inspection, and workflow execution from inside the same working session.
 
-The tool used here is [Gemini CLI](https://github.com/google-gemini/gemini-cli), Google’s terminal-based coding agent. The official documentation is at [geminicli.com/docs](https://geminicli.com/docs/).
+The tool used here is [Google Antigravity](https://antigravity.google), Google's agentic development platform: an AI-powered editor and an "agent-first" workspace where the agent can plan, edit files, run commands, and even drive a browser on your behalf. The official download is at [antigravity.google/download](https://antigravity.google/download).
 
-Although the examples here use Gemini CLI, the core workflow generalizes well to other coding agents such as Claude Code and Codex-style tools. The vocabulary and config file names vary, but the underlying pattern is similar: work inside a real repository, let the tool inspect actual files, and keep important project instructions in versioned text files.
+> **A note before we begin — and the first lesson.** When this handout was first drafted, the obvious entry point was Google's ~~Gemini CLI~~. By the time it was delivered, Google's recommended starting tool had shifted to **Antigravity** — a different product, with a different interface and different limits. The strikethrough in the title is intentional. The half-life of any *specific* tool in this space is now measured in months. That is exactly why most of what follows is about the things that change slowly: what an agent is, how context and tokens work, and the habits for working with real files. Learn those, and you can pick up whatever tool is current the week you read this.
+
+Although the examples here use Antigravity, the core workflow generalizes well to other coding agents such as Claude Code and Codex-style tools. The vocabulary and config file names vary, but the underlying pattern is similar: work inside a real repository, let the tool inspect actual files, and keep important project instructions in versioned text files.
 
 ## Why this is different from a chatbot
 
@@ -48,6 +50,57 @@ Agentic coding tools are especially strong whenever the task depends on **files 
 
 For Python and R users, this matters because so much day-to-day work is file-shaped: scripts, notebooks, CSV/TSV files, environment files, package metadata, Quarto or R Markdown, Snakemake or Nextflow pipelines, and test fixtures. If the tool can read the actual repository state, it can reason with fewer guesses.
 
+## Beyond code: agents for knowledge work
+
+Everything so far has been framed around code, but the same capabilities — reading files on disk, following instructions, calling tools, and holding context — apply just as well to the document-heavy work that fills a research week. Modern agents can read and write PDFs, Word documents, Excel spreadsheets, PowerPoint decks, and Markdown, so the real boundary is not "code vs. not code." It is *"does the task depend on real files and real context?"* — and most knowledge work does.
+
+A few examples that map onto common graduate-research tasks. (These slides were built this way; see the [`slides/`](slides/) directory.)
+
+**Deep research and literature synthesis.** Instead of reading twenty tabs by hand, point the agent at the question and let it gather, read, and compare sources, then write something you can act on.
+
+```text
+Search the web and PubMed for recent reviews of spatial transcriptomics
+normalization methods. Read the most-cited and most-recent sources, then write a
+one-page synthesis with citations. Note explicitly where sources disagree, and
+end with the three open questions that come up most often.
+```
+
+**Extracting structure from PDFs.** Stacks of PDFs — applications, CVs, papers, supplementary files — are a classic "messy input" that agents are good at turning into a table.
+
+```text
+This folder has ~40 applicant CVs as PDFs. For each one, extract: name, degree,
+years since PhD, methods used (e.g., scRNA-seq, imaging, ML), and number of
+first-author papers. Score each against the rubric in rubric.md, output a ranked
+CSV with a one-line justification per applicant, and flag anyone missing a
+required item.
+```
+
+**Building and editing slide decks.** Agents can draft a deck from notes, restructure an existing one, and even generate figures — the workflow used to produce this talk.
+
+```text
+Turn outline.md into a 12-slide deck: one idea per slide, speaker notes on each,
+and a simple diagram for the methods section. Keep it readable from the back of
+a room.
+```
+
+**Editing and tightening documents.** Grants, manuscripts, and theses are long, structured, and full of internal consistency you have to maintain by hand.
+
+```text
+Read aims.md (a grant Specific Aims page). Tighten it to one page while keeping
+my voice, flag every claim that needs a citation, and list any place where the
+aims and the one-paragraph summary contradict each other.
+```
+
+**Brainstorming with real context.** The agent is a better thinking partner when it can see your actual material — the papers, the data, the current draft — rather than a paraphrase.
+
+```text
+Here are three papers (PDFs) and my current slide deck. Given what these papers
+show, suggest three follow-up experiments and the figure each one would produce.
+Then push back on the weakest part of my current framing.
+```
+
+The thread is identical to the coding case: the agent is most useful when you hand it the *real material* — the PDFs, the spreadsheet, the draft, the slides — instead of describing it. And the same habits carry over: keep the context focused, put durable instructions in a file, and review the output the way you would review a colleague's draft.
+
 ## Core idea: from "answering" to "acting"
 
 The simplest way to explain agentic coding is this:
@@ -57,11 +110,10 @@ The simplest way to explain agentic coding is this:
 
 That does not mean it should be allowed to do everything automatically. Good tools expose actions with approvals, scope, logs, and context. But the important shift is that the tool is no longer disconnected from the codebase.
 
-Gemini CLI is explicitly built around that model. Its docs describe it as a way to "understand code, automate tasks, and build workflows with your local project context" and document built-in support for file operations, shell commands, web fetching, and MCP integrations:
+Antigravity is explicitly built around that model. Google describes it as an "agentic development platform" in which the agent autonomously plans, executes, and verifies its work across the editor, the terminal, and a built-in browser — going well beyond plain text generation:
 
-- [Gemini CLI overview](https://geminicli.com/docs/)
-- [Gemini CLI tools](https://geminicli.com/docs/tools)
-- [Gemini CLI cheatsheet](https://geminicli.com/docs/cli/cli-reference/)
+- [Build with Google Antigravity (announcement)](https://developers.googleblog.com/build-with-google-antigravity-our-new-agentic-development-platform/)
+- [Antigravity home and download](https://antigravity.google)
 
 ## The right mental model: colleague, not oracle
 
@@ -77,6 +129,44 @@ The developer's job does not disappear. It shifts:
 Think of it less like consulting an expert and more like working with a new team member who happens to read code very fast and never gets tired. You would not hand a new team member an ambiguous task and walk away. You would give them a clear goal, check in on their progress, catch errors early, and push back when the approach is wrong.
 
 That framing also helps calibrate frustration. When an agent makes a wrong assumption, the right response is usually a clearer prompt or more explicit context, not a different tool. The bottleneck is almost always the quality of the instructions.
+
+## Understanding context: tokens and the context window
+
+Before going further, it helps to understand what the model is actually reading. Almost everything about quality, cost, and the habits in the rest of this document follows from two ideas: **tokens** and the **context window**.
+
+### Tokens
+
+A model does not read characters or words the way you do. It reads **tokens**: short chunks of text, usually a few characters each. A useful rule of thumb for English is:
+
+> 1 token ≈ 4 characters ≈ about ¾ of a word. So roughly **100 tokens ≈ 75 words**.
+
+Code, file paths, identifiers, and non-English text tend to break into *more* tokens per word, so a screen full of R or Python usually costs more tokens than a screen full of prose. Every model uses its own tokenizer, so these numbers are approximate — but the rule of thumb is good enough for planning.
+
+Tokens come in two flavors, and the distinction matters more than people expect:
+
+- **Input tokens** are everything the model *reads*: your prompt, the files it opens, earlier turns in the conversation, and the output of any tools it runs.
+- **Output tokens** are everything the model *writes*: explanations, code, edits, and tool calls.
+
+The reason to care is cost. **Output tokens are typically several times more expensive than input tokens — often 4x to 8x.** As of mid-2026, for example, one widely used model charges about \$3 per million input tokens and \$15 per million output tokens (a 5x gap); another charges roughly \$1.25 in and \$10 out (an 8x gap). Exact prices change constantly, so treat the figures as illustrative — but the *shape* is stable: reading is cheap, writing is expensive. That is why asking for a focused, well-scoped edit usually costs far less than asking for a sprawling rewrite, even when the model reads the same files in both cases.
+
+### The context window
+
+The **context window** is the maximum number of tokens the model can consider at once: the prompt, the files, the conversation history, and the answer it is generating all have to fit inside it. It is a finite budget, and *everything competes for the same space*.
+
+```text
+        ┌──────────────  CONTEXT WINDOW (a fixed token budget)  ──────────────┐
+        │  system + instructions │ files opened │ conversation so far │ output │
+        └─────────────────────────────────────────────────────────────────────┘
+                                          ↑
+                  as the session grows, the earlier parts crowd the budget
+```
+
+Modern windows are large — as of mid-2026, frontier models advertise context windows from a few hundred thousand tokens up to about a million. That sounds like effectively unlimited room, but two things complicate the picture:
+
+1. **Bigger is not free.** Every token in the window is an input token you pay for on each turn. A long, cluttered session re-reads its entire history every time the model responds, so cost grows with the conversation, not just with the task.
+2. **Bigger is not always better.** Research on long context — notably the *"Lost in the Middle"* finding (Liu et al., 2023) — shows that models attend best to information at the *start* and *end* of the window and can miss material buried in the middle. More recent work on *"context rot"* (2025) found that answer quality can degrade as the input grows long, sometimes well below the advertised limit. A million-token window does not guarantee a million tokens of reliable attention.
+
+Most tools soften the first problem with **prompt caching**: a stable chunk of context, such as a repository instruction file, can be cached so that re-reading it on later turns costs a small fraction of the normal input price (often around a tenth). This is one reason durable instructions belong in a file rather than being re-typed each session — caching is part of why that habit is also cheap. It does not solve the second problem, though: a cached-but-bloated context is still a bloated context. Both problems point to the same habit, covered later under [Managing context well](#managing-context-well): keep the working context lean and relevant.
 
 ## Agentic frameworks: model versus agent
 
@@ -144,9 +234,7 @@ These three ideas are worth separating clearly.
 
 ### Tools
 
-In an agentic coding environment, a **tool** is a capability the model can call to do something concrete. Gemini CLI documents built-in tools for file access and shell execution, and its tools page describes them as the mechanism that lets the model go beyond plain text generation:
-
-- [Gemini CLI tools](https://geminicli.com/docs/tools)
+In an agentic coding environment, a **tool** is a capability the model can call to do something concrete. Antigravity, like other agents, ships with built-in tools for file access, shell execution, and even browser control — the mechanism that lets the model go beyond plain text generation.
 
 Examples of tool-like actions include:
 
@@ -160,11 +248,7 @@ This is why agentic systems are so useful for real coding work. The model does n
 
 ### Skills
 
-A **skill** is a reusable bundle of instructions and assets for a specific kind of task. In Gemini CLI, skills are a first-class concept. The official docs describe them as a way to package "specialized expertise, procedural workflows, and task-specific resources":
-
-- [Agent Skills](https://geminicli.com/docs/cli/skills/)
-- [Get started with Agent Skills](https://geminicli.com/docs/cli/tutorials/skills-getting-started/)
-- [Creating Agent Skills](https://geminicli.com/docs/cli/creating-skills/)
+A **skill** is a reusable bundle of instructions and assets for a specific kind of task. Skills are becoming a first-class concept across agents: a way to package "specialized expertise, procedural workflows, and task-specific resources" that the agent loads only when a task calls for it. (In Antigravity, project skills are reported to live under a `.agents/` directory; Claude Code uses a `skills/` convention. The exact location varies by tool — the idea does not.)
 
 It helps to think of a skill as a small, sharable playbook:
 
@@ -190,11 +274,7 @@ Other tools use different names for roughly the same idea. Claude Code tends to 
 
 The official MCP introduction describes it as a kind of "USB-C port for AI applications." That analogy is useful: the point is standardization. Instead of every tool inventing a different one-off integration, MCP provides a common way to expose tools, resources, and prompts.
 
-Gemini CLI has dedicated support for MCP servers:
-
-- [MCP servers with Gemini CLI](https://geminicli.com/docs/tools/mcp-server/)
-- [Set up an MCP server](https://geminicli.com/docs/cli/tutorials/mcp-setup/)
-- [MCP resource tools](https://geminicli.com/docs/tools/mcp-resources/)
+Antigravity and the other major agents all support MCP servers, so the same external tool can be reused across whichever agent you happen to be running:
 
 In practice, MCP is what lets an agentic tool extend beyond the local filesystem. For example, you might connect a coding agent to:
 
@@ -210,12 +290,7 @@ One of the most important habits in agentic coding is using Markdown files to ca
 
 This matters for two reasons. First, the AI needs stable context. Second, human teams need stable context. A good Markdown file serves both.
 
-Gemini CLI uses `GEMINI.md` as its default context file name and supports a hierarchical loading model:
-
-- [Manage context and memory](https://geminicli.com/docs/cli/tutorials/memory-management/)
-- [Provide context with GEMINI.md files](https://geminicli.com/docs/cli/gemini-md/)
-- [Gemini CLI configuration: context files](https://geminicli.com/docs/reference/configuration/)
-- [Memory tool (`save_memory`)](https://geminicli.com/docs/tools/memory/)
+Different tools expose this idea differently. Antigravity's documented mechanism is **Artifacts** (saved plans, task lists, and records of what the agent did) together with a **Knowledge Base** for durable context; it is also reported to pick up a plain-text repository instruction file automatically — `AGENTS.md`, and it recognizes `GEMINI.md` and `CLAUDE.md` as well. Earlier CLIs such as Gemini CLI and Claude Code popularized the single-file approach (`GEMINI.md`, `CLAUDE.md`). The filename matters far less than the habit:
 
 This is more than configuration trivia. It suggests a very practical point:
 
@@ -240,99 +315,71 @@ The larger lesson is that agentic coding rewards explicitness. If a decision mat
 
 If you work with more than one tool, it is worth keeping this explicit: `GEMINI.md` and `CLAUDE.md` are not just random dotfiles. They are examples of a broader pattern of repository-scoped AI instructions.
 
-## Installing Gemini CLI on macOS and Linux
+## Managing context well
 
-The current official installation guide is here:
+If [tokens and the context window](#understanding-context-tokens-and-the-context-window) explain *what* the model reads, this section is about the single most useful operational habit: deciding what *should* be in the window at any moment. Good context management improves both quality and cost at the same time, which is rare enough to be worth taking seriously.
 
-- [Gemini CLI installation, execution, and releases](https://geminicli.com/docs/get-started/installation/)
-- [Gemini CLI authentication setup](https://geminicli.com/docs/get-started/authentication/)
+The guiding principle is simple:
 
-As of April 2026, the Gemini CLI docs list these baseline requirements:
+> Keep the working context **lean and relevant**. Add what the task needs; remove what it does not.
 
-- macOS 15+ or Ubuntu 20.04+
-- Node.js 20.0.0+
-- Bash or Zsh
+### Clear the context between unrelated tasks
 
-### macOS
+A long-running session accumulates history: files you opened three tasks ago, output from commands that no longer matter, a tangent you abandoned. All of it is still in the window, still being re-read on every turn, and — per the *lost-in-the-middle* and *context-rot* findings above — still competing for the model's attention. The symptoms are familiar: the agent starts referring to stale details, mixes up two problems, or gets slower and more expensive without getting better.
 
-For most macOS users, the cleanest path is:
+The fix is to start fresh when you switch problems. Most tools provide a way to do this:
 
-1. Install [Homebrew](https://brew.sh/) if you do not already have it.
-2. Install a current Node.js release from [nodejs.org](https://nodejs.org/en/download) or via Homebrew.
-3. Install Gemini CLI.
+- a command to **clear** the conversation and begin a new one (for example, `/clear` in Claude Code, or simply starting a new session);
+- a command to **compact** or summarize the session so far — replacing a long history with a short summary and continuing from there (for example, `/compact`);
+- starting a clean session and pointing the tool back at the repository, where the durable context lives in the instruction file anyway.
 
-Typical commands:
+A practical rhythm is **one objective per conversation**. Finish a task, capture anything durable in a Markdown file, then clear before the next unrelated task. This is the everyday version of the cost advice later in this document: a focused session is both cheaper and sharper.
 
-```bash
-# Optional: install Node with Homebrew if Node is not already available
-brew install node
+### Skills versus one large instruction file
 
-# Install Gemini CLI
-brew install gemini-cli
-```
+As teams encode more knowledge for the agent, a tension appears between two ways of storing it:
 
-You can also install with `npm`:
+- **One large instruction file** (`GEMINI.md`, `CLAUDE.md`, `AGENTS.md`). Everything the agent should know lives in a single document that is loaded into context every session.
+- **Skills** (and similar modular conventions). Knowledge is split into small, named, task-specific bundles — see [Skills](#skills) above — that are loaded *only when relevant*.
 
-```bash
-npm install -g @google/gemini-cli
-```
+The trade-off is about context budget. A single file is easy to find and reason about, but everything in it occupies the window on every turn, whether or not the current task needs it. A monolithic file that has grown to cover release steps, data-cleaning conventions, review checklists, and deployment notes spends tokens — and attention — on all of them even when you are just renaming a variable.
 
-If you use MacPorts, Gemini CLI also documents:
+A reasonable rule of thumb:
 
-```bash
-sudo port install gemini-cli
-```
+- Keep **broadly applicable, always-true** facts in the main instruction file: project layout, core conventions, "do not touch this generated directory." These earn their permanent place in the window, and because the file is stable, [prompt caching](#the-context-window) makes re-reading it cheap.
+- Move **task-specific procedures** into skills or separate documents that load on demand: "how we cut a release," "how we run a reproducible R analysis," "how we audit an API endpoint."
 
-Then start the tool:
+The result is the same lean-context principle applied to your own configuration: the agent carries a small, stable core at all times and pulls in specialized playbooks only when the task calls for them.
 
-```bash
-gemini
-```
+### A short checklist
 
-For most individual users, the recommended authentication path is to launch `gemini` and choose **Sign in with Google** in the interactive prompt.
+- One objective per conversation; clear or compact before switching tasks.
+- Open only the files the task needs; close the loop on long tool output.
+- Put durable facts in a stable instruction file (cheap to cache, easy to share).
+- Put task-specific procedures in skills or separate docs that load on demand.
+- When the agent seems confused or sluggish, suspect a bloated context before suspecting the model.
 
-### Linux
+## Installing Antigravity
 
-On Linux, I would usually recommend:
+Antigravity is a downloadable application that runs on **macOS, Windows, and Linux**. The current download and overview are here:
 
-1. Make sure Node.js 20+ is installed.
-2. Install Gemini CLI with either `npm` or Homebrew on Linux.
-3. Run `gemini` and authenticate.
+- [Antigravity download](https://antigravity.google/download)
+- [Build with Google Antigravity (overview)](https://developers.googleblog.com/build-with-google-antigravity-our-new-agentic-development-platform/)
 
-Typical commands:
+The typical path is:
 
-```bash
-# Check Node
-node --version
-npm --version
+1. Download Antigravity for your platform from [antigravity.google/download](https://antigravity.google/download).
+2. Install and launch it like any other desktop application.
+3. **Sign in with a Google account** when prompted.
+4. Open a project folder and choose a model to back the agent.
 
-# Install Gemini CLI
-npm install -g @google/gemini-cli
-```
+Because Antigravity is model-flexible, you can usually pick which model drives the agent. At the time of writing that includes **Gemini 3 Pro** alongside options such as **Claude Sonnet 4.5** and open models. The "2.0" release (announced at Google I/O 2026) also added a standalone desktop app for orchestrating several agents at once, a command-line interface, and an SDK — so you are not limited to the editor if you prefer a terminal.
 
-If you use Linuxbrew/Homebrew on Linux:
+### A note on the free tier
 
-```bash
-brew install gemini-cli
-```
+Antigravity is free to use in public preview, which is part of why it is a reasonable starting point for a class. Be aware, though, that the **free tier is rate-limited**, the limits are deliberately not published, and they have changed repeatedly. Google now applies a **weekly** ceiling to free users (paid Google AI Pro/Ultra plans get larger quotas that refresh every few hours). Community trackers have reported the free allowance at roughly **20 requests per day** on the fast model — treat that as unofficial and likely to change. This matters for planning a session and is picked up again under [Paying for tools: an honest recommendation](#paying-for-tools-an-honest-recommendation): a focused exercise fits comfortably inside the free tier, but a sustained afternoon of real work can hit the wall quickly.
 
-Then start:
-
-```bash
-gemini
-```
-
-If you prefer not to authenticate with a browser-based Google login, Gemini CLI also supports using a Gemini API key from [Google AI Studio](https://aistudio.google.com/) or Vertex AI credentials:
-
-- [Authentication guide](https://geminicli.com/docs/get-started/authentication/)
-
-### A practical setup note
-
-If you are trying Gemini CLI for the first time, browser-based login with a Google account is usually the least confusing path. It minimizes setup overhead and gets you to the main point quickly: the agent can work with the repository in front of you.
-
-Also relevant if you work in these languages: Google documents both **Python** and **R** among the verified coding languages for Gemini Code Assist:
-
-- [Supported languages, IDEs, and interfaces](https://developers.google.com/gemini-code-assist/docs/supported-languages)
+For what it is worth if you work in these languages, Google documents both **Python** and **R** among its well-supported coding languages.
 
 ## A very small hello-world example
 
@@ -341,8 +388,8 @@ If you are just getting started, avoid beginning with "build a web app." Start w
 Create a directory and a tiny Python file:
 
 ```bash
-mkdir hello-gemini
-cd hello-gemini
+mkdir hello-agent
+cd hello-agent
 
 cat > hello.py <<'EOF'
 name = "world"
@@ -350,13 +397,7 @@ print(f"Hello, {name}!")
 EOF
 ```
 
-Now start Gemini CLI:
-
-```bash
-gemini
-```
-
-Then try prompts like these:
+Now open that folder in your agent — in Antigravity, open the project; in a terminal agent such as Claude Code, start it inside the directory. Then try prompts like these:
 
 ```text
 Explain this small project.
@@ -404,7 +445,7 @@ Run the tests for the R package you just created and report the results.
 
 A leaderboard can be helpful, but it is important to explain what is being measured.
 
-Most public leaderboards do **not** rank a CLI wrapper such as Gemini CLI by itself. They usually rank:
+Most public leaderboards do **not** rank an agent such as Antigravity by itself. They usually rank:
 
 - language models
 - full agent systems
@@ -435,13 +476,11 @@ The key message is not "which model is number one this week." The key message is
 
 If you want a compact reading list, start with these:
 
-- [Gemini CLI GitHub repository](https://github.com/google-gemini/gemini-cli)
-- [Gemini CLI docs home](https://geminicli.com/docs/)
-- [Gemini CLI installation guide](https://geminicli.com/docs/get-started/installation/)
-- [Gemini CLI authentication guide](https://geminicli.com/docs/get-started/authentication/)
-- [Gemini CLI cheatsheet](https://geminicli.com/docs/cli/cli-reference/)
-- [Agent Skills](https://geminicli.com/docs/cli/skills/)
-- [MCP servers with Gemini CLI](https://geminicli.com/docs/tools/mcp-server/)
+- [Google Antigravity](https://antigravity.google)
+- [Antigravity download](https://antigravity.google/download)
+- [Build with Google Antigravity (announcement)](https://developers.googleblog.com/build-with-google-antigravity-our-new-agentic-development-platform/)
+- [Claude Code](https://claude.com/product/claude-code)
+- [Claude pricing](https://claude.com/pricing)
 - [Model Context Protocol introduction](https://modelcontextprotocol.io/docs/getting-started/intro)
 - [SWE-bench paper](https://openreview.net/forum?id=VTF8yNQM66)
 - [SWE-bench leaderboards](https://www.swebench.com/)
@@ -560,12 +599,13 @@ This project exercises web search, GitHub repository inspection, structured comp
 
 ## A note on tokens and model costs
 
-As you start using agentic coding tools on real projects, it helps to track token usage and model cost. Most tools expose some combination of usage metrics, rate limits, or billing dashboards.
+This section builds directly on [Understanding context: tokens and the context window](#understanding-context-tokens-and-the-context-window) and [Managing context well](#managing-context-well). Those sections explain what tokens are and why a lean context helps; this one is the practical cost angle. As you start using agentic coding tools on real projects, it helps to track token usage and model cost. Most tools expose some combination of usage metrics, rate limits, or billing dashboards.
 
 A simple mental model is:
 
 - more input context (large files, long chats, many tool outputs) usually means more tokens
 - more turns in a session usually means more tokens
+- output tokens usually cost several times more than input tokens (often 4x–8x), so the size of the *answer* matters, not just the size of the *prompt*
 - larger or premium models usually cost more per token than smaller models
 
 Practical ways to manage cost without losing quality:
@@ -591,6 +631,29 @@ One practical budgeting pattern is:
 
 You do not need exact pricing memorized. The important habit is to treat tokens as a real resource, just like compute time or API calls.
 
+## Paying for tools: an honest recommendation
+
+You can do everything in this handout on a free tier, and you should start there. But it is worth being straight with you about where the free path runs out, because pretending otherwise is its own kind of unfair.
+
+**The free tiers are demo-grade.** They are excellent for learning and for finishing a scoped exercise. They are not sized for a sustained afternoon of real work. Antigravity's free allowance is currently the tightest of the major tools — a weekly ceiling, reported at roughly twenty requests a day on the fast model — so the people most likely to hit a wall mid-task are exactly the ones who paid nothing. If a class quietly splits into students who can keep going and students whose quota has died, *that* is the equity problem, not the twenty-dollar tool.
+
+So here is the honest recommendation, framed as a fork rather than a hurdle:
+
+> **Today works on free.** If you want to keep doing real work after this week, the tool most worth paying for is a **Claude Pro** subscription, which includes **Claude Code** for interactive use.
+
+A few things that make this an easy call:
+
+- **It is cheap, and it is a rental, not a purchase.** Claude Pro is **$20/month** (about **$17/month billed annually**), cancelable the day the course ends. Compare that to a textbook in the not-so-distant past: $100–200, non-refundable, obsolete in two years. Adjusted for inflation, a one-month rental of a professional-grade agent is among the cheapest serious tool access this field has ever offered.
+- **Many of you can expense it.** PI funds, training-grant professional-development lines, and lab budgets routinely cover $20 of tooling for a working scientist. Ask. For most trainees this is reimbursable — which dissolves much of the discomfort about recommending a paid product.
+- **The recommendation was tested, not assumed.** Free terminal tools were tried for this kind of cowork-heavy task and came up short; Claude Code is what actually did the job. Recommending the tool that works, *after* trying the alternatives, is the point of having an instructor.
+
+A couple of honest caveats, because this space is volatile (figures here are mid-2026):
+
+- **There is no individual student discount.** Anthropic runs an institutional *Claude for Education* program (free premium access, but only at partner universities) and a campus-ambassador program; there is no `.edu` checkout for an individual. The closest thing to a price break is annual billing. If your institution is a Claude for Education partner, check whether you already have access before paying.
+- **The free Claude tier is effectively the trial** — no expiry, no card required — and Max subscribers can share **7-day guest passes** that include Claude Code, which is a low-friction way to try the full experience before subscribing.
+
+None of this is gatekeeping. The free path is real and we will use it. This is simply naming, out loud, that the free tiers are demo-grade — and handing you the cheapest honest on-ramp to the real thing.
+
 ## Closing idea
 
 If you remember only one thing from this document, let it be this:
@@ -601,4 +664,4 @@ That is what separates them from ordinary chatbots and from the copy/paste workf
 
 ## AI assistance
 
-This document was structured, edited, and written with the help of AI tools, including Gemini CLI, OpenAI Codex, and GitHub Copilot. That is intentional: using agentic and AI-assisted tools to produce a document about agentic and AI-assisted tools is itself a reasonable demonstration of the workflow described here.
+This document was structured, edited, and written with the help of AI tools, including Claude Code, Gemini CLI, Antigravity, OpenAI Codex, and GitHub Copilot. That is intentional: using agentic and AI-assisted tools to produce a document about agentic and AI-assisted tools is itself a reasonable demonstration of the workflow described here. (The slides in [`slides/`](slides/) were built the same way.)

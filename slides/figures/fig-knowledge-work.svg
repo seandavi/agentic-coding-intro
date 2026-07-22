@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 490" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <!-- five knowledge-work use cases; same idea as coding: files + context + tools -->
+
+  <!-- card template: tinted panel + colored dot + title + 2-line desc + example -->
+  <!-- row 1 -->
+  <!-- 1. Deep research -->
+  <rect x="35" y="60" width="290" height="172" rx="12" fill="#f5f8fb" stroke="#cbd5e0"/>
+  <circle cx="63" cy="96" r="7" fill="#2b6cb0"/>
+  <text x="81" y="102" font-size="17" font-weight="700" fill="#1f2933">Deep research</text>
+  <text x="26" y="140" font-size="13.5" fill="#52606d"><tspan x="61">Read many sources and</tspan><tspan x="61" dy="22">synthesize a cited summary.</tspan></text>
+  <text x="61" y="200" font-size="13" font-style="italic" fill="#2b6cb0">e.g. compare 10 methods in a table</text>
+
+  <!-- 2. PDF extraction -->
+  <rect x="345" y="60" width="290" height="172" rx="12" fill="#f5f8fb" stroke="#cbd5e0"/>
+  <circle cx="373" cy="96" r="7" fill="#dd6b20"/>
+  <text x="391" y="102" font-size="17" font-weight="700" fill="#1f2933">PDF extraction</text>
+  <text x="336" y="140" font-size="13.5" fill="#52606d"><tspan x="371">Pull structured data out of</tspan><tspan x="371" dy="22">stacks of PDFs.</tspan></text>
+  <text x="371" y="200" font-size="13" font-style="italic" fill="#dd6b20">e.g. 40 applicant CVs → a ranked CSV</text>
+
+  <!-- 3. Slides & decks -->
+  <rect x="655" y="60" width="290" height="172" rx="12" fill="#f5f8fb" stroke="#cbd5e0"/>
+  <circle cx="683" cy="96" r="7" fill="#2f855a"/>
+  <text x="701" y="102" font-size="17" font-weight="700" fill="#1f2933">Slides &amp; decks</text>
+  <text x="646" y="140" font-size="13.5" fill="#52606d"><tspan x="681">Draft and edit presentations</tspan><tspan x="681" dy="22">from your notes.</tspan></text>
+  <text x="681" y="200" font-size="13" font-style="italic" fill="#2f855a">e.g. these very slides</text>
+
+  <!-- row 2 (two cards, centered) -->
+  <!-- 4. Document editing -->
+  <rect x="190" y="248" width="290" height="172" rx="12" fill="#f5f8fb" stroke="#cbd5e0"/>
+  <circle cx="218" cy="284" r="7" fill="#2b6cb0"/>
+  <text x="236" y="290" font-size="17" font-weight="700" fill="#1f2933">Document editing</text>
+  <text x="181" y="328" font-size="13.5" fill="#52606d"><tspan x="216">Revise grants, manuscripts,</tspan><tspan x="216" dy="22">and theses.</tspan></text>
+  <text x="216" y="388" font-size="13" font-style="italic" fill="#2b6cb0">e.g. tighten this Aims page; flag gaps</text>
+
+  <!-- 5. Brainstorming -->
+  <rect x="500" y="248" width="290" height="172" rx="12" fill="#f5f8fb" stroke="#cbd5e0"/>
+  <circle cx="528" cy="284" r="7" fill="#dd6b20"/>
+  <text x="546" y="290" font-size="17" font-weight="700" fill="#1f2933">Brainstorming</text>
+  <text x="491" y="328" font-size="13.5" fill="#52606d"><tspan x="526">Think with your papers and</tspan><tspan x="526" dy="22">decks as context.</tspan></text>
+  <text x="526" y="388" font-size="13" font-style="italic" fill="#dd6b20">e.g. from 3 papers, propose experiments</text>
+
+  <!-- footer thread -->
+  <text x="490" y="462" text-anchor="middle" font-size="15" fill="#1f2933">Same idea as code: give it the <tspan font-weight="700">real material</tspan> — PDFs, data, drafts, slides — not a description of it.</text>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 420" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="ar2" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2f855a"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="44" font-size="18" font-weight="700" fill="#1f2933">Markdown as memory</text>
+  <text x="40" y="70" font-size="14" fill="#52606d">Chats reset; a versioned instruction file persists and is loaded into every session.</text>
+
+  <!-- the file -->
+  <rect x="40" y="100" width="320" height="250" rx="10" fill="#ffffff" stroke="#2f855a" stroke-width="2"/>
+  <rect x="40" y="100" width="320" height="40" rx="10" fill="#e3f3ea" stroke="#2f855a" stroke-width="2"/>
+  <text x="60" y="127" font-size="16" font-weight="700" fill="#1f2933">CLAUDE.md · GEMINI.md · AGENTS.md</text>
+  <g font-size="14" fill="#1f2933">
+    <text x="62" y="172"># project layout &amp; conventions</text>
+    <text x="62" y="202"># do not touch generated/</text>
+    <text x="62" y="232"># run tests with: Rscript / pytest</text>
+    <text x="62" y="262"># update CHANGELOG on schema change</text>
+  </g>
+  <rect x="62" y="290" width="276" height="34" rx="8" fill="#e3f3ea" stroke="#2f855a"/>
+  <text x="200" y="312" text-anchor="middle" font-size="13" fill="#2f855a">durable · versioned · shared by humans + agents</text>
+
+  <!-- sessions -->
+  <g>
+    <rect x="660" y="104" width="280" height="64" rx="10" fill="#f7fafc" stroke="#cbd5e0"/>
+    <text x="680" y="132" font-size="15" font-weight="700" fill="#1f2933">Session 1</text>
+    <text x="680" y="154" font-size="13" fill="#52606d">fresh chat, same instructions</text>
+
+    <rect x="660" y="184" width="280" height="64" rx="10" fill="#f7fafc" stroke="#cbd5e0"/>
+    <text x="680" y="212" font-size="15" font-weight="700" fill="#1f2933">Session 2</text>
+    <text x="680" y="234" font-size="13" fill="#52606d">history gone, file reloaded</text>
+
+    <rect x="660" y="264" width="280" height="64" rx="10" fill="#f7fafc" stroke="#cbd5e0"/>
+    <text x="680" y="292" font-size="15" font-weight="700" fill="#1f2933">Session 3</text>
+    <text x="680" y="314" font-size="13" fill="#52606d">…and so on</text>
+  </g>
+
+  <!-- arrows file -> sessions -->
+  <line x1="360" y1="200" x2="656" y2="136" stroke="#2f855a" stroke-width="2" marker-end="url(#ar2)"/>
+  <line x1="360" y1="220" x2="656" y2="216" stroke="#2f855a" stroke-width="2" marker-end="url(#ar2)"/>
+  <line x1="360" y1="240" x2="656" y2="296" stroke="#2f855a" stroke-width="2" marker-end="url(#ar2)"/>
+  <text x="508" y="196" text-anchor="middle" font-size="13" fill="#2f855a">loaded into</text>
+  <text x="508" y="214" text-anchor="middle" font-size="13" fill="#2f855a">every session</text>
+
+  <!-- cache note -->
+  <rect x="300" y="372" width="380" height="34" rx="8" fill="#fff8ec" stroke="#dd6b20"/>
+  <text x="490" y="394" text-anchor="middle" font-size="14" fill="#1f2933">stable file → <tspan font-weight="700" fill="#dd6b20">cached</tspan>: re-read at ≈ 10% of normal cost</text>
+</svg>
