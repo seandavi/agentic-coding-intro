@@ -1,0 +1,48 @@
+// Where the text actually goes: a hosted model vs one running on your own
+// machine. Palette matches the deck's other figures (blue = context/input,
+// green = good/lean, coral = the thing to worry about).
+digraph local_vs_hosted {
+  rankdir=TB;
+  bgcolor="transparent";
+  compound=true;
+  node [shape=box, style="rounded,filled", fontname="Helvetica",
+        fontsize=13, margin="0.20,0.12", penwidth=1.6];
+  edge [fontname="Helvetica", fontsize=11, color="#7d8b99", penwidth=1.4];
+
+  subgraph cluster_hosted {
+    label="Hosted model";
+    fontname="Helvetica-Bold";
+    fontsize=15;
+    fontcolor="#1f2933";
+    style="rounded";
+    color="#d98b7a";
+    penwidth=2;
+    margin=16;
+
+    h_doc  [label="your document", fillcolor="#e8eef7", color="#2b6cb0", fontcolor="#1f2933"];
+    h_net  [label="leaves your machine", shape=box, style="rounded,filled",
+            fillcolor="#fdebd9", color="#dd6b20", fontcolor="#7b341e"];
+    h_srv  [label="someone else's server", fillcolor="#ffffff", color="#a0aec0", fontcolor="#1f2933"];
+
+    h_doc -> h_net -> h_srv;
+  }
+
+  subgraph cluster_local {
+    label="Local model";
+    fontname="Helvetica-Bold";
+    fontsize=15;
+    fontcolor="#1f2933";
+    style="rounded";
+    color="#2f855a";
+    penwidth=2;
+    margin=16;
+
+    l_doc [label="your document", fillcolor="#e8eef7", color="#2b6cb0", fontcolor="#1f2933"];
+    l_mod [label="model on your hardware\n(Ollama · LM Studio)",
+           fillcolor="#e3f3ea", color="#2f855a", fontcolor="#1f2933"];
+    l_out [label="answer", fillcolor="#e3f3ea", color="#2f855a", fontcolor="#1f2933"];
+
+    l_doc -> l_mod [label="  stays put"];
+    l_mod -> l_out;
+  }
+}

@@ -27,3 +27,9 @@ format:
       theme: chalkboard
       boardmarker-width: 4
       buttons: true
+
+# livefigures renders diagram sources (e.g. figures/*.dot) at build time.
+# pre-ast so cross-references work on inline fenced-block figures too.
+filters:
+  - at: pre-ast
+    path: livefigures

@@ -518,14 +518,27 @@ share them — that's how a lab encodes its habits once instead of per-person.
 
 ## Privacy, PHI, and trust {background-color="#3a2430"}
 
-- **Consumer chat accounts are not for PHI.** No patient data, no identifiable
-  records — de-identify first, or don't paste it.
-- **Institutional deployments differ** — a BAA-covered enterprise tool may be
-  approved where a personal account is not. *Ask; don't assume.*
-- Your **IRB, compliance office, and data-use agreements** outrank anything on
-  these slides.
-- And for everything the agent produces: **verify before it counts.**
+:::: {.columns}
+::: {.column width="54%"}
+- **Consumer chat accounts are not for PHI.** De-identify first, or don't
+  paste it.
+- **Institutional deployments differ** — a BAA-covered tool may be approved
+  where a personal account is not. *Ask; don't assume.*
+- Your **IRB, compliance office, and data-use agreements** outrank anything
+  on these slides.
+- And for everything it produces: **verify before it counts.**
   You sign the note.
+:::
+
+::: {.column width="44%"}
+::: {.small}
+**If the data truly cannot leave**, run the model on your own hardware —
+the text never goes anywhere.
+:::
+
+![](figures/local-vs-hosted.dot){.nostretch width="94%"}
+:::
+::::
 
 ::: notes
 Non-optional slide for this audience; better to answer before they ask. Keep it

@@ -1,0 +1,6 @@
+/* theme=auto: restyle light-rendered figures on dark pages using Excalidraw's
+   own dark-mode filter (ADR 0005). */
+.quarto-dark img.livefigure-auto,
+body.quarto-dark img.livefigure-auto {
+  filter: invert(0.93) hue-rotate(180deg);
+}
