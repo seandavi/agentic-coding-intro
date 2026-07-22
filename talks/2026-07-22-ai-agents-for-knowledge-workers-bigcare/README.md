@@ -102,6 +102,8 @@ Copied from the CSHL deck; `fig-chatbot-vs-agent.svg` and
 | `fig-skills-vs-monolith.svg` | one large file vs. a small core + playbooks on demand |
 | `fig-knowledge-work.svg` | the centerpiece: research, PDF extraction, slides, editing, brainstorming |
 | `fig-agent-extensions.svg` | Part 4: shell/tools, skills, MCP, and subagents side by side |
+| `fig-api-flow.svg` | request → Semantic Scholar → labelled fields, for the API slide |
+| `semantic-scholar.png` | screenshot of the search that produced `demo/papers.csv` |
 | `chart-context-rot.svg` | lost-in-the-middle + degradation with length (`charts.R`) |
 | `chart-cost.svg` | input vs. output token pricing (unused in this deck; kept for reference) |
 

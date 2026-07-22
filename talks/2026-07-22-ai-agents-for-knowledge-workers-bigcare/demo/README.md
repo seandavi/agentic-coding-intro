@@ -26,9 +26,11 @@ if the agent smooths it over, that is the teachable failure.
 There is also one review among the nine primary studies, which has no sample
 size — a good test of whether the agent flags a missing field or invents one.
 
-Two otherwise-ideal papers (AACR and BMJ titles on CAFs and immunotherapy
-response) were deliberately left out: their sites return 403 to scripted
-requests. Worth mentioning during Act 1 as real friction.
+Several otherwise-ideal papers were deliberately left out because their
+publishers return 403 to scripted requests — AACR and BMJ titles on CAFs and
+immunotherapy response, plus Wiley and Science candidates. Worth mentioning
+during Act 1 as real friction: a record marked open access is not the same as
+a PDF you can actually fetch.
 
 ## Fallback fetch
 

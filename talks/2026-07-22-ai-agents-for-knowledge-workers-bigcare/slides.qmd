@@ -23,6 +23,8 @@ format:
     # on slides where an image shares space with a caption it computes a
     # remaining height of 0 and the image silently disappears.
     auto-stretch: false
+    # Line numbers add noise to the one illustrative JSON block.
+    code-line-numbers: false
 
     # --- presenting ---------------------------------------------------------
     # Chalkboard config lives in _quarto.yml, not here: the `share` profile
@@ -189,6 +191,126 @@ product" are separate questions, and this talk teaches the durable layer.
 
 # Live demo — let's watch one work {background-color="#222c38"}
 
+## The task I actually had
+
+I needed ten papers on one topic — **real, open access, and downloadable** —
+to demo on.
+
+. . .
+
+By hand that is an afternoon: search, skim, check each licence, download,
+give up around paper six, and end with a folder nobody else can reuse.
+
+. . .
+
+So the preparation for this demo *was* the demo:
+
+1. **Ask** a literature database for candidates
+2. **Keep** only the ones that actually download
+3. **Curate** for a real disagreement
+4. **Save the list**, not the PDFs
+
+::: notes
+This slide exists because the demo otherwise looks like it started from a
+tidy CSV that fell from the sky. It didn't — and the messy part is the part
+worth teaching.
+
+Step 2 is the one to lean on. "Open access" in a database record does not
+mean "I can fetch it": four publishers in my candidate set (AACR, BMJ, Wiley,
+Science) return 403 to a scripted request. The agent found that by trying
+every link and reporting the failures — exactly the verification habit from
+the mental-model slide.
+
+Step 3 was mine, not the agent's: I chose papers that disagree with each
+other so the synthesis step has something real to find. Say that out loud —
+the agent fetched and checked; deciding what makes a good teaching set was a
+human judgment.
+
+Step 4 is why the repo holds a 3 KB list instead of 114 MB of PDFs.
+:::
+
+## Where the candidates came from
+
+![](figures/semantic-scholar.png){.paper-banner .nostretch width="92%"}
+
+[**semanticscholar.org**](https://www.semanticscholar.org) — free, ~200M
+papers. Beyond title and abstract, every record carries the DOI and says
+whether an **open-access PDF exists, where it is, and under which licence**.
+
+. . .
+
+This page is laid out for **human eyes**. Your agent would rather have the
+same search as **data**.
+
+::: notes
+This is the human view — the same site anyone in the room could use by hand,
+and worth knowing about on its own if they don't.
+
+The top hit on that screen is literally the first paper in our CSV. Point
+at it.
+
+The field that matters for what comes next is the open-access one. Most
+literature search tools tell you a paper exists; this one tells you whether
+you can actually get the file, and under what licence. That is the
+difference between a reading list and something an agent can act on.
+:::
+
+## Every search is also an API call
+
+A website is built for eyes. An **API** is the same data served for
+programs — you send a query, you get back records with labelled fields.
+
+:::: {.columns}
+::: {.column width="38%"}
+![](figures/fig-api-flow.svg){.nostretch width="76%"}
+:::
+
+::: {.column width="60%"}
+``` json
+{ "title": "Tumor microenvironment remodeling
+            after neoadjuvant immunotherapy…",
+  "year":  2023,
+  "venue": "Genome Medicine",
+  "externalIds": {
+      "DOI": "10.1186/s13073-023-01164-9" },
+  "isOpenAccess": true,
+  "openAccessPdf": {
+      "url":     "https://genomemedicine…",
+      "license": "CCBY" } }
+```
+
+No scraping, no copy-paste — and **that record is row 1 of our CSV.**
+:::
+::::
+
+::: notes
+This is the slide for the half of the room who have never thought about an
+API. Keep the definition concrete: a website is for eyes, an API is the same
+thing for programs. Every field is labelled, so a program can use it without
+guessing.
+
+Walk the four fields on the left, then point at them in the real response on
+the right: the DOI is the permanent identifier; isOpenAccess and license say
+whether we may take it; openAccessPdf.url is the actual file. Those four are
+the entire reason the demo works.
+
+Say plainly that this response is real and lightly trimmed — the ellipses are
+mine, for the slide.
+
+Practical, if asked: Semantic Scholar's API is free and needs no key for light
+use; it rate-limits instead, which I hit while preparing this, and keys are
+free for heavier work. PubMed and Europe PMC have equivalent APIs, so the
+pattern generalises to whatever corpus you care about.
+
+And the connection forward: this is the MCP idea from Part 4 arriving early.
+I never taught the agent what Semantic Scholar is — it had a tool for it, and
+the tool speaks this.
+
+If someone asks "couldn't I just ask a chatbot for ten papers?" — yes, and
+some of them would not exist. Going through a literature API is what makes
+every record a real one with a resolvable DOI.
+:::
+
 ## What we start with: a reference list
 
 `papers.csv` — 10 open-access single-cell papers on the tumor
@@ -226,9 +348,10 @@ report what broke.
 This act is short (~2 min) but it earns the whole talk. Points to narrate:
 
 - It handles a *list*, one row at a time — the same loop as any repetitive task.
-- Publishers differ: two candidate papers were dropped from this list because
-  their sites block scripted download (AACR, BMJ). Real friction, real
-  workaround — that is what "verify" means in practice.
+- Publishers differ: four in the candidate set (AACR, BMJ, Wiley, Science)
+  return 403 to a scripted request, so those papers never made the list —
+  see the previous slide. Real friction, real workaround; that is what
+  "verify" means in practice.
 - It reports failures instead of silently producing a short table. Contrast
   with a chatbot, which would just hand you plausible-looking text.
 

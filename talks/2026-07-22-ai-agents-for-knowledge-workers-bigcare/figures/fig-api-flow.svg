@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 560" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="apq" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2b6cb0"/>
+    </marker>
+    <marker id="apr" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2f855a"/>
+    </marker>
+  </defs>
+
+  <!-- 1. the asker -->
+  <rect x="70" y="14" width="300" height="72" rx="10" fill="#e8eef7" stroke="#2b6cb0" stroke-width="2"/>
+  <text x="220" y="46" text-anchor="middle" font-size="19" font-weight="700" fill="#1f2933">your agent</text>
+  <text x="220" y="70" text-anchor="middle" font-size="14" fill="#52606d">(or your script)</text>
+
+  <!-- request -->
+  <line x1="220" y1="86" x2="220" y2="152" stroke="#2b6cb0" stroke-width="2.5" marker-end="url(#apq)"/>
+  <rect x="96" y="99" width="248" height="42" rx="6" fill="#ffffff"/>
+  <text x="220" y="115" text-anchor="middle" font-size="13.5" font-weight="700" fill="#2b6cb0">REQUEST</text>
+  <text x="220" y="134" text-anchor="middle" font-size="13.5" fill="#3e4c59">a query + the fields you want</text>
+
+  <!-- 2. the resource -->
+  <rect x="40" y="160" width="360" height="120" rx="10" fill="#ffffff" stroke="#1f2933" stroke-width="2"/>
+  <ellipse cx="105" cy="205" rx="30" ry="10" fill="#dbe6f4" stroke="#7d93ad"/>
+  <path d="M75,205 v34 a30,10 0 0 0 60,0 v-34" fill="#dbe6f4" stroke="#7d93ad"/>
+  <ellipse cx="105" cy="239" rx="30" ry="10" fill="#eef3f9" stroke="#7d93ad"/>
+  <text x="255" y="205" text-anchor="middle" font-size="18" font-weight="700" fill="#1f2933">Semantic Scholar</text>
+  <text x="255" y="230" text-anchor="middle" font-size="14" fill="#52606d">~200M papers</text>
+  <text x="255" y="252" text-anchor="middle" font-size="14" fill="#52606d">the same one in the browser</text>
+
+  <!-- response -->
+  <line x1="220" y1="280" x2="220" y2="346" stroke="#2f855a" stroke-width="2.5" marker-end="url(#apr)"/>
+  <rect x="96" y="293" width="248" height="42" rx="6" fill="#ffffff"/>
+  <text x="220" y="309" text-anchor="middle" font-size="13.5" font-weight="700" fill="#2f855a">RESPONSE</text>
+  <text x="220" y="328" text-anchor="middle" font-size="13.5" fill="#3e4c59">records, every field labelled</text>
+
+  <!-- 3. what comes back -->
+  <rect x="40" y="354" width="360" height="150" rx="10" fill="#e3f3ea" stroke="#2f855a" stroke-width="2"/>
+  <text x="220" y="382" text-anchor="middle" font-size="15" fill="#1f2933">the four fields the demo needs</text>
+  <g font-size="15">
+    <rect x="62" y="396" width="316" height="30" rx="6" fill="#ffffff" stroke="#a8d5bd"/>
+    <text x="78" y="416" fill="#1f2933">DOI — the permanent identifier</text>
+    <rect x="62" y="430" width="316" height="30" rx="6" fill="#ffffff" stroke="#a8d5bd"/>
+    <text x="78" y="450" fill="#1f2933">is it open access?</text>
+    <rect x="62" y="464" width="316" height="30" rx="6" fill="#ffffff" stroke="#a8d5bd"/>
+    <text x="78" y="484" fill="#1f2933">licence · and the PDF link</text>
+  </g>
+
+  <text x="220" y="536" text-anchor="middle" font-size="15" fill="#52606d">One call. No page to read, nothing to paste.</text>
+</svg>
