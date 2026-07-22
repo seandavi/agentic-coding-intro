@@ -11,7 +11,7 @@
 
   <text x="250" y="95" text-anchor="middle" font-size="23" font-weight="700" fill="#1f2933">Chatbot</text>
   <text x="250" y="120" text-anchor="middle" font-size="13" fill="#52606d">answers from a prompt window</text>
-  <text x="730" y="95" text-anchor="middle" font-size="23" font-weight="700" fill="#1f2933">Coding agent</text>
+  <text x="730" y="95" text-anchor="middle" font-size="23" font-weight="700" fill="#1f2933">AI agent</text>
   <text x="730" y="120" text-anchor="middle" font-size="13" fill="#52606d">acts in your environment</text>
 
   <!-- left: linear flow -->
@@ -45,6 +45,6 @@
 
   <line x1="730" y1="362" x2="730" y2="384" stroke="#52606d" stroke-width="2" marker-end="url(#ar)"/>
   <rect x="598" y="386" width="264" height="34" rx="8" fill="#eef2f7" stroke="#cbd5e0"/>
-  <text x="730" y="408" text-anchor="middle" font-size="14" fill="#1f2933">Files · Shell · Git · MCP</text>
-  <text x="730" y="442" text-anchor="middle" font-size="14" fill="#2f855a">✓ reads &amp; changes your real repo</text>
+  <text x="730" y="408" text-anchor="middle" font-size="14" fill="#1f2933">Files · Web · Documents · Tools</text>
+  <text x="730" y="442" text-anchor="middle" font-size="14" fill="#2f855a">✓ reads &amp; changes your real files</text>
 </svg>

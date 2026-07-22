@@ -13,10 +13,10 @@
   <rect x="40" y="100" width="320" height="40" rx="10" fill="#e3f3ea" stroke="#2f855a" stroke-width="2"/>
   <text x="60" y="127" font-size="16" font-weight="700" fill="#1f2933">CLAUDE.md · GEMINI.md · AGENTS.md</text>
   <g font-size="14" fill="#1f2933">
-    <text x="62" y="172"># project layout &amp; conventions</text>
-    <text x="62" y="202"># do not touch generated/</text>
-    <text x="62" y="232"># run tests with: Rscript / pytest</text>
-    <text x="62" y="262"># update CHANGELOG on schema change</text>
+    <text x="62" y="172"># project background &amp; goals</text>
+    <text x="62" y="202"># writing style: plain, active voice</text>
+    <text x="62" y="232"># citation format: AMA, numbered</text>
+    <text x="62" y="262"># keep the one-page summary current</text>
   </g>
   <rect x="62" y="290" width="276" height="34" rx="8" fill="#e3f3ea" stroke="#2f855a"/>
   <text x="200" y="312" text-anchor="middle" font-size="13" fill="#2f855a">durable · versioned · shared by humans + agents</text>

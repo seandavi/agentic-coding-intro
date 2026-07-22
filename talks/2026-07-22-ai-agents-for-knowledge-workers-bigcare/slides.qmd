@@ -1,8 +1,8 @@
 ---
-title: "From Chatbots to Coding Agents"
-subtitle: "Context, tokens, and working well with AI coding tools"
+title: "AI Agents for Knowledge Workers"
+subtitle: "What changes when AI can work in your files — and how to work well with it"
 author: "Sean Davis"
-date: "2026-06-18"
+date: "2026-07-22"
 format:
   revealjs:
     theme: [dark, custom.scss]
@@ -24,16 +24,17 @@ That intuition transfers directly. This session adds three things:
 
 - what changes when the AI can **act in your files**, not just chat
 - what is actually happening under the hood — **context** and **tokens**
-- a few habits that make these tools **cheaper and sharper**
+- a few habits that make these tools **safer, cheaper, and sharper**
 
 ::: notes
-Anchor to what they already do. Most of the audience uses ChatGPT/Claude/Gemini
-as a chat window. The goal today is not "learn to code differently" — it's to
-understand a new interface and a handful of mental models. Keep it concrete and
-tool-neutral; examples will span Gemini CLI, Claude Code, and ChatGPT.
+Anchor to what they already do. Nearly everyone in the room uses
+ChatGPT/Claude/Gemini as a chat window. The goal today is not "learn to program"
+— it's to understand a new interface and a handful of mental models. Stay
+tool-agnostic throughout: the concepts hold across every major tool, and the
+handout covers specific options.
 :::
 
-# Part 1 — Chatbot vs. coding agent {background-color="#222c38"}
+# Part 1 — From chatbot to agent {background-color="#222c38"}
 
 ## Two ways to use the same model
 
@@ -42,124 +43,154 @@ tool-neutral; examples will span Gemini CLI, Claude Code, and ChatGPT.
 ::: notes
 The model is the same kind of thing in both columns. The difference is the
 scaffolding around it. A chatbot answers from a prompt window — you copy, paste,
-adjust, repeat. A coding agent runs a loop: plan an action, call a tool (read a
-file, run a command), observe the result, and continue — and it does this inside
-your actual repository, with permissions.
+adjust, repeat. An agent runs a loop: plan an action, use a tool (open a file,
+search the web, extract a table), observe the result, and continue — and it does
+this with your actual documents, with permissions and your approval.
 :::
 
-## Why this matters for research work
+## Your work is file-shaped
 
-So much of our day is **file-shaped**:
+So much of research and clinical-academic life lives in files:
 
-- scripts, notebooks, Quarto / R Markdown
-- CSV / TSV data, config and environment files
-- package metadata, Snakemake / Nextflow pipelines, test fixtures
+- manuscripts, grant applications, protocols, consent documents
+- folders of PDFs — papers, applications, reports
+- spreadsheets, data dictionaries, survey exports
+- slide decks, meeting notes, literature libraries
 
 . . .
 
 A chatbot reasons about a *snippet you paste*.
-An agent reasons about the *files as they actually are*.
+An agent reasons about the *documents as they actually are*.
 
-> "Open this repo, find the script that reads the TSV, explain how the columns
-> are normalized, then add a validation check before write-out."
+> "Read the 12 PDFs in this folder, extract the study design and sample size
+> from each, and flag the two whose methods sections disagree with their abstracts."
 
 ::: notes
 This is the key distinction worth repeating. The unit of work changes from
-"a regex in Python" to "operate on the real project." For a biomedical audience,
-ground it in their world: exploring an unfamiliar Bioconductor package, cleaning
-a messy field-notes file, auditing a small pipeline.
+"answer a question" to "operate on the real material." Nobody in this room lacks
+a folder of PDFs they wish were a table. That's the hook.
 :::
 
-## Not just code — knowledge work too
+## What agents do for knowledge work
 
 ![](figures/fig-knowledge-work.svg){width="90%"}
 
 ::: notes
-This is the slide that makes the talk relevant to everyone in the room, not just
-the people who write pipelines. The same capabilities — read files, follow
-instructions, call tools, hold context — power document work too. Concrete
-prompts to mention or demo:
+This is the center of the talk. Walk each card slowly — each one is a real
+prompt pattern:
 
-- Deep research: "Search the web and PubMed for recent reviews of X; read the top
-  sources and write a one-page synthesis with citations, noting disagreements."
-- PDF extraction: "These 40 applicant CVs are PDFs — extract degree, methods, and
-  first-author papers, score against rubric.md, and give me a ranked CSV." Works
-  the same for course applications or pulling data out of papers.
-- Slides: "Turn outline.md into a 12-slide deck with speaker notes" — exactly how
-  this deck was built.
-- Document editing: "Tighten this grant Aims page, flag claims needing citations,
-  and list inconsistencies with the summary."
-- Brainstorming: "Given these three papers and my deck, propose three follow-up
-  experiments and push back on my weakest framing."
+- Deep research: "Search the web and PubMed for recent reviews of X; read the
+  top sources and write a one-page synthesis with citations, noting disagreements."
+- PDF extraction: "These 40 applicant CVs are PDFs — extract degree, methods,
+  and first-author papers, score against rubric.md, and give me a ranked CSV."
+- Slides: "Turn outline.md into a 12-slide deck with speaker notes" — exactly
+  how this deck was built.
+- Document editing: "Tighten this Aims page, flag claims needing citations,
+  and list inconsistencies with the project summary."
+- Brainstorming: "Given these three papers and my draft, propose follow-up
+  analyses and push back on my weakest framing."
 
-The thread is the same: give it the real material, not a description of it.
+The thread: give it the real material, not a description of the material.
 :::
 
 ## The right mental model
 
-A **capable but junior colleague** — not an oracle.
+A **capable, fast, tireless trainee** — not an oracle.
 
-- reads fast, drafts quickly, runs commands, follows instructions
-- also: makes mistakes, needs clear direction, benefits from review
-
-. . .
-
-Your job shifts:
-
-- from writing every line → **directing what to write and why**
-- from remembering context → **providing context clearly**
-- from fixing alone → **reviewing output like a pull request**
-
-::: notes
-This framing calibrates frustration. When the agent makes a wrong assumption,
-the fix is usually a clearer prompt or better context — not a different tool.
-The bottleneck is almost always the quality of the instructions. You wouldn't
-hand a new team member an ambiguous task and walk away.
-:::
-
-## Model vs. agent (one quick distinction)
-
-- The **model** (LLM) is the reasoning engine: predicts, plans, explains.
-- The **agent / framework** is the layer that gives it tools, memory,
-  permissions, and a control loop.
+- reads quickly, drafts well, follows instructions, never gets bored
+- also: makes mistakes, needs clear direction, benefits from supervision
 
 . . .
 
-You can often swap the model and keep the workflow.
-*Model = intelligence. Framework = the workflow that puts it to work.*
+You are the attending. **You sign the note.**
+
+- from doing every task → **delegating with clear instructions**
+- from remembering context → **providing context explicitly**
+- from working alone → **reviewing output before it counts**
 
 ::: notes
-Tools you'll hear about: Gemini CLI, Claude Code, Codex/Aider as finished agents;
-LangGraph, PydanticAI, smolagents as frameworks people build on. Don't dwell —
-the point is just that "which model" and "which agent" are separate questions.
+The trainee/attending framing lands for this audience better than any software
+metaphor. It calibrates frustration (a wrong assumption usually means unclear
+instructions, not a broken tool) and it carries the responsibility message
+without moralizing: supervision is not optional, and the signature is yours.
+This framing returns on the privacy/trust slide.
 :::
 
-# Part 2 — What's under the hood: context & tokens {background-color="#222c38"}
+## Model vs. agent — one quick distinction
+
+- The **model** (the LLM) is the reasoning engine: reads, plans, writes.
+- The **agent** is the layer around it: tools, memory, permissions, a loop.
+
+. . .
+
+Different products are mostly different *agent layers* over similar models.
+Learn the concepts once; the skills transfer across tools.
+
+::: notes
+Deliberately tool-agnostic. Name a few examples verbally if asked (Claude,
+ChatGPT, Gemini all now ship agent modes; terminal tools exist for developers)
+but don't put logos on the slide — the point is that "which model" and "which
+product" are separate questions, and this talk teaches the durable layer.
+:::
+
+# Live demo — let's watch one work {background-color="#222c38"}
+
+## The task
+
+A folder of **10 open-access papers** (PDFs). One instruction:
+
+> "Read the PDFs in `papers/`. Build a table — study, year, design, sample
+> size, key finding, main limitation — as a CSV. Then write a one-page
+> synthesis: where do these papers agree, and where do they disagree?
+> Cite by filename."
+
+. . .
+
+Watch for the **loop**: plan → open a file → extract → next file → synthesize.
+
+::: notes
+Demo plan (~10 min):
+
+- Materials prepared in advance: papers/ with 10 open-access PDFs on one topic;
+  nothing sensitive, nothing paywalled.
+- Narrate the loop as it runs — the audience should see it *reading files they
+  can see in the folder*, not answering from training data.
+- While it works, take one or two audience questions.
+- Punchline when it finishes: open the CSV, spot-check one row against the
+  actual PDF. Model the verification habit in front of them.
+
+Fallbacks, in order: (1) hotspot if venue wifi fails; (2) pre-recorded screen
+capture of the same run; (3) screenshots of the finished CSV + synthesis.
+Keep the finished outputs in a backup/ folder either way.
+:::
+
+## What you just saw
+
+- It **planned**, then worked file-by-file — not one giant answer
+- Every step was **visible and interruptible**
+- The output landed **in files you keep** — a CSV and a document, not a chat bubble
+- And one row was wrong until we checked it — **that's the job now**
+
+::: notes
+Bridge slide: convert the demo into the concepts. The visible loop is Part 1;
+what it cost and why it sometimes misses things is Part 2; the habits that make
+it reliable are Part 3. If the demo failed and you used the recording, this
+slide still works verbatim.
+:::
+
+# Part 2 — What's under the hood {background-color="#222c38"}
 
 ## The model reads tokens, not words
 
 ![](figures/fig-tokens.svg){width="90%"}
 
 ::: notes
-Tokens are the unit the model actually processes. The ~4-chars / ¾-word rule is
-good enough for planning. The practical takeaway: code and paths are
-"token-expensive" — pasting a whole notebook costs more than it looks.
-:::
-
-## Input tokens vs. output tokens
-
-![](figures/chart-cost.svg){width="74%"}
-
-. . .
-
-Reading is cheap; **writing is expensive**. The size of the *answer* matters,
-not just the size of the *prompt*.
-
-::: notes
-This is the cost intuition most people miss. Output is typically 4–8× the input
-price. So a focused, well-scoped edit usually costs far less than a sprawling
-rewrite, even when the model reads the same files. Numbers are mid-2026 and
-illustrative — the shape is the durable point.
+Tokens are the unit the model actually processes — roughly ¾ of a word. Two
+practical takeaways for this audience: (1) documents are bigger than they look
+— a 30-page PDF is tens of thousands of tokens; (2) pricing and limits are all
+denominated in tokens, and generating output costs several times more than
+reading input. That's the whole cost model in one sentence; skip the pricing
+chart and move on.
 :::
 
 ## The context window is a budget
@@ -167,10 +198,10 @@ illustrative — the shape is the durable point.
 ![](figures/fig-context-window.svg){width="86%"}
 
 ::: notes
-Everything competes for the same space: instructions, files, the running
-conversation, and the answer being generated. Two consequences drive every habit
-in Part 3: bigger is not free (you re-read and re-pay the whole window each turn),
-and bigger is not always better.
+Everything competes for the same finite space: the instructions, the documents
+it has opened, the running conversation, and the answer being written.
+Two consequences drive every habit in Part 3: the whole window is re-read on
+every turn (so bloat costs money and attention), and bigger is not free.
 :::
 
 ## More context is not always better
@@ -178,156 +209,162 @@ and bigger is not always better.
 ![](figures/chart-context-rot.svg){width="88%"}
 
 ::: notes
-Two robust findings. "Lost in the middle" (Liu et al., 2023): models attend best
-to the start and end of the window and can miss material buried in the middle.
-"Context rot" (2025 studies across many frontier models): answer quality can
-degrade as input grows long — sometimes well below the advertised limit. A
-1M-token window does not guarantee 1M tokens of reliable attention.
+Two robust findings, in plain terms. "Lost in the middle": models attend best
+to the start and end of the window and can miss material buried in the middle —
+like a reviewer who reads the abstract and discussion carefully but skims page
+14. "Context rot": answer quality can degrade as input grows long, sometimes
+well below the advertised limit. A million-token window is not a promise of a
+million tokens of attention. This is why the demo agent read papers one at a
+time instead of swallowing the whole folder at once.
 :::
 
-# Part 3 — Working well with context {background-color="#222c38"}
+# Part 3 — Working well with an agent {background-color="#222c38"}
 
-## Markdown as memory
+## A notes file as memory
 
 ![](figures/fig-markdown-memory.svg){width="92%"}
 
 ::: notes
-The single most useful habit. Chats reset; a versioned Markdown file persists.
-`CLAUDE.md`, `GEMINI.md`, `AGENTS.md` are the same idea under different names:
-repository-scoped instructions that both humans and agents read. Bonus: because
-the file is stable, prompt caching makes re-reading it cheap (~10% of normal
-input cost on some tools). If a decision matters repeatedly, put it in a file
-instead of re-typing it into chat forever.
+The single most useful habit, and it requires no programming: keep a plain-text
+notes file in the project folder — background, goals, style preferences,
+standing decisions — and the agent reads it at the start of every session.
+Chats reset; the file persists. The filenames on the figure (CLAUDE.md,
+AGENTS.md) are just conventions different tools read automatically; a plain
+"project-notes.md" you point the agent at works everywhere. If you find
+yourself typing the same instruction twice, it belongs in the file.
 :::
 
-## Manage context: clear between ideas
+## One task per conversation
 
 ![](figures/fig-context-management.svg){width="92%"}
 
 ::: notes
-A long session accumulates stale files, dead tangents, and old tool output — all
-re-read every turn and all competing for attention. The fix: one objective per
-conversation; `/clear` or `/compact` between unrelated tasks; capture durable
-facts in Markdown first. This improves quality and cost at the same time, which
-is rare. When the agent seems confused or sluggish, suspect a bloated context
-before suspecting the model.
+A long session accumulates stale documents, dead tangents, and old output — all
+re-read every turn, all competing for attention (Part 2 made this concrete).
+The fix is a rhythm: one objective per conversation; capture anything durable
+in the notes file; start fresh for the next task. When the agent seems confused
+or sluggish, suspect a bloated conversation before suspecting the tool.
 :::
 
-## Skills vs. one giant instructions file
+## Small playbooks beat one giant file
 
 ![](figures/fig-skills-vs-monolith.svg){width="94%"}
 
 ::: notes
-As you encode more knowledge, you face a choice. A single big file is easy to
-reason about, but everything in it sits in the window on every task. "Skills"
-(and similar modular conventions) split knowledge into named, task-specific
-bundles that load only when relevant. Rule of thumb: broadly-true facts go in the
-small, stable core; task-specific procedures become skills that load on demand.
+As the notes file grows, split it. Keep a small stable core (what the project
+is, standing preferences) that loads every time, and move task-specific
+procedures into separate documents the agent pulls in only when relevant: "how
+we screen abstracts," "our figure style," "the journal's submission checklist."
+Tools call these "skills"; the concept is just modular playbooks. Teams can
+share them — that's how a lab encodes its habits once instead of per-person.
 :::
 
-## And reaching beyond your files: MCP
+## Privacy, PHI, and trust {background-color="#3a2430"}
 
-**MCP** (Model Context Protocol) — a standard way to connect an agent to
-external tools and data.
-
-- GitHub, a database, an internal docs system, a lab-specific tool
-- think "USB-C port for AI applications": one standard instead of many one-offs
+- **Consumer chat accounts are not for PHI.** No patient data, no identifiable
+  records — de-identify first, or don't paste it.
+- **Institutional deployments differ** — a BAA-covered enterprise tool may be
+  approved where a personal account is not. *Ask; don't assume.*
+- Your **IRB, compliance office, and data-use agreements** outrank anything on
+  these slides.
+- And for everything the agent produces: **verify before it counts.**
+  You sign the note.
 
 ::: notes
-Keep this light. The point is just that agents aren't limited to the local
-filesystem — there's a growing standard (MCP) for plugging in external
-capabilities. Several of the tools in the handout already support it.
+Non-optional slide for this audience; better to answer before they ask. Keep it
+practical, not fearful: today's demo used open-access papers precisely because
+that's the safe pattern — public or de-identified material flows freely, and
+the sensitive-data question is an institutional one, not a slide-deck one.
+The trust half is the attending framing again: hallucination is real, citations
+must be spot-checked, and the professional signature never transfers.
 :::
-
-# Putting it together {background-color="#222c38"}
 
 ## What a good session looks like
 
-- **One objective** per conversation; clear or compact before the next
-- Open only the **files the task needs**
-- Put durable facts in a **stable instruction file** (cheap to cache, easy to share)
-- Put task-specific procedures in **skills / separate docs** that load on demand
-- **Review the output** like a pull request — you're the senior colleague
-- Watch tokens like compute time: discovery on a cheaper model, the critical
-  pass on a stronger one
+- **One objective** per conversation; start fresh for the next
+- Give it the **real documents**, not descriptions of them
+- Keep durable facts in a **notes file** the agent always reads
+- Keep task-specific procedures in **small playbooks**, loaded when needed
+- **Verify the output** — spot-check citations, numbers, and extractions
+- Nothing sensitive goes in without an **institutional green light**
 
 ::: notes
-This slide is the synthesis — it ties Parts 2 and 3 into a practical checklist.
-If they remember one operational thing, it's "one objective per conversation,
-durable facts in a file."
+The synthesis slide — Parts 2 and 3 as one practical checklist. If they
+remember one operational thing: "one task per conversation, durable facts in a
+file, verify before it counts."
 :::
 
 ## Try it this week
 
-Start small and concrete — not "build a web app."
+Start small and concrete — with material you already have:
 
-- A tiny **hello-world** edit, then ask for a test, then an R-package refactor
-- **Explore a Bioconductor repo** (DESeq2, GenomicRanges, …): trace one function
-- **Structure a messy text file** into clean CSV + a problems report
-- **Audit a small CLI workflow** for assumptions that break on another machine
-- **Survey foundation models** for single-cell / spatial transcriptomics
-- **Knowledge work**: extract a folder of PDFs into a table, or draft a deck from notes
+- **A folder of PDFs → a table**: extract the same five fields from each,
+  then spot-check two rows
+- **Literature synthesis**: recent reviews on your topic → one page,
+  cited, with disagreements flagged
+- **Draft from your outline**: turn notes into a deck or a first-draft section
+- **Edit with pushback**: "tighten this Aims page and flag weak claims"
+- **Meeting notes → action items**, assigned and dated
 
 ::: notes
-These four projects are in the handout (README) with copy-paste prompts. They're
-chosen to exercise different muscles: repo understanding, parsing/validation,
-cross-file reasoning, and web+GitHub research with evidence-based judgment. Point
-them to the handout rather than reading the prompts aloud.
+All research-leaning, all PHI-free by construction, all in the handout with
+copy-paste prompts. The advice that matters: pick material where you can judge
+the output — your own field, your own documents — so verification is easy and
+the failure modes are instructive rather than dangerous.
 :::
 
 ## Free today — \$20 to keep going
 
-- **Start free.** Everything today works on a free tier (we'll use Antigravity).
+- **Start free.** Every major tool has a free tier that covers today's examples.
 - **Free tiers are demo-grade** — great for learning, but they hit a wall on
-  sustained work, and Antigravity's free quota is the tightest.
-- The on-ramp: [**Claude Pro — \$20/mo**]{.amber} (\$17 annual), **Claude Code included**, cancel anytime.
-- A *one-month rental* of a pro tool — cheaper than any textbook, and often
-  **expensable** (PI / training-grant funds).
+  sustained real work.
+- One honest on-ramp: [**Claude Pro — \$20/mo**]{.amber} (\$17 annual),
+  agent features included, cancel anytime.
+- A *one-month rental* — cheaper than a textbook, and often **expensable**
+  (PI, training-grant, or professional-development funds).
 - A **fork, not a hurdle**: today needs nothing; *continuing* is worth \$20.
 
 ::: notes
-Be honest and non-coercive. The equity risk is not the \$20 tool — it's the free
-path quietly failing, so "optional" becomes "you had to pay to keep up." So:
-scope today to fit inside the free budget, and frame the subscription as "to keep
-doing real work after this week," not "to survive today."
-
-Caveats to say out loud: there is no individual student discount (only
-institutional Claude for Education at partner universities); annual billing is the
-only price break; Max subscribers can share 7-day guest passes that include Claude
-Code. And the recommendation was tested — free terminal tools came up short for
-cowork-heavy tasks; Claude Code is what actually did the job. Full version is in
-the handout under "Paying for tools: an honest recommendation."
+Be honest and non-coercive. The equity risk is not the \$20 — it's the free
+path quietly failing, so "optional" becomes "you had to pay to keep up." Scope
+this week's experiments to fit a free tier; frame the subscription as "to keep
+doing real work after this week." The recommendation was tested, not sponsored
+— free tiers came up short on sustained document work. Full reasoning is in the
+handout under "Paying for tools: an honest recommendation." Institutional
+licenses may make this moot — worth asking before paying personally.
 :::
 
 ## Takeaways
 
-> Agentic coding tools are most useful when the work depends on the state of
-> **real files, real commands, and real project context.**
+> AI agents are most useful when the work depends on
+> **real documents, real folders, and real project context.**
 
-- They **act**, they don't just answer
-- Just as useful for **knowledge work** — research, PDFs, slides, editing
-- **Tokens and the context window** explain cost *and* quality
-- Keep context **lean**; keep durable knowledge in **Markdown**
-- Treat the agent as a **junior colleague** you direct and review
+- They **act** on your files — they don't just answer
+- **Tokens and the context window** explain both cost and quality
+- Keep context **lean**; keep durable knowledge in a **notes file**
+- Treat the agent as a **trainee you supervise** — you sign the note
+- Sensitive data needs an **institutional path**, not a personal account
 
 ::: notes
-Land the plane on the closing idea from the handout. Everything else is detail in
-service of this one sentence.
+Land the plane on the one sentence. Everything else is detail in service of it.
 :::
 
 ## Resources
 
-- Handout (this repo's `README.md`) — full notes + the four projects
-- Antigravity: <https://antigravity.google> · Claude Code: <https://claude.com/product/claude-code>
-- Model Context Protocol: <https://modelcontextprotocol.io/>
+- Handout (this repo's `README.md`) — full notes + try-it-this-week prompts
 - "Lost in the Middle" (Liu et al., 2023) · "Context Rot" (2025)
-- SWE-bench: <https://www.swebench.com/> · Aider leaderboards
+- Model Context Protocol: <https://modelcontextprotocol.io/> — how agents
+  connect to external tools
+- Your institution's AI / data-governance policy — the document that
+  actually governs what you may use
 
 ::: {.footnote}
-Token/price/context figures are mid-2026 and illustrative; exact numbers move fast.
+Token and context-window figures are mid-2026 and illustrative; exact numbers move fast.
 :::
 
 ::: notes
-Leave this up for Q&A. Offer to share the repo so they have the prompts and these
-slides.
+Leave this up for Q&A. Offer to share the repo so they have the prompts and
+these slides. Expect questions on: PHI specifics (route to compliance),
+hallucinated citations (the verify habit), and "which tool" (concepts transfer;
+handout has options).
 :::
