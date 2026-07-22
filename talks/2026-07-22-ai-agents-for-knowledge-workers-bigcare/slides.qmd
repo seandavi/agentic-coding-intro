@@ -187,6 +187,10 @@ Deliberately tool-agnostic. Name a few examples verbally if asked (Claude,
 ChatGPT, Gemini all now ship agent modes; terminal tools exist for developers)
 but don't put logos on the slide — the point is that "which model" and "which
 product" are separate questions, and this talk teaches the durable layer.
+
+This separation is also what makes the local-model option on the privacy
+slide possible: because the agent and the model are different layers, you can
+keep the workflow and swap in a model running on your own hardware.
 :::
 
 # Live demo — let's watch one work {background-color="#222c38"}
@@ -530,6 +534,32 @@ that's the safe pattern — public or de-identified material flows freely, and
 the sensitive-data question is an institutional one, not a slide-deck one.
 The trust half is the attending framing again: hallucination is real, citations
 must be spot-checked, and the professional signature never transfers.
+
+THE LOCAL-MODEL ANSWER — expect this question, and it is a good one. You can
+run the model itself on your own hardware, so the text never leaves the
+machine at all. Ollama and LM Studio are the usual runners; both expose an
+OpenAI-compatible endpoint, which is the trick that makes them work with
+ordinary agent tools rather than needing special ones. `opencode`
+(opencode.ai) is a terminal agent that documents exactly this — point it at
+`localhost` and it drives a local model instead of a hosted one — and several
+other open-source agents take the same endpoint.
+
+Four honest caveats to say in the same breath:
+
+- Local removes the *transmission* risk, not the *governance* one. PHI on
+  your laptop is still PHI: institutional policy, disk encryption, device
+  management, and IRB all still apply. Ask; don't assume local means allowed.
+- Check the harness, not just the model. The tool wrapped around it may still
+  send telemetry or crash reports somewhere.
+- Capability gap. Open-weight models are genuinely good at the extraction and
+  summarising work in today's demo; they are still behind frontier models on
+  hard multi-step reasoning. Match the model to the task.
+- Hardware. A useful local model wants a real GPU or an Apple Silicon machine
+  with a lot of RAM. It is free in licence, not in equipment.
+
+The one-line version for the room: if the blocker is "our data cannot leave
+the building," that is now a solvable engineering problem — talk to whoever
+runs your research computing, because they may already have this.
 :::
 
 # Part 4 — How an agent reaches further {background-color="#222c38"}
