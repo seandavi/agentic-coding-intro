@@ -1,31 +1,16 @@
-// Where the text actually goes: a hosted model vs one running on your own
-// machine. Palette matches the deck's other figures (blue = context/input,
-// green = good/lean, coral = the thing to worry about).
+// The institutional boundary is the point: the same text-out/answer-back
+// round trip either crosses the dashed "your institution" line (commercial)
+// or never touches it (local). Horizontal flow; the two panels stack
+// vertically. Palette matches the deck's other figures (blue = yours/inside,
+// green = good/local, coral = the thing to worry about).
 digraph local_vs_hosted {
-  rankdir=TB;
+  rankdir=LR;
   bgcolor="transparent";
-  compound=true;
+  ranksep=1.1;
+  nodesep=0.3;
   node [shape=box, style="rounded,filled", fontname="Helvetica",
         fontsize=13, margin="0.20,0.12", penwidth=1.6];
-  edge [fontname="Helvetica", fontsize=11, color="#7d8b99", penwidth=1.4];
-
-  subgraph cluster_hosted {
-    label="Hosted model";
-    fontname="Helvetica-Bold";
-    fontsize=15;
-    fontcolor="#1f2933";
-    style="rounded";
-    color="#d98b7a";
-    penwidth=2;
-    margin=16;
-
-    h_doc  [label="your document", fillcolor="#e8eef7", color="#2b6cb0", fontcolor="#1f2933"];
-    h_net  [label="leaves your machine", shape=box, style="rounded,filled",
-            fillcolor="#fdebd9", color="#dd6b20", fontcolor="#7b341e"];
-    h_srv  [label="someone else's server", fillcolor="#ffffff", color="#a0aec0", fontcolor="#1f2933"];
-
-    h_doc -> h_net -> h_srv;
-  }
+  edge [fontname="Helvetica", fontsize=13, penwidth=1.5];
 
   subgraph cluster_local {
     label="Local model";
@@ -35,14 +20,57 @@ digraph local_vs_hosted {
     style="rounded";
     color="#2f855a";
     penwidth=2;
-    margin=16;
+    margin=18;
 
-    l_doc [label="your document", fillcolor="#e8eef7", color="#2b6cb0", fontcolor="#1f2933"];
-    l_mod [label="model on your hardware\n(Ollama · LM Studio)",
-           fillcolor="#e3f3ea", color="#2f855a", fontcolor="#1f2933"];
-    l_out [label="answer", fillcolor="#e3f3ea", color="#2f855a", fontcolor="#1f2933"];
+    subgraph cluster_local_inst {
+      label="your institution";
+      fontname="Helvetica-Bold";
+      fontsize=13;
+      fontcolor="#2b6cb0";
+      style="rounded,dashed";
+      color="#2b6cb0";
+      penwidth=2;
+      margin=14;
 
-    l_doc -> l_mod [label="  stays put"];
-    l_mod -> l_out;
+      l_doc [label="your document", fillcolor="#e8eef7", color="#2b6cb0", fontcolor="#1f2933"];
+      l_mod [label="model on your hardware\n(Ollama · LM Studio)",
+             fillcolor="#e3f3ea", color="#2f855a", fontcolor="#1f2933"];
+
+      l_doc -> l_mod [color="#2f855a", fontcolor="#2f855a", penwidth=2,
+                      label="your text"];
+      l_mod -> l_doc [color="#2f855a", fontcolor="#2f855a", style=dashed,
+                      label="answer"];
+    }
+  }
+
+  subgraph cluster_hosted {
+    label="Commercial model";
+    fontname="Helvetica-Bold";
+    fontsize=15;
+    fontcolor="#1f2933";
+    style="rounded";
+    color="#d98b7a";
+    penwidth=2;
+    margin=18;
+
+    subgraph cluster_hosted_inst {
+      label="your institution";
+      fontname="Helvetica-Bold";
+      fontsize=13;
+      fontcolor="#2b6cb0";
+      style="rounded,dashed";
+      color="#2b6cb0";
+      penwidth=2;
+      margin=14;
+
+      h_doc [label="your document", fillcolor="#e8eef7", color="#2b6cb0", fontcolor="#1f2933"];
+    }
+
+    h_srv [label="someone else's server", fillcolor="#fdebd9", color="#dd6b20", fontcolor="#7b341e"];
+
+    h_doc -> h_srv [color="#c05621", fontcolor="#c05621", penwidth=2,
+                    label="your text"];
+    h_srv -> h_doc [color="#c05621", fontcolor="#c05621", style=dashed,
+                    label="answer"];
   }
 }
