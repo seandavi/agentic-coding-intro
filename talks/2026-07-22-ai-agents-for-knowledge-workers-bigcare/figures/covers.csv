@@ -1,0 +1,7 @@
+short_name,crop_top,crop_height,crop_left,pdf_url,note
+biomni,0.05,0.26,0.0,https://www.biorxiv.org/content/biorxiv/early/2025/06/02/2025.05.30.656746.full.pdf,Biomni bioRxiv CC BY; now Science 2026 (paywalled)
+ai-co-scientist,0.05,0.26,0.06,https://arxiv.org/pdf/2502.18864v1,Google AI co-scientist arXiv v1; accepted Nature 2026
+virtual-lab,0.05,0.26,0.0,https://www.biorxiv.org/content/10.1101/2024.11.11.623004v1.full.pdf,Virtual Lab bioRxiv CC BY-NC; now Nature 2025
+txagent,0.05,0.26,0.06,https://arxiv.org/pdf/2503.10970,TxAgent arXiv (Harvard Zitnik lab)
+agentic-eval-cancer,0.05,0.26,0.0,https://www.biorxiv.org/content/biorxiv/early/2026/06/09/2026.06.04.729919.full.pdf,Johri/Van Allen Dana-Farber bioRxiv CC BY-NC; 11 cancer types
+crispr-gpt,0.05,0.30,0.0,https://www.nature.com/articles/s41551-025-01463-z.pdf,CRISPR-GPT Nat Biomed Eng CC BY; wet-lab validated

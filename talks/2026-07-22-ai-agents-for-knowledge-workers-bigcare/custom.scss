@@ -58,5 +58,22 @@ $code-color:       #e6eaef;
 
 .reveal .footnote { font-size: 0.6em; color: #9aa5b1; }
 
+// Caption under a paper screenshot: venue line, then the one-line "so what".
+.reveal .small {
+  font-size: 0.62em;
+  line-height: 1.35;
+  color: #9aa5b1;
+  margin-top: 0.35em;
+}
+.reveal .small strong { color: #e6eaef; }
+
+// Paper title banners are wide crops — no card padding, tighter shadow, so
+// they read as a reproduced page rather than a figure.
+.reveal section img.paper-banner {
+  padding: 0;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
 // Brighter, larger slide numbers on dark
 .reveal .slide-number { color: #9aa5b1; background: transparent; }

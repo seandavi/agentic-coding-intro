@@ -32,6 +32,22 @@ ChatGPT/Claude/Gemini as a chat window. The goal today is not "learn to program"
 — it's to understand a new interface and a handful of mental models. Stay
 tool-agnostic throughout: the concepts hold across every major tool, and the
 handout covers specific options.
+
+TIMING (50-60 min slot). The deck runs long if you show everything; that is
+deliberate, so you can pick per audience. Planned shape:
+  Parts 1-3 + demo ......... ~35 min  (demo ~10 of it)
+  Part 4 (extensions) ...... ~8 min
+  Where this is going ...... ~7 min
+  Wrap-up + Q&A ............ ~10 min
+
+If you are behind after the demo, cut in this order:
+  1. "Model vs. agent" (Part 1) — nice-to-have, not load-bearing
+  2. "Shell and tools" (Part 4) — this audience already knows it; the overview
+     figure covers it
+  3. "Multi-agent systems" (co-scientist / Virtual Lab) — keep Biomni and the
+     two cancer papers, which are closer to home
+  4. "What a good session looks like" — it restates the takeaways slide
+Never cut: the demo punchline (check a row), privacy/PHI, or takeaways.
 :::
 
 # Part 1 — From chatbot to agent {background-color="#222c38"}
@@ -353,6 +369,277 @@ The trust half is the attending framing again: hallucination is real, citations
 must be spot-checked, and the professional signature never transfers.
 :::
 
+# Part 4 — How an agent reaches further {background-color="#222c38"}
+
+## Four ways to extend one agent
+
+![](figures/fig-agent-extensions.svg){width="96%"}
+
+::: notes
+Orienting slide for the section — don't linger, the next four slides take these
+one at a time. The framing that matters: it's the *same* agent underneath.
+These are not four products; they are four ways to hand it more reach
+(tools), more knowledge (skills), more connections (MCP), and more room to
+think (subagents).
+
+If you are running long, this slide alone covers the section. Show it, say the
+one-liner for each column, and jump to "Where this is going."
+:::
+
+## Shell and tools: it can just run things
+
+You already know this layer — it's your terminal.
+
+- `samtools`, `bedtools`, `Rscript`, `grep`, `git`
+- read a file, list a directory, fetch a URL
+
+. . .
+
+The novelty isn't the commands. It's that the agent **writes them, runs them,
+reads the error, and tries again** — the loop you do by hand.
+
+::: notes
+This is the shortest slide in the section, deliberately: this audience already
+lives here. The one point worth making is the feedback loop. When a tool
+errors, the agent sees the stderr and adjusts — which is why "run the pipeline
+and fix what breaks" is a reasonable instruction and "write me a pipeline"
+in a chat window is not.
+
+Honest caveat to say out loud: this is also the layer where an agent can do
+real damage — `rm`, overwriting files, pushing to a shared branch. That is why
+tools ask permission before running commands, and why you keep work in version
+control. Do not turn approvals off on data you care about.
+:::
+
+## Skills: give it your lab's know-how
+
+A **skill** is a folder with instructions — loaded only when relevant.
+
+- "how we screen abstracts for this review"
+- "our scRNA-seq QC thresholds, and why"
+- "the figure conventions for our papers"
+
+. . .
+
+Written once. Shared by the whole lab. **Versioned like a protocol.**
+
+. . .
+
+People are already sharing these — genomics skill collections exist
+today, and are young enough that yours could matter.
+
+::: notes
+Connect back to the notes-file slide in Part 3 — same idea, modular. The
+framing that lands for scientists: a skill is a *protocol* for the agent. Your
+lab already writes protocols so a new student does the thing the same way
+twice; this is that, for a collaborator that happens to be software.
+
+Verified as of July 2026, if asked for specifics (URLs are in the handout):
+- the SKILL.md convention itself is public (github.com/anthropics/skills)
+- GoekeLab/awesome-genomic-skills — a genomics lab's curated index of
+  bioinformatics skill collections, which is the best single starting point
+- google-deepmind/science-skills — genomics, structural biology, cheminformatics
+- mims-harvard/ToolUniverse — Zitnik lab, wires up ~1,000 biomedical tools
+
+Honest framing for the room: this ecosystem is real and growing fast, but it
+is young — many overlapping 2026-vintage repos of uneven provenance, and some
+adoption claims that are marketing rather than measurement. That is an
+opportunity, not a warning: the conventions for how a lab packages its methods
+knowledge are being set right now.
+:::
+
+## MCP: plug it into other systems
+
+**Model Context Protocol** — one standard connector, so a tool built once
+works in any agent.
+
+- literature: **PubMed / NCBI Entrez**
+- genomics resources and cohort portals
+- your own institutional systems
+
+. . .
+
+The agent stops being limited to what's on your laptop.
+
+::: notes
+Keep the protocol talk light — the point is the *shape*: instead of every AI
+product building its own PubMed integration, someone builds a PubMed MCP
+server once and every agent can use it.
+
+Verified as of July 2026, if asked (URLs in the handout):
+- Anthropic ships a life-sciences connector set with PubMed, BioRender,
+  Synapse, and 10x Genomics Cloud (github.com/anthropics/life-sciences)
+- BioMCP (github.com/genomoncology/biomcp) is the broadest community one —
+  a single server covering PubMed/PubTator, ClinVar, MyVariant, gnomAD, CIViC,
+  OncoKB, cBioPortal, and ClinicalTrials.gov. That list should get this room's
+  attention.
+- there is a community registry (biocontext.ai/registry) for browsing more
+
+I deliberately keep specific repo names off the slide — anything named here is
+likely wrong within a year. Say instead: "look for a server for the resource
+you care about; if none exists, that is a very tractable project for a
+bioinformatics-capable lab, and the ecosystem is young enough to matter."
+
+Caveat worth stating out loud: an MCP server is code you are trusting with
+your session and your credentials. Prefer servers published by the
+organization that owns the resource, or read the source.
+:::
+
+## Subagents: delegate with a clean desk
+
+A **subagent** is a fresh agent with its own context window and a narrow job.
+
+- one reader per paper — ten papers at once, no cross-contamination
+- a **citation checker** whose only job is: *does this reference exist,
+  and does it say what the sentence claims?*
+- a skeptic asked to argue against your conclusion
+
+. . .
+
+Remember context rot? This is the structural fix: **many small windows
+instead of one enormous one.**
+
+::: notes
+This lands best as the payoff of Part 2. A single agent reading forty papers
+fills its window and starts losing the middle. Forty subagents, each reading
+one paper into a clean window and returning a short structured answer, sidesteps
+the problem — the coordinating agent only ever sees the summaries.
+
+The citation checker is the example to dwell on for this audience, because
+hallucinated or misattributed references are the failure mode they most fear
+and most need to catch. A verification agent that never saw the draft being
+defended is a genuinely better reviewer than the agent that wrote it.
+
+This is also how the systems on the next slides work — Biomni and friends are
+mostly orchestrations of specialized agents, not one giant prompt.
+:::
+
+# Where this is going {background-color="#222c38"}
+
+## Agents built for biomedical research
+
+![](figures/papers/biomni.png){.paper-banner width="88%"}
+
+::: {.small}
+Stanford · bioRxiv 2025 · now published in *Science* (2026)
+:::
+
+- ~150 tools, ~60 databases, mined from the literature across 25 subdomains
+- Given a goal, it **composes its own workflow** — gene prioritization,
+  drug repurposing, rare-disease diagnosis
+
+::: notes
+This is the "how far does this go" slide. Everything earlier in the talk was
+one agent doing one task you supervised. This is the same machinery pointed at
+a whole study.
+
+Be precise about status: the preprint is from 2025 and the peer-reviewed
+version is in Science (2026). Show the preprint because it is open access —
+which is itself a small lesson about what agents can and cannot fetch.
+
+The skeptical note, and say it in the same breath: the benchmarks are the
+authors' own. "Used by 10,000+ labs" is a usage number, not a validation
+number. This is genuinely impressive engineering whose scientific validation
+is still early.
+:::
+
+## Multi-agent systems that propose — and test
+
+:::: {.columns}
+::: {.column width="49%"}
+![](figures/papers/ai-co-scientist.png){.paper-banner}
+
+::: {.small}
+Google · accepted at *Nature* (2026)
+
+Agents **debate and rank** hypotheses. It proposed KIRA6 for **AML** —
+a compound no human had pointed it at — and it killed leukemia cells
+in vitro at far lower doses than healthy cells.
+:::
+:::
+
+::: {.column width="49%"}
+![](figures/papers/virtual-lab.png){.paper-banner}
+
+::: {.small}
+Stanford + CZ Biohub · *Nature* (2025)
+
+An LLM "PI" runs meetings with LLM scientists; 92 nanobodies designed,
+**two validated at the bench**.
+:::
+:::
+::::
+
+::: notes
+Both of these are the subagent idea from two slides ago, taken to its
+conclusion: not one agent, but a team of specialized ones that argue.
+
+The honest reading of both, which this audience will respect you for saying:
+- The validation experiments were run by the same groups that built the
+  systems. That is not independent replication.
+- In the Virtual Lab, a human still set the agenda and chose which designs to
+  synthesize. Human-in-the-loop, not autonomous discovery.
+- "Two of 92 worked" is a real result and also a reminder of the hit rate.
+
+The point is not that these replace scientists. It is that hypothesis
+generation and workflow composition are now things you can *delegate a draft
+of* — and the reviewing is still yours.
+:::
+
+## Closer to home: agents in cancer research
+
+![](figures/papers/crispr-gpt.png){.paper-banner width="80%"}
+
+::: {.small}
+Stanford/Princeton · *Nature Biomedical Engineering* (2025) — plans and
+executes gene-editing experiments end to end. **Wet-lab validated**: four
+genes knocked out in a lung adenocarcinoma line, two activated in melanoma.
+:::
+
+::: notes
+This is the slide for the molecular biologists. Everything else has been
+documents and analysis; this one designed guides, drafted the protocol, and
+the edits worked at the bench.
+
+Note the dates on the banner — received June 2024, accepted June 2025. A
+reminder that this field's peer-reviewed layer runs about a year behind the
+preprints, which is why the earlier slides showed bioRxiv and arXiv.
+
+Caveat: cancer cell lines here are the convenient validation system, not a
+cancer-biology question. This is a gene-editing tool that happened to be
+tested in cancer lines.
+:::
+
+## And the honest evaluation
+
+![](figures/papers/agentic-eval-cancer.png){.paper-banner width="86%"}
+
+::: {.small}
+Dana-Farber (Van Allen lab) · bioRxiv 2026 — agents tested on single-cell
+multi-omics across **11 cancer types**.
+:::
+
+> Good at broad exploration. **Domain experts remained essential** for
+> synthesis and methodological judgment.
+
+::: notes
+Deliberately the last paper, and the most important one for this room. It is
+from a serious cancer-genomics group, it is on exactly their data type, and
+its conclusion is measured rather than triumphant.
+
+This is the slide that earns your credibility. A room of basic scientists has
+been hearing AI hype for three years; showing them a careful evaluation that
+says "useful for exploration, still needs you for synthesis" is both the honest
+read and, conveniently, the thesis of this entire talk.
+
+It is a preprint — say so.
+
+If asked for more: there is a 2026 Cancer Cell paper from the same group on
+retrieval-augmented precision-oncology recommendations, and a Frontiers in
+Oncology review of LLMs and multi-agent systems across the precision-oncology
+continuum. Both are in the handout.
+:::
+
 ## What a good session looks like
 
 - **One objective** per conversation; start fresh for the next
@@ -430,20 +717,49 @@ Land the plane on the one sentence. Everything else is detail in service of it.
 
 ## Resources
 
-- Handout (this repo's `README.md`) — full notes + try-it-this-week prompts
-- "Lost in the Middle" (Liu et al., 2023) · "Context Rot" (2025)
-- Model Context Protocol: <https://modelcontextprotocol.io/> — how agents
-  connect to external tools
-- Your institution's AI / data-governance policy — the document that
-  actually governs what you may use
+**Handout** (this repo) — notes, prompts, today's `papers.csv`, and every
+link below with full citations.
 
-::: {.footnote}
-Token and context-window figures are mid-2026 and illustrative; exact numbers move fast.
+::::{.columns}
+:::{.column width="50%"}
+::: {.small}
+**Papers shown**
+Biomni · *Science* 2026
+AI co-scientist · *Nature* 2026
+The Virtual Lab · *Nature* 2025
+CRISPR-GPT · *Nat Biomed Eng* 2025
+Johri et al. · bioRxiv 2026
+:::
+:::
+:::{.column width="50%"}
+::: {.small}
+**Tooling**
+modelcontextprotocol.io
+biocontext.ai/registry — biomedical MCP servers
+BioMCP — PubMed, ClinVar, cBioPortal, OncoKB
+awesome-genomic-skills — skills for genomics
+:::
+:::
+::::
+
+::: {.small}
+And the document that actually governs what you may use: **your institution's
+AI and data-governance policy.**
 :::
 
 ::: notes
-Leave this up for Q&A. Offer to share the repo so they have the prompts and
-these slides. Expect questions on: PHI specifics (route to compliance),
-hallucinated citations (the verify habit), and "which tool" (concepts transfer;
-handout has options).
+Leave this up for Q&A. Offer to share the repo — that is the real handout, and
+it has working URLs for everything here, which a slide cannot.
+
+Expect questions on: PHI specifics (route to compliance), hallucinated
+citations (the verify habit), "which tool should I use" (concepts transfer;
+handout has options), and "is my data training the model" (depends on account
+type and institutional agreement — do not guess on stage, point to the policy).
+
+Every link on this slide was verified the week of the talk. Re-verify before
+you give it again — that is the whole point of the tools-change-fast lesson.
+:::
+
+::: {.footnote}
+Token and context-window figures are mid-2026 and illustrative; exact numbers move fast.
 :::

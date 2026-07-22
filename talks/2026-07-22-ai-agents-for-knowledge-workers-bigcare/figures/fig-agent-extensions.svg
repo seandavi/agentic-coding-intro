@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 470" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="arx" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#9aa5b1"/>
+    </marker>
+  </defs>
+
+  <!-- the agent -->
+  <rect x="380" y="14" width="220" height="52" rx="10" fill="#e8eef7" stroke="#2b6cb0" stroke-width="2"/>
+  <text x="490" y="38" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2933">the agent</text>
+  <text x="490" y="57" text-anchor="middle" font-size="12" fill="#52606d">model + loop + context window</text>
+
+  <!-- fan-out connectors -->
+  <g stroke="#9aa5b1" stroke-width="1.6" fill="none" marker-end="url(#arx)">
+    <path d="M430,68 C430,88 145,86 145,104"/>
+    <path d="M465,68 C465,90 375,88 375,104"/>
+    <path d="M515,68 C515,90 605,88 605,104"/>
+    <path d="M550,68 C550,88 835,86 835,104"/>
+  </g>
+
+  <!-- ============ 1. shell & tools (blue) ============ -->
+  <rect x="40" y="110" width="210" height="322" rx="10" fill="#ffffff" stroke="#2b6cb0" stroke-width="2"/>
+  <path d="M40,120 a10,10 0 0 1 10,-10 h190 a10,10 0 0 1 10,10 v42 h-210 z" fill="#2b6cb0"/>
+  <text x="145" y="139" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Shell &amp; tools</text>
+  <text x="145" y="155" text-anchor="middle" font-size="11.5" fill="#d6e4f5">it can run things</text>
+
+  <text x="60" y="186" font-size="11" font-weight="700" fill="#2b6cb0">ADDS</text>
+  <text x="60" y="206" font-size="13.5" fill="#1f2933">actions in your own</text>
+  <text x="60" y="224" font-size="13.5" fill="#1f2933">environment</text>
+
+  <text x="60" y="256" font-size="11" font-weight="700" fill="#2b6cb0">LOOKS LIKE</text>
+  <g font-size="12" fill="#3e4c59" font-family="ui-monospace, Menlo, monospace">
+    <text x="60" y="277">samtools view …</text>
+    <text x="60" y="297">Rscript qc.R</text>
+    <text x="60" y="317">grep -c "^>" f.fa</text>
+    <text x="60" y="337">ls data/ · git log</text>
+  </g>
+
+  <line x1="60" y1="358" x2="230" y2="358" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="60" y="380" font-size="12.5" fill="#52606d">You already know</text>
+  <text x="60" y="398" font-size="12.5" fill="#52606d">these commands —</text>
+  <text x="60" y="416" font-size="12.5" fill="#52606d">now it types them.</text>
+
+  <!-- ============ 2. skills (green) ============ -->
+  <rect x="270" y="110" width="210" height="322" rx="10" fill="#ffffff" stroke="#2f855a" stroke-width="2"/>
+  <path d="M270,120 a10,10 0 0 1 10,-10 h190 a10,10 0 0 1 10,10 v42 h-210 z" fill="#2f855a"/>
+  <text x="375" y="139" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Skills</text>
+  <text x="375" y="155" text-anchor="middle" font-size="11.5" fill="#d6ece0">know-how, on demand</text>
+
+  <text x="290" y="186" font-size="11" font-weight="700" fill="#2f855a">ADDS</text>
+  <text x="290" y="206" font-size="13.5" fill="#1f2933">knowledge —</text>
+  <text x="290" y="224" font-size="13.5" fill="#1f2933">your lab's procedures</text>
+
+  <text x="290" y="256" font-size="11" font-weight="700" fill="#2f855a">LOOKS LIKE</text>
+  <g font-size="12.5" fill="#3e4c59">
+    <text x="290" y="277">how we screen abstracts</text>
+    <text x="290" y="297">our scRNA-seq QC cutoffs</text>
+    <text x="290" y="317">the lab's figure style</text>
+    <text x="290" y="337">journal submission checklist</text>
+  </g>
+
+  <line x1="290" y1="358" x2="460" y2="358" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="290" y="380" font-size="12.5" fill="#52606d">A folder with a</text>
+  <text x="290" y="398" font-size="12.5" fill="#52606d">markdown file. Written</text>
+  <text x="290" y="416" font-size="12.5" fill="#52606d">once, shared by all.</text>
+
+  <!-- ============ 3. MCP (amber) ============ -->
+  <rect x="500" y="110" width="210" height="322" rx="10" fill="#ffffff" stroke="#b7791f" stroke-width="2"/>
+  <path d="M500,120 a10,10 0 0 1 10,-10 h190 a10,10 0 0 1 10,10 v42 h-210 z" fill="#b7791f"/>
+  <text x="605" y="139" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">MCP</text>
+  <text x="605" y="155" text-anchor="middle" font-size="11.5" fill="#f7e6c8">reach other systems</text>
+
+  <text x="520" y="186" font-size="11" font-weight="700" fill="#b7791f">ADDS</text>
+  <text x="520" y="206" font-size="13.5" fill="#1f2933">tools — live data</text>
+  <text x="520" y="224" font-size="13.5" fill="#1f2933">beyond your laptop</text>
+
+  <text x="520" y="256" font-size="11" font-weight="700" fill="#b7791f">LOOKS LIKE</text>
+  <g font-size="12.5" fill="#3e4c59">
+    <text x="520" y="277">PubMed / NCBI search</text>
+    <text x="520" y="297">a genome browser</text>
+    <text x="520" y="317">a variant or cohort portal</text>
+    <text x="520" y="337">your ELN or file store</text>
+  </g>
+
+  <line x1="520" y1="358" x2="690" y2="358" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="520" y="380" font-size="12.5" fill="#52606d">One standard plug —</text>
+  <text x="520" y="398" font-size="12.5" fill="#52606d">so a tool built once</text>
+  <text x="520" y="416" font-size="12.5" fill="#52606d">works in any agent.</text>
+
+  <!-- ============ 4. subagents (indigo) ============ -->
+  <rect x="730" y="110" width="210" height="322" rx="10" fill="#ffffff" stroke="#5a67d8" stroke-width="2"/>
+  <path d="M730,120 a10,10 0 0 1 10,-10 h190 a10,10 0 0 1 10,10 v42 h-210 z" fill="#5a67d8"/>
+  <text x="835" y="139" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Subagents</text>
+  <text x="835" y="155" text-anchor="middle" font-size="11.5" fill="#dcdff7">delegate a piece</text>
+
+  <text x="750" y="186" font-size="11" font-weight="700" fill="#5a67d8">ADDS</text>
+  <text x="750" y="206" font-size="13.5" fill="#1f2933">focus — each gets a</text>
+  <text x="750" y="224" font-size="13.5" fill="#1f2933">clean context window</text>
+
+  <text x="750" y="256" font-size="11" font-weight="700" fill="#5a67d8">LOOKS LIKE</text>
+  <g font-size="12.5" fill="#3e4c59">
+    <text x="750" y="277">one reader per paper</text>
+    <text x="750" y="297">a citation checker that</text>
+    <text x="750" y="315">only checks citations</text>
+    <text x="750" y="337">a skeptic that argues back</text>
+  </g>
+
+  <line x1="750" y1="358" x2="920" y2="358" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="750" y="380" font-size="12.5" fill="#52606d">Ten papers in parallel,</text>
+  <text x="750" y="398" font-size="12.5" fill="#52606d">and no paper's details</text>
+  <text x="750" y="416" font-size="12.5" fill="#52606d">bleed into another.</text>
+
+  <text x="490" y="458" text-anchor="middle" font-size="13.5" fill="#1f2933">Same agent underneath — four ways to give it more <tspan font-weight="700">reach</tspan>, more <tspan font-weight="700">knowledge</tspan>, and more <tspan font-weight="700">room to think</tspan>.</text>
+</svg>
