@@ -13,12 +13,35 @@ format:
     width: 1280
     height: 720
     fig-align: center
-    embed-resources: true
     history: true
+    # NOTE: no `embed-resources` here — the chalkboard plugin is incompatible
+    # with self-contained output, so the default build presents from the
+    # directory (slides.html + slides_files/). For a single shareable file:
+    #   quarto render slides.qmd --profile share
+    #
     # Every figure here sets its own width. Reveal's auto-stretch fights that:
     # on slides where an image shares space with a caption it computes a
     # remaining height of 0 and the image silently disappears.
     auto-stretch: false
+
+    # --- presenting ---------------------------------------------------------
+    # Chalkboard config lives in _quarto.yml, not here: the `share` profile
+    # has to switch it off to produce self-contained output, and document-level
+    # YAML would override the profile.
+    #
+    # Laser pointer on Q. Amber is the deck's accent and stays visible over
+    # both the dark slides and the white figure cards.
+    pointer:
+      key: "q"
+      color: "#f0913e"
+      pointerSize: 18
+    menu:
+      numbers: true
+    # A link opened mid-talk must not navigate the deck away from itself.
+    link-external-newwindow: true
+
+revealjs-plugins:
+  - pointer
 ---
 
 ## You already know the hard part
@@ -39,6 +62,11 @@ ChatGPT/Claude/Gemini as a chat window. The goal today is not "learn to program"
 — it's to understand a new interface and a handful of mental models. Stay
 tool-agnostic throughout: the concepts hold across every major tool, and the
 handout covers specific options.
+
+PRESENTER KEYS — s speaker view · f fullscreen · o overview · g go-to-slide
+  c draw on this slide · b blank board · x cycle ink colour · del clear slide
+  backspace clear all · d download drawings · q laser pointer · ? all keys
+(Drawings live only in this browser session unless you press d.)
 
 TIMING (50-60 min slot). The deck runs long if you show everything; that is
 deliberate, so you can pick per audience. Planned shape:

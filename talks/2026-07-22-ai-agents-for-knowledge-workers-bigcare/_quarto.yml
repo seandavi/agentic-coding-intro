@@ -17,3 +17,13 @@ bibliography:
 csl: ama.csl
 
 # The deck's own format block (revealjs) lives in slides.qmd.
+
+format:
+  revealjs:
+    # Draw over the current slide (C) or open a blank board (B); D downloads
+    # the drawings. Lives here rather than in slides.qmd so the `share`
+    # profile can switch it off — document YAML would outrank the profile.
+    chalkboard:
+      theme: chalkboard
+      boardmarker-width: 4
+      buttons: true

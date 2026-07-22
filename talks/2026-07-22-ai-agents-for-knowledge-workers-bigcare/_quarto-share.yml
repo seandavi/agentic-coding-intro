@@ -1,0 +1,8 @@
+# Profile for a single self-contained slides.html you can email or hand over:
+#   quarto render slides.qmd --profile share
+# Chalkboard has to go — reveal's chalkboard plugin cannot be inlined into
+# self-contained output. Everything else, including the pointer, survives.
+format:
+  revealjs:
+    chalkboard: false
+    embed-resources: true

@@ -42,8 +42,39 @@ auto-stretch computes a remaining height of 0 for an image that shares a slide
 with a caption, which silently makes the image vanish.
 
 Present with `quarto preview slides.qmd`, or open `slides.html` directly.
-Speaker notes are in the deck — press **`s`** in the browser to open the
-speaker view. The rendered `slides.html` is git-ignored (regenerate it locally).
+The rendered `slides.html` and `slides_files/` are git-ignored (regenerate
+them locally).
+
+The default build **presents from this directory** — `slides.html` needs
+`slides_files/` next to it. For one self-contained file you can email or carry
+on a USB stick:
+
+```bash
+quarto render slides.qmd --profile share
+```
+
+That profile turns the chalkboard off, because reveal's chalkboard plugin
+cannot be inlined into self-contained output; everything else, pointer
+included, survives. Both builds write to the same `slides.html`, so re-render
+without the profile before presenting.
+
+## Presenting
+
+| Key | Does |
+| --- | --- |
+| `s` | speaker view — notes, next slide, timer |
+| `f` / `o` / `g` | fullscreen · slide overview · go to slide number |
+| `c` | **draw on the current slide** |
+| `b` | **blank board** to work through something from scratch |
+| `x` | cycle ink colour (palette also appears at the left) |
+| `del` / `backspace` | clear this slide's drawings · clear all |
+| `d` | download drawings — otherwise they vanish with the tab |
+| `q` | laser pointer (amber dot; hides the mouse cursor) |
+| `?` | full keyboard-shortcut overlay |
+
+Drawings are per-session. If a whiteboard explanation turns out well, press
+`d` and commit the JSON, then point `chalkboard: src:` in `_quarto.yml` at it
+to have it pre-loaded next time.
 
 ## Demo materials
 
