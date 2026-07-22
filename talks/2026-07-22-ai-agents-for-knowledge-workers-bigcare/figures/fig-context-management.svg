@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 400" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bloat" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"  stop-color="#2f855a"/>
+      <stop offset="55%" stop-color="#dd6b20"/>
+      <stop offset="100%" stop-color="#c53030"/>
+    </linearGradient>
+  </defs>
+
+  <!-- scenario 1: bloat -->
+  <text x="40" y="56" font-size="17" font-weight="700" fill="#1f2933">One long session — context keeps growing</text>
+  <rect x="40" y="74" width="800" height="48" rx="8" fill="url(#bloat)"/>
+  <g font-size="12" fill="#ffffff" text-anchor="middle" font-weight="700">
+    <text x="120" y="103">task A</text>
+    <text x="290" y="103">task B</text>
+    <text x="460" y="103">tangent</text>
+    <text x="640" y="103">task C</text>
+    <text x="790" y="103">…</text>
+  </g>
+  <text x="858" y="94" font-size="13" fill="#c53030">slower,</text>
+  <text x="858" y="111" font-size="13" fill="#c53030">pricier,</text>
+  <text x="858" y="128" font-size="13" fill="#c53030">confused</text>
+
+  <!-- divider -->
+  <line x1="40" y1="172" x2="940" y2="172" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- scenario 2: lean -->
+  <text x="40" y="216" font-size="17" font-weight="700" fill="#1f2933">Clear or compact between tasks — context stays lean</text>
+
+  <rect x="40"  y="236" width="200" height="48" rx="8" fill="#2f855a"/>
+  <text x="140" y="265" text-anchor="middle" font-size="13" fill="#ffffff" font-weight="700">task A</text>
+
+  <text x="268" y="266" text-anchor="middle" font-size="14" fill="#52606d">✂ /clear</text>
+
+  <rect x="320" y="236" width="200" height="48" rx="8" fill="#2f855a"/>
+  <text x="420" y="265" text-anchor="middle" font-size="13" fill="#ffffff" font-weight="700">task B</text>
+
+  <text x="548" y="266" text-anchor="middle" font-size="14" fill="#52606d">✂ /clear</text>
+
+  <rect x="600" y="236" width="200" height="48" rx="8" fill="#2f855a"/>
+  <text x="700" y="265" text-anchor="middle" font-size="13" fill="#ffffff" font-weight="700">task C</text>
+
+  <text x="858" y="258" font-size="13" fill="#2f855a">focused,</text>
+  <text x="858" y="275" font-size="13" fill="#2f855a">cheaper,</text>
+  <text x="858" y="292" font-size="13" fill="#2f855a">sharper</text>
+
+  <text x="40" y="344" font-size="15" fill="#1f2933">Rule of thumb: <tspan font-weight="700">one objective per conversation.</tspan> Capture anything durable in a Markdown file first.</text>
+  <text x="40" y="370" font-size="13" fill="#52606d">When the agent seems confused or sluggish, suspect a bloated context before suspecting the model.</text>
+</svg>

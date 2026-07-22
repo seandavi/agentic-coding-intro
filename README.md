@@ -706,4 +706,4 @@ That is what separates them from ordinary chatbots and from the copy/paste workf
 
 ## AI assistance
 
-This document was structured, edited, and written with the help of AI tools, including Claude Code, Gemini CLI, Antigravity, OpenAI Codex, and GitHub Copilot. That is intentional: using agentic and AI-assisted tools to produce a document about agentic and AI-assisted tools is itself a reasonable demonstration of the workflow described here. (The slides in [`slides/`](slides/) were built the same way.)
+This document was structured, edited, and written with the help of AI tools, including Claude Code, Gemini CLI, Antigravity, OpenAI Codex, and GitHub Copilot. That is intentional: using agentic and AI-assisted tools to produce a document about agentic and AI-assisted tools is itself a reasonable demonstration of the workflow described here. (The slide decks in [`talks/`](talks/) were built the same way.)
